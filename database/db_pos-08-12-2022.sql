@@ -1,6 +1,6 @@
 /*
 SQLyog Community v13.1.7 (64 bit)
-MySQL - 10.5.17-MariaDB-cll-lve : Database - u1272680_pos_dev
+MySQL - 10.5.17-MariaDB-cll-lve : Database - u1579603_db_ciptajaya
 *********************************************************************
 */
 
@@ -12,9 +12,9 @@ MySQL - 10.5.17-MariaDB-cll-lve : Database - u1272680_pos_dev
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`u1272680_pos_dev` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`u1579603_db_ciptajaya` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-USE `u1272680_pos_dev`;
+USE `u1579603_db_ciptajaya`;
 
 /*Table structure for table `accounts` */
 
@@ -36,7 +36,7 @@ CREATE TABLE `accounts` (
 
 /*Data for the table `accounts` */
 
-insert  into `accounts`(`id`,`account_no`,`name`,`initial_balance`,`total_balance`,`note`,`is_default`,`is_active`,`created_at`,`updated_at`) values 
+insert  into `accounts`(`id`,`account_no`,`name`,`initial_balance`,`total_balance`,`note`,`is_default`,`is_active`,`created_at`,`updated_at`) values
 (1,'11111','Sales Account',1000,1000,'this is first account',1,1,'2018-12-18 08:58:02','2022-10-12 12:40:08');
 
 /*Table structure for table `adjustments` */
@@ -58,7 +58,7 @@ CREATE TABLE `adjustments` (
 
 /*Data for the table `adjustments` */
 
-insert  into `adjustments`(`id`,`reference_no`,`warehouse_id`,`document`,`total_qty`,`item`,`note`,`created_at`,`updated_at`) values 
+insert  into `adjustments`(`id`,`reference_no`,`warehouse_id`,`document`,`total_qty`,`item`,`note`,`created_at`,`updated_at`) values
 (12,'adr-20221125-081025',9,NULL,1,1,'tambah stok','2022-11-25 08:10:25','2022-11-25 08:10:25'),
 (13,'adr-20221201-043428',11,NULL,1,1,NULL,'2022-12-01 04:34:28','2022-12-01 04:34:28'),
 (14,'adr-20221201-043750',9,NULL,5,1,NULL,'2022-12-01 04:37:50','2022-12-01 04:37:50');
@@ -108,7 +108,7 @@ CREATE TABLE `billers` (
 
 /*Data for the table `billers` */
 
-insert  into `billers`(`id`,`name`,`image`,`company_name`,`vat_number`,`email`,`phone_number`,`address`,`city`,`state`,`postal_code`,`country`,`is_active`,`created_at`,`updated_at`) values 
+insert  into `billers`(`id`,`name`,`image`,`company_name`,`vat_number`,`email`,`phone_number`,`address`,`city`,`state`,`postal_code`,`country`,`is_active`,`created_at`,`updated_at`) values
 (1,'yousuf','aks.jpg','Nama Tokonya','31123','yousuf@kds.com','442343324','halishahar','chittagong','','','sdgs',1,'2018-05-13 03:49:30','2019-03-02 11:20:38'),
 (2,'tariq','','Nama Tokonya','','tariq@bigtree.com','321312','khulshi','chittagong','','','',1,'2018-05-13 03:57:54','2018-06-15 06:07:11'),
 (3,'test','','Nama Tokonya','','test@test.com','3211','erewrwqre','afsf','','','',0,'2018-05-30 08:38:58','2018-05-30 08:39:57'),
@@ -134,7 +134,7 @@ CREATE TABLE `brands` (
 
 /*Data for the table `brands` */
 
-insert  into `brands`(`id`,`code`,`title`,`image`,`is_active`,`created_at`,`updated_at`) values 
+insert  into `brands`(`id`,`code`,`title`,`image`,`is_active`,`created_at`,`updated_at`) values
 (1,'M0001','Lakoni Pro','',1,'2022-11-02 23:21:32','2022-11-02 23:21:32'),
 (2,'M0002','Aldo','',1,'2022-11-02 23:21:32','2022-11-02 23:21:32'),
 (3,'M0003','Strauss','',1,'2022-11-02 23:21:32','2022-11-02 23:21:32'),
@@ -711,7 +711,7 @@ CREATE TABLE `cash_registers` (
 
 /*Data for the table `cash_registers` */
 
-insert  into `cash_registers`(`id`,`cash_in_hand`,`user_id`,`warehouse_id`,`status`,`created_at`,`updated_at`) values 
+insert  into `cash_registers`(`id`,`cash_in_hand`,`user_id`,`warehouse_id`,`status`,`created_at`,`updated_at`) values
 (1,100,9,1,0,'2020-10-13 13:32:54','2020-10-24 06:27:42'),
 (2,50,9,1,1,'2020-10-13 21:25:26','2020-10-13 21:25:26'),
 (3,200,1,1,0,'2020-10-22 13:53:07','2021-06-19 10:52:48'),
@@ -743,7 +743,7 @@ CREATE TABLE `categories` (
 
 /*Data for the table `categories` */
 
-insert  into `categories`(`id`,`code`,`name`,`image`,`parent_id`,`is_active`,`created_at`,`updated_at`) values 
+insert  into `categories`(`id`,`code`,`name`,`image`,`parent_id`,`is_active`,`created_at`,`updated_at`) values
 (25,'K0001','Toolkit',NULL,NULL,1,'2022-11-02 23:41:17','2022-11-02 23:41:17'),
 (26,'K0002','Semen',NULL,NULL,1,'2022-11-02 23:41:18','2022-11-02 23:41:18'),
 (27,'K0003','Keramik & Perlengkapan',NULL,NULL,1,'2022-11-02 23:41:18','2022-11-02 23:41:18'),
@@ -784,7 +784,7 @@ CREATE TABLE `coupons` (
 
 /*Data for the table `coupons` */
 
-insert  into `coupons`(`id`,`code`,`type`,`amount`,`minimum_amount`,`quantity`,`used`,`expired_date`,`user_id`,`is_active`,`created_at`,`updated_at`) values 
+insert  into `coupons`(`id`,`code`,`type`,`amount`,`minimum_amount`,`quantity`,`used`,`expired_date`,`user_id`,`is_active`,`created_at`,`updated_at`) values
 (3,'DISKON50','percentage',50,0,100,0,'2022-11-30',1,1,'2022-10-11 11:30:58','2022-11-22 13:10:01'),
 (4,'promo70','percentage',70,NULL,10,0,'2022-10-15',1,1,'2022-10-11 11:32:38','2022-10-11 11:32:38');
 
@@ -804,7 +804,7 @@ CREATE TABLE `currencies` (
 
 /*Data for the table `currencies` */
 
-insert  into `currencies`(`id`,`name`,`code`,`exchange_rate`,`created_at`,`updated_at`) values 
+insert  into `currencies`(`id`,`name`,`code`,`exchange_rate`,`created_at`,`updated_at`) values
 (1,'Rupiah','Rp',1,'2022-03-24 02:33:42','2022-11-25 07:52:29'),
 (2,'Euro','Euro',0.85,'2020-11-01 07:29:12','2020-11-11 05:15:34'),
 (4,'Dollar','Dollar',1.1,'2022-11-25 08:59:40','2022-11-25 08:59:40');
@@ -825,7 +825,7 @@ CREATE TABLE `customer_groups` (
 
 /*Data for the table `customer_groups` */
 
-insert  into `customer_groups`(`id`,`name`,`percentage`,`is_active`,`created_at`,`updated_at`) values 
+insert  into `customer_groups`(`id`,`name`,`percentage`,`is_active`,`created_at`,`updated_at`) values
 (1,'general','0',1,'2018-05-12 14:09:36','2019-03-02 12:01:35'),
 (2,'distributor','-10',1,'2018-05-12 14:12:14','2019-03-02 12:02:12'),
 (3,'reseller','5',1,'2018-05-12 14:12:26','2018-05-30 07:18:14'),
@@ -860,7 +860,7 @@ CREATE TABLE `customers` (
 
 /*Data for the table `customers` */
 
-insert  into `customers`(`id`,`customer_group_id`,`user_id`,`name`,`company_name`,`email`,`phone_number`,`tax_no`,`address`,`city`,`state`,`postal_code`,`country`,`points`,`deposit`,`expense`,`is_active`,`created_at`,`updated_at`) values 
+insert  into `customers`(`id`,`customer_group_id`,`user_id`,`name`,`company_name`,`email`,`phone_number`,`tax_no`,`address`,`city`,`state`,`postal_code`,`country`,`points`,`deposit`,`expense`,`is_active`,`created_at`,`updated_at`) values
 (1,1,22,'dhiman','lioncoders','dhiman@gmail.com','+8801111111101','','kajir deuri','chittagong','','','bd',226,190,20,1,'2018-05-12 16:00:48','2022-12-03 02:01:23'),
 (2,2,0,'moinul','lioncoders','','+8801200000001','','jamalkhan','chittagong','','','bd',0,100,20,1,'2018-05-12 16:04:51','2019-02-22 11:38:08'),
 (3,3,0,'tariq','big tree','','3424','','khulshi','chittagong','','','bd',1960,0,0,1,'2018-05-12 16:07:52','2022-05-23 14:41:17'),
@@ -913,7 +913,7 @@ CREATE TABLE `departments` (
 
 /*Data for the table `departments` */
 
-insert  into `departments`(`id`,`name`,`is_active`,`created_at`,`updated_at`) values 
+insert  into `departments`(`id`,`name`,`is_active`,`created_at`,`updated_at`) values
 (1,'Sale',1,'2018-12-27 11:16:47','2018-12-27 16:40:23'),
 (2,'xyz',1,'2018-12-27 16:28:47','2018-12-27 16:28:47');
 
@@ -934,7 +934,7 @@ CREATE TABLE `deposits` (
 
 /*Data for the table `deposits` */
 
-insert  into `deposits`(`id`,`amount`,`customer_id`,`user_id`,`note`,`created_at`,`updated_at`) values 
+insert  into `deposits`(`id`,`amount`,`customer_id`,`user_id`,`note`,`created_at`,`updated_at`) values
 (1,90,1,1,'first deposit','2018-08-26 04:48:23','2018-08-26 07:18:55'),
 (3,100,2,1,'','2018-08-26 06:53:16','2018-08-27 03:42:39'),
 (4,50,1,1,'','2018-09-05 04:56:19','2018-09-05 04:56:19'),
@@ -963,7 +963,7 @@ CREATE TABLE `employees` (
 
 /*Data for the table `employees` */
 
-insert  into `employees`(`id`,`name`,`email`,`phone_number`,`department_id`,`user_id`,`image`,`address`,`city`,`country`,`is_active`,`created_at`,`updated_at`) values 
+insert  into `employees`(`id`,`name`,`email`,`phone_number`,`department_id`,`user_id`,`image`,`address`,`city`,`country`,`is_active`,`created_at`,`updated_at`) values
 (1,'john','john@gmail.com','10001',2,12,'johngmailcom.jpg','GEC','chittagong','Bangladesh',1,'2018-12-30 06:48:37','2019-03-02 12:50:23'),
 (3,'tests','test@test.com','111',1,0,'','','','',0,'2018-12-31 04:20:51','2022-07-13 12:52:22'),
 (6,'test','1232@qwe','123123',1,35,NULL,NULL,NULL,NULL,0,'2022-07-13 12:51:56','2022-07-13 12:52:12');
@@ -984,7 +984,7 @@ CREATE TABLE `expense_categories` (
 
 /*Data for the table `expense_categories` */
 
-insert  into `expense_categories`(`id`,`code`,`name`,`is_active`,`created_at`,`updated_at`) values 
+insert  into `expense_categories`(`id`,`code`,`name`,`is_active`,`created_at`,`updated_at`) values
 (1,'16718342','washing',1,'2018-08-16 06:32:48','2019-03-02 13:02:07'),
 (2,'60128975','electric bill',1,'2018-08-16 06:39:18','2018-08-16 06:39:18'),
 (3,'83954970','test',0,'2018-08-16 06:50:28','2018-08-16 06:51:40'),
@@ -1011,7 +1011,7 @@ CREATE TABLE `expenses` (
 
 /*Data for the table `expenses` */
 
-insert  into `expenses`(`id`,`reference_no`,`expense_category_id`,`warehouse_id`,`account_id`,`user_id`,`cash_register_id`,`amount`,`note`,`created_at`,`updated_at`) values 
+insert  into `expenses`(`id`,`reference_no`,`expense_category_id`,`warehouse_id`,`account_id`,`user_id`,`cash_register_id`,`amount`,`note`,`created_at`,`updated_at`) values
 (2,'er-20180817-012254',1,2,1,1,0,150,'first expense...','2018-08-17 13:22:54','2018-08-17 13:44:13'),
 (3,'er-20180817-014241',1,1,1,1,0,125,'second expense...','2018-08-17 13:42:41','2018-08-17 13:43:50'),
 (4,'er-20181022-043609',2,1,1,1,0,1000,'','2018-10-22 16:36:09','2018-10-22 16:36:09'),
@@ -1086,7 +1086,7 @@ CREATE TABLE `general_settings` (
 
 /*Data for the table `general_settings` */
 
-insert  into `general_settings`(`id`,`site_title`,`site_logo`,`is_rtl`,`currency`,`staff_access`,`date_format`,`developed_by`,`invoice_format`,`state`,`theme`,`created_at`,`updated_at`,`currency_position`) values 
+insert  into `general_settings`(`id`,`site_title`,`site_logo`,`is_rtl`,`currency`,`staff_access`,`date_format`,`developed_by`,`invoice_format`,`state`,`theme`,`created_at`,`updated_at`,`currency_position`) values
 (1,'POS','logo-cipta-jaya.png',0,'1','all','d-m-Y','Anonymous','standard',1,'default.css','2018-07-06 12:13:11','2022-11-25 07:36:33','prefix');
 
 /*Table structure for table `gift_card_recharges` */
@@ -1105,7 +1105,7 @@ CREATE TABLE `gift_card_recharges` (
 
 /*Data for the table `gift_card_recharges` */
 
-insert  into `gift_card_recharges`(`id`,`gift_card_id`,`amount`,`user_id`,`created_at`,`updated_at`) values 
+insert  into `gift_card_recharges`(`id`,`gift_card_id`,`amount`,`user_id`,`created_at`,`updated_at`) values
 (1,2,100,1,'2018-08-25 05:08:29','2018-08-25 05:08:29'),
 (2,1,200,1,'2018-08-25 05:08:50','2018-08-25 05:08:50'),
 (3,1,100,1,'2018-09-05 05:50:41','2018-09-05 05:50:41'),
@@ -1140,7 +1140,7 @@ CREATE TABLE `gift_cards` (
 
 /*Data for the table `gift_cards` */
 
-insert  into `gift_cards`(`id`,`card_no`,`amount`,`expense`,`customer_id`,`user_id`,`expired_date`,`created_by`,`is_active`,`created_at`,`updated_at`) values 
+insert  into `gift_cards`(`id`,`card_no`,`amount`,`expense`,`customer_id`,`user_id`,`expired_date`,`created_by`,`is_active`,`created_at`,`updated_at`) values
 (1,'3571097513020486',1400,450,1,0,'2020-12-31',1,1,'2018-08-18 07:57:40','2020-10-18 11:14:26'),
 (2,'0452297501931931',500,100,2,0,'2021-12-31',1,1,'2018-08-18 08:46:43','2021-02-11 13:36:01'),
 (3,'123',13123,0,1,0,'2018-08-19',1,0,'2018-08-19 04:38:21','2018-08-19 04:38:28'),
@@ -1182,7 +1182,7 @@ CREATE TABLE `hrm_settings` (
 
 /*Data for the table `hrm_settings` */
 
-insert  into `hrm_settings`(`id`,`checkin`,`checkout`,`created_at`,`updated_at`) values 
+insert  into `hrm_settings`(`id`,`checkin`,`checkout`,`created_at`,`updated_at`) values
 (1,'10:00am','6:00pm','2019-01-02 08:20:08','2019-01-02 10:20:53');
 
 /*Table structure for table `languages` */
@@ -1199,7 +1199,7 @@ CREATE TABLE `languages` (
 
 /*Data for the table `languages` */
 
-insert  into `languages`(`id`,`code`,`created_at`,`updated_at`) values 
+insert  into `languages`(`id`,`code`,`created_at`,`updated_at`) values
 (1,'id','2018-07-08 04:59:17','2019-12-24 23:34:20');
 
 /*Table structure for table `migrations` */
@@ -1215,7 +1215,7 @@ CREATE TABLE `migrations` (
 
 /*Data for the table `migrations` */
 
-insert  into `migrations`(`id`,`migration`,`batch`) values 
+insert  into `migrations`(`id`,`migration`,`batch`) values
 (1,'2014_10_12_000000_create_users_table',1),
 (2,'2014_10_12_100000_create_password_resets_table',1),
 (3,'2018_02_17_060412_create_categories_table',1),
@@ -1364,7 +1364,7 @@ CREATE TABLE `money_transfers` (
 
 /*Data for the table `money_transfers` */
 
-insert  into `money_transfers`(`id`,`reference_no`,`from_account_id`,`to_account_id`,`amount`,`created_at`,`updated_at`) values 
+insert  into `money_transfers`(`id`,`reference_no`,`from_account_id`,`to_account_id`,`amount`,`created_at`,`updated_at`) values
 (2,'mtr-20200228-071852',1,3,100,'2020-02-28 19:18:52','2020-02-28 19:18:52');
 
 /*Table structure for table `notifications` */
@@ -1414,7 +1414,7 @@ CREATE TABLE `payment_with_cheque` (
 
 /*Data for the table `payment_with_cheque` */
 
-insert  into `payment_with_cheque`(`id`,`payment_id`,`cheque_no`,`created_at`,`updated_at`) values 
+insert  into `payment_with_cheque`(`id`,`payment_id`,`cheque_no`,`created_at`,`updated_at`) values
 (1,19,'23425235235','2018-07-01 09:09:48','2018-07-01 09:09:48'),
 (2,24,'3123123123','2018-07-10 07:21:32','2018-07-10 07:21:32'),
 (3,31,'767867678','2018-08-08 16:36:22','2018-08-08 16:36:22'),
@@ -1448,7 +1448,7 @@ CREATE TABLE `payment_with_credit_card` (
 
 /*Data for the table `payment_with_credit_card` */
 
-insert  into `payment_with_credit_card`(`id`,`payment_id`,`customer_id`,`customer_stripe_id`,`charge_id`,`created_at`,`updated_at`) values 
+insert  into `payment_with_credit_card`(`id`,`payment_id`,`customer_id`,`customer_stripe_id`,`charge_id`,`created_at`,`updated_at`) values
 (4,294,1,'cus_IDw8z9yJZn4qH3','ch_1HdUGJKwOmA8HLXePiqphlky','2020-10-18 11:16:55','2020-10-18 11:16:55');
 
 /*Table structure for table `payment_with_gift_card` */
@@ -1466,7 +1466,7 @@ CREATE TABLE `payment_with_gift_card` (
 
 /*Data for the table `payment_with_gift_card` */
 
-insert  into `payment_with_gift_card`(`id`,`payment_id`,`gift_card_id`,`created_at`,`updated_at`) values 
+insert  into `payment_with_gift_card`(`id`,`payment_id`,`gift_card_id`,`created_at`,`updated_at`) values
 (1,36,2,'2018-08-25 03:48:36','2018-08-25 06:57:35'),
 (4,39,1,'2018-08-25 08:36:34','2018-08-25 08:36:34'),
 (6,50,1,'2018-09-03 05:01:38','2018-09-03 05:01:38'),
@@ -1511,7 +1511,7 @@ CREATE TABLE `payments` (
 
 /*Data for the table `payments` */
 
-insert  into `payments`(`id`,`payment_reference`,`user_id`,`purchase_id`,`sale_id`,`cash_register_id`,`account_id`,`amount`,`used_points`,`change`,`paying_method`,`payment_note`,`created_at`,`updated_at`) values 
+insert  into `payments`(`id`,`payment_reference`,`user_id`,`purchase_id`,`sale_id`,`cash_register_id`,`account_id`,`amount`,`used_points`,`change`,`paying_method`,`payment_note`,`created_at`,`updated_at`) values
 (33,'spr-20180809-055453',1,0,2,0,1,1000,0,0,'Cash','','2018-08-09 05:54:53','2018-08-09 05:54:53'),
 (34,'spr-20180809-055553',1,0,2,0,1,1200,0,0,'Cheque','','2018-08-09 05:55:53','2018-08-09 05:56:36'),
 (35,'spr-20180809-063214',1,0,3,0,1,897,0,0,'Cheque','','2018-08-09 06:32:14','2018-08-09 06:32:14'),
@@ -1739,7 +1739,7 @@ CREATE TABLE `payrolls` (
 
 /*Data for the table `payrolls` */
 
-insert  into `payrolls`(`id`,`reference_no`,`employee_id`,`account_id`,`user_id`,`amount`,`paying_method`,`note`,`created_at`,`updated_at`) values 
+insert  into `payrolls`(`id`,`reference_no`,`employee_id`,`account_id`,`user_id`,`amount`,`paying_method`,`note`,`created_at`,`updated_at`) values
 (8,'payroll-20190101-055231',1,1,1,100,'0','','2019-01-01 05:52:31','2019-01-01 05:52:31'),
 (9,'payroll-20191204-113802',1,1,1,10000,'0','','2019-12-04 23:38:02','2019-12-04 23:38:02'),
 (10,'payroll-20210619-123706',1,1,1,200,'0','','2021-06-19 12:37:06','2021-06-19 12:37:06');
@@ -1759,7 +1759,7 @@ CREATE TABLE `permissions` (
 
 /*Data for the table `permissions` */
 
-insert  into `permissions`(`id`,`name`,`guard_name`,`created_at`,`updated_at`) values 
+insert  into `permissions`(`id`,`name`,`guard_name`,`created_at`,`updated_at`) values
 (4,'products-edit','web','2018-06-03 07:00:09','2018-06-03 07:00:09'),
 (5,'products-delete','web','2018-06-04 04:54:22','2018-06-04 04:54:22'),
 (6,'products-add','web','2018-06-04 06:34:14','2018-06-04 06:34:14'),
@@ -1883,7 +1883,7 @@ CREATE TABLE `pos_setting` (
 
 /*Data for the table `pos_setting` */
 
-insert  into `pos_setting`(`id`,`customer_id`,`warehouse_id`,`biller_id`,`product_number`,`keybord_active`,`stripe_public_key`,`stripe_secret_key`,`created_at`,`updated_at`) values 
+insert  into `pos_setting`(`id`,`customer_id`,`warehouse_id`,`biller_id`,`product_number`,`keybord_active`,`stripe_public_key`,`stripe_secret_key`,`created_at`,`updated_at`) values
 (1,11,9,1,15,0,'1312','123412','2018-09-02 09:17:04','2022-12-06 01:55:10');
 
 /*Table structure for table `product_adjustments` */
@@ -1904,7 +1904,7 @@ CREATE TABLE `product_adjustments` (
 
 /*Data for the table `product_adjustments` */
 
-insert  into `product_adjustments`(`id`,`adjustment_id`,`product_id`,`variant_id`,`qty`,`action`,`created_at`,`updated_at`) values 
+insert  into `product_adjustments`(`id`,`adjustment_id`,`product_id`,`variant_id`,`qty`,`action`,`created_at`,`updated_at`) values
 (17,12,18,NULL,1,'+','2022-11-25 08:10:25','2022-11-25 08:10:25'),
 (18,13,20,NULL,1,'+','2022-12-01 04:34:28','2022-12-01 04:34:28'),
 (19,14,20,NULL,5,'-','2022-12-01 04:37:50','2022-12-01 04:37:50');
@@ -1926,7 +1926,7 @@ CREATE TABLE `product_batches` (
 
 /*Data for the table `product_batches` */
 
-insert  into `product_batches`(`id`,`product_id`,`batch_no`,`expired_date`,`qty`,`created_at`,`updated_at`) values 
+insert  into `product_batches`(`id`,`product_id`,`batch_no`,`expired_date`,`qty`,`created_at`,`updated_at`) values
 (1,71,'1001','2023-05-31',18,'2021-03-07 14:14:05','2021-11-29 13:22:53'),
 (2,71,'1002','2023-05-31',6,'2021-03-07 14:55:06','2021-06-18 20:32:54'),
 (3,71,'1003','2023-09-30',2,'2021-03-09 15:42:13','2021-09-21 15:49:37'),
@@ -1958,7 +1958,7 @@ CREATE TABLE `product_purchases` (
 
 /*Data for the table `product_purchases` */
 
-insert  into `product_purchases`(`id`,`purchase_id`,`product_id`,`product_batch_id`,`variant_id`,`imei_number`,`qty`,`recieved`,`purchase_unit_id`,`net_unit_cost`,`discount`,`tax_rate`,`tax`,`total`,`created_at`,`updated_at`) values 
+insert  into `product_purchases`(`id`,`purchase_id`,`product_id`,`product_batch_id`,`variant_id`,`imei_number`,`qty`,`recieved`,`purchase_unit_id`,`net_unit_cost`,`discount`,`tax_rate`,`tax`,`total`,`created_at`,`updated_at`) values
 (372,136,84,NULL,NULL,NULL,155,155,1,250000,0,0,0,38750000,'2022-03-24 04:42:30','2022-03-24 04:42:30'),
 (373,136,83,NULL,NULL,NULL,100,100,1,100000,0,0,0,10000000,'2022-03-24 04:42:30','2022-03-24 04:42:30'),
 (374,137,84,NULL,NULL,NULL,1,1,1,250000,0,0,0,250000,'2022-04-23 02:58:14','2022-04-23 02:58:14'),
@@ -1996,7 +1996,7 @@ CREATE TABLE `product_quotation` (
 
 /*Data for the table `product_quotation` */
 
-insert  into `product_quotation`(`id`,`quotation_id`,`product_id`,`product_batch_id`,`variant_id`,`qty`,`sale_unit_id`,`net_unit_price`,`discount`,`tax_rate`,`tax`,`total`,`created_at`,`updated_at`) values 
+insert  into `product_quotation`(`id`,`quotation_id`,`product_id`,`product_batch_id`,`variant_id`,`qty`,`sale_unit_id`,`net_unit_price`,`discount`,`tax_rate`,`tax`,`total`,`created_at`,`updated_at`) values
 (39,16,84,NULL,NULL,2,1,560000,0,0,0,1120000,'2022-10-09 23:35:28','2022-10-09 23:35:28');
 
 /*Table structure for table `product_returns` */
@@ -2024,7 +2024,7 @@ CREATE TABLE `product_returns` (
 
 /*Data for the table `product_returns` */
 
-insert  into `product_returns`(`id`,`return_id`,`product_id`,`product_batch_id`,`variant_id`,`imei_number`,`qty`,`sale_unit_id`,`net_unit_price`,`discount`,`tax_rate`,`tax`,`total`,`created_at`,`updated_at`) values 
+insert  into `product_returns`(`id`,`return_id`,`product_id`,`product_batch_id`,`variant_id`,`imei_number`,`qty`,`sale_unit_id`,`net_unit_price`,`discount`,`tax_rate`,`tax`,`total`,`created_at`,`updated_at`) values
 (55,30,83,NULL,NULL,NULL,1,1,250000,0,0,0,250000,'2022-08-07 05:42:08','2022-08-07 05:42:08');
 
 /*Table structure for table `product_sales` */
@@ -2052,7 +2052,7 @@ CREATE TABLE `product_sales` (
 
 /*Data for the table `product_sales` */
 
-insert  into `product_sales`(`id`,`sale_id`,`product_id`,`product_batch_id`,`variant_id`,`imei_number`,`qty`,`sale_unit_id`,`net_unit_price`,`discount`,`tax_rate`,`tax`,`total`,`created_at`,`updated_at`) values 
+insert  into `product_sales`(`id`,`sale_id`,`product_id`,`product_batch_id`,`variant_id`,`imei_number`,`qty`,`sale_unit_id`,`net_unit_price`,`discount`,`tax_rate`,`tax`,`total`,`created_at`,`updated_at`) values
 (588,363,84,NULL,NULL,NULL,16,1,560000,0,0,0,8960000,'2022-03-24 04:49:19','2022-05-09 07:40:25'),
 (589,363,83,NULL,NULL,NULL,17,1,250000,0,0,0,4250000,'2022-03-24 04:49:19','2022-05-09 07:40:25'),
 (590,364,83,NULL,NULL,NULL,1,1,250000,0,0,0,250000,'2022-05-17 16:15:09','2022-05-17 16:15:09'),
@@ -2110,7 +2110,7 @@ CREATE TABLE `product_transfer` (
 
 /*Data for the table `product_transfer` */
 
-insert  into `product_transfer`(`id`,`transfer_id`,`product_id`,`product_batch_id`,`variant_id`,`imei_number`,`qty`,`purchase_unit_id`,`net_unit_cost`,`tax_rate`,`tax`,`total`,`created_at`,`updated_at`) values 
+insert  into `product_transfer`(`id`,`transfer_id`,`product_id`,`product_batch_id`,`variant_id`,`imei_number`,`qty`,`purchase_unit_id`,`net_unit_cost`,`tax_rate`,`tax`,`total`,`created_at`,`updated_at`) values
 (34,1,29,NULL,NULL,NULL,1,12,0,0,0,0,'2022-12-01 03:03:43','2022-12-01 03:07:49'),
 (35,2,20,NULL,NULL,NULL,1,12,0,0,0,0,'2022-12-01 04:32:16','2022-12-01 04:32:16'),
 (36,3,20,NULL,NULL,NULL,10,12,0,0,0,0,'2022-12-01 04:36:07','2022-12-01 04:36:07');
@@ -2154,7 +2154,7 @@ CREATE TABLE `product_warehouse` (
 
 /*Data for the table `product_warehouse` */
 
-insert  into `product_warehouse`(`id`,`product_id`,`product_batch_id`,`variant_id`,`imei_number`,`warehouse_id`,`qty`,`price`,`created_at`,`updated_at`) values 
+insert  into `product_warehouse`(`id`,`product_id`,`product_batch_id`,`variant_id`,`imei_number`,`warehouse_id`,`qty`,`price`,`created_at`,`updated_at`) values
 (1,'1',NULL,NULL,NULL,9,4,50000,'2022-11-22 04:24:19','2022-11-24 14:56:13'),
 (2,'2',NULL,NULL,NULL,9,5,71000,'2022-11-22 04:24:19','2022-11-22 04:24:19'),
 (3,'3',NULL,NULL,NULL,9,5,108000,'2022-11-22 04:24:19','2022-11-22 04:24:19'),
@@ -2258,7 +2258,7 @@ CREATE TABLE `products` (
 
 /*Data for the table `products` */
 
-insert  into `products`(`id`,`name`,`code`,`type`,`barcode_symbology`,`brand_id`,`category_id`,`unit_id`,`purchase_unit_id`,`sale_unit_id`,`cost`,`price`,`price_wholesale`,`qty`,`alert_quantity`,`promotion`,`promotion_price`,`starting_date`,`last_date`,`tax_id`,`tax_method`,`image`,`file`,`is_variant`,`is_batch`,`is_diffPrice`,`is_imei`,`featured`,`product_list`,`variant_list`,`qty_list`,`price_list`,`product_details`,`is_active`,`created_at`,`updated_at`) values 
+insert  into `products`(`id`,`name`,`code`,`type`,`barcode_symbology`,`brand_id`,`category_id`,`unit_id`,`purchase_unit_id`,`sale_unit_id`,`cost`,`price`,`price_wholesale`,`qty`,`alert_quantity`,`promotion`,`promotion_price`,`starting_date`,`last_date`,`tax_id`,`tax_method`,`image`,`file`,`is_variant`,`is_batch`,`is_diffPrice`,`is_imei`,`featured`,`product_list`,`variant_list`,`qty_list`,`price_list`,`product_details`,`is_active`,`created_at`,`updated_at`) values
 (1,'Besi Beton Uk.6','K0010M00011120220001','standard','C128',557,34,17,17,17,'0','50000','',-1,NULL,NULL,NULL,NULL,NULL,NULL,2,'zummXD2dvAtI.png',NULL,NULL,NULL,1,NULL,1,NULL,NULL,NULL,NULL,'',1,'2022-11-21 00:12:16','2022-11-24 14:56:13'),
 (2,'Besi Beton Uk.8','K0010M00011120220002','standard','C128',557,34,17,17,17,'0','71000','',0,NULL,NULL,NULL,NULL,NULL,NULL,1,'zummXD2dvAtI.png',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',1,'2022-11-21 00:12:17','2022-11-22 04:13:08'),
 (3,'Besi Beton Uk.10','K0010M00011120220003','standard','C128',557,34,17,17,17,'0','108000','',0,NULL,NULL,NULL,NULL,NULL,NULL,1,'zummXD2dvAtI.png',NULL,NULL,NULL,1,NULL,0,NULL,NULL,NULL,NULL,'',1,'2022-11-21 00:12:17','2022-11-22 13:26:45'),
@@ -2367,7 +2367,7 @@ CREATE TABLE `purchases` (
 
 /*Data for the table `purchases` */
 
-insert  into `purchases`(`id`,`reference_no`,`user_id`,`warehouse_id`,`supplier_id`,`item`,`total_qty`,`total_discount`,`total_tax`,`total_cost`,`order_tax_rate`,`order_tax`,`order_discount`,`shipping_cost`,`grand_total`,`paid_amount`,`status`,`payment_status`,`document`,`note`,`created_at`,`updated_at`) values 
+insert  into `purchases`(`id`,`reference_no`,`user_id`,`warehouse_id`,`supplier_id`,`item`,`total_qty`,`total_discount`,`total_tax`,`total_cost`,`order_tax_rate`,`order_tax`,`order_discount`,`shipping_cost`,`grand_total`,`paid_amount`,`status`,`payment_status`,`document`,`note`,`created_at`,`updated_at`) values
 (1,'pr-20221201-041209',1,9,1,1,25,0,0,0,0,0,0,0,0,0,1,2,NULL,NULL,'2022-12-01 04:12:09','2022-12-01 04:12:42'),
 (2,'pr-20221201-041401',1,9,1,1,5,0,0,0,0,0,0,0,0,0,1,2,NULL,NULL,'2022-12-01 04:14:01','2022-12-01 04:14:31');
 
@@ -2403,7 +2403,7 @@ CREATE TABLE `quotations` (
 
 /*Data for the table `quotations` */
 
-insert  into `quotations`(`id`,`reference_no`,`user_id`,`biller_id`,`supplier_id`,`customer_id`,`warehouse_id`,`item`,`total_qty`,`total_discount`,`total_tax`,`total_price`,`order_tax_rate`,`order_tax`,`order_discount`,`shipping_cost`,`grand_total`,`quotation_status`,`document`,`note`,`created_at`,`updated_at`) values 
+insert  into `quotations`(`id`,`reference_no`,`user_id`,`biller_id`,`supplier_id`,`customer_id`,`warehouse_id`,`item`,`total_qty`,`total_discount`,`total_tax`,`total_price`,`order_tax_rate`,`order_tax`,`order_discount`,`shipping_cost`,`grand_total`,`quotation_status`,`document`,`note`,`created_at`,`updated_at`) values
 (16,'qr-20221009-113528',1,8,1,21,7,1,2,0,0,1120000,0,0,NULL,NULL,1120000,1,NULL,NULL,'2022-10-09 23:35:28','2022-10-09 23:35:28');
 
 /*Table structure for table `return_purchases` */
@@ -2484,7 +2484,7 @@ CREATE TABLE `reward_point_settings` (
 
 /*Data for the table `reward_point_settings` */
 
-insert  into `reward_point_settings`(`id`,`per_point_amount`,`minimum_amount`,`duration`,`type`,`is_active`,`created_at`,`updated_at`) values 
+insert  into `reward_point_settings`(`id`,`per_point_amount`,`minimum_amount`,`duration`,`type`,`is_active`,`created_at`,`updated_at`) values
 (1,300,1000,1,'Year',1,'2021-06-08 21:40:15','2021-06-27 11:20:55');
 
 /*Table structure for table `role_has_permissions` */
@@ -2498,7 +2498,7 @@ CREATE TABLE `role_has_permissions` (
 
 /*Data for the table `role_has_permissions` */
 
-insert  into `role_has_permissions`(`permission_id`,`role_id`) values 
+insert  into `role_has_permissions`(`permission_id`,`role_id`) values
 (4,1),
 (4,2),
 (4,4),
@@ -2742,7 +2742,7 @@ CREATE TABLE `roles` (
 
 /*Data for the table `roles` */
 
-insert  into `roles`(`id`,`name`,`description`,`guard_name`,`is_active`,`created_at`,`updated_at`) values 
+insert  into `roles`(`id`,`name`,`description`,`guard_name`,`is_active`,`created_at`,`updated_at`) values
 (1,'Admin','admin can access all data...','web',1,'2018-06-02 05:46:44','2018-06-03 05:13:05'),
 (2,'Owner','Owner of shop...','web',1,'2018-10-22 08:38:13','2018-10-22 08:38:13'),
 (4,'staff','staff has specific acess...','web',1,'2018-06-02 06:05:27','2018-06-02 06:05:27'),
@@ -2786,7 +2786,7 @@ CREATE TABLE `sales` (
 
 /*Data for the table `sales` */
 
-insert  into `sales`(`id`,`reference_no`,`user_id`,`cash_register_id`,`customer_id`,`warehouse_id`,`biller_id`,`item`,`total_qty`,`total_discount`,`total_tax`,`total_price`,`grand_total`,`order_tax_rate`,`order_tax`,`order_discount`,`coupon_id`,`coupon_discount`,`shipping_cost`,`sale_status`,`payment_status`,`document`,`paid_amount`,`sale_note`,`staff_note`,`created_at`,`updated_at`) values 
+insert  into `sales`(`id`,`reference_no`,`user_id`,`cash_register_id`,`customer_id`,`warehouse_id`,`biller_id`,`item`,`total_qty`,`total_discount`,`total_tax`,`total_price`,`grand_total`,`order_tax_rate`,`order_tax`,`order_discount`,`coupon_id`,`coupon_discount`,`shipping_cost`,`sale_status`,`payment_status`,`document`,`paid_amount`,`sale_note`,`staff_note`,`created_at`,`updated_at`) values
 (381,'posr-20221203-020123',1,7,1,9,2,3,3,0,0,10000,10000,0,0,NULL,NULL,NULL,NULL,3,4,NULL,10000,NULL,NULL,'2022-12-03 02:01:23','2022-12-03 02:01:23');
 
 /*Table structure for table `stock_counts` */
@@ -2837,7 +2837,7 @@ CREATE TABLE `suppliers` (
 
 /*Data for the table `suppliers` */
 
-insert  into `suppliers`(`id`,`name`,`image`,`company_name`,`vat_number`,`email`,`phone_number`,`address`,`city`,`state`,`postal_code`,`country`,`is_active`,`created_at`,`updated_at`) values 
+insert  into `suppliers`(`id`,`name`,`image`,`company_name`,`vat_number`,`email`,`phone_number`,`address`,`city`,`state`,`postal_code`,`country`,`is_active`,`created_at`,`updated_at`) values
 (1,'Supplier 1','globaltouch.jpg','Supplier 1','','Supplier 1@mail.com','231231','Jakarta','Jakarta Selatan','','','Indonesia',1,'2018-05-13 04:06:34','2019-12-21 16:58:47');
 
 /*Table structure for table `taxes` */
@@ -2856,7 +2856,7 @@ CREATE TABLE `taxes` (
 
 /*Data for the table `taxes` */
 
-insert  into `taxes`(`id`,`name`,`rate`,`is_active`,`created_at`,`updated_at`) values 
+insert  into `taxes`(`id`,`name`,`rate`,`is_active`,`created_at`,`updated_at`) values
 (1,'vat@11',11,1,'2018-05-12 15:58:30','2022-05-17 16:08:02'),
 (2,'vat@15',15,1,'2018-05-12 15:58:43','2018-05-28 05:35:05'),
 (3,'test',6,0,'2018-05-28 05:32:54','2018-05-28 05:34:44'),
@@ -2888,7 +2888,7 @@ CREATE TABLE `transfers` (
 
 /*Data for the table `transfers` */
 
-insert  into `transfers`(`id`,`reference_no`,`user_id`,`status`,`from_warehouse_id`,`to_warehouse_id`,`item`,`total_qty`,`total_tax`,`total_cost`,`shipping_cost`,`grand_total`,`document`,`note`,`created_at`,`updated_at`) values 
+insert  into `transfers`(`id`,`reference_no`,`user_id`,`status`,`from_warehouse_id`,`to_warehouse_id`,`item`,`total_qty`,`total_tax`,`total_cost`,`shipping_cost`,`grand_total`,`document`,`note`,`created_at`,`updated_at`) values
 (1,'tr-20221201-030343',1,3,9,10,1,1,0,0,0,0,NULL,NULL,'2022-12-01 03:03:43','2022-12-01 03:07:49'),
 (2,'tr-20221201-043216',1,1,9,11,1,1,0,0,NULL,0,NULL,NULL,'2022-12-01 04:32:16','2022-12-01 04:32:16'),
 (3,'tr-20221201-043607',1,1,9,10,1,10,0,0,NULL,0,NULL,NULL,'2022-12-01 04:36:07','2022-12-01 04:36:07');
@@ -2912,7 +2912,7 @@ CREATE TABLE `units` (
 
 /*Data for the table `units` */
 
-insert  into `units`(`id`,`unit_code`,`unit_name`,`base_unit`,`operator`,`operation_value`,`is_active`,`created_at`,`updated_at`) values 
+insert  into `units`(`id`,`unit_code`,`unit_name`,`base_unit`,`operator`,`operation_value`,`is_active`,`created_at`,`updated_at`) values
 (12,'Pcs','Pieces',NULL,'/',1,1,'2022-11-14 03:10:01','2022-11-14 03:10:01'),
 (13,'Box','Box',12,'/',1,1,'2022-11-14 03:28:49','2022-11-14 03:28:49'),
 (14,'Dos','Dos',12,'/',1,1,'2022-11-14 03:28:49','2022-11-14 03:28:49'),
@@ -2960,7 +2960,7 @@ CREATE TABLE `users` (
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`name`,`email`,`password`,`remember_token`,`phone`,`company_name`,`role_id`,`biller_id`,`warehouse_id`,`is_active`,`is_deleted`,`created_at`,`updated_at`) values 
+insert  into `users`(`id`,`name`,`email`,`password`,`remember_token`,`phone`,`company_name`,`role_id`,`biller_id`,`warehouse_id`,`is_active`,`is_deleted`,`created_at`,`updated_at`) values
 (1,'admin','admin@gmail.com','$2y$10$DWAHTfjcvwCpOCXaJg11MOhsqns03uvlwiSUOQwkHL2YYrtrXPcL6','YNJ102CU5fzsBv03NXfN8F25nLo7j7ZzBsbIQEJfncAdFhsTA9FmWT0P7DBh','12112','ciptajaya',1,0,0,1,0,'2018-06-02 09:24:15','2022-11-25 07:36:17'),
 (3,'dhiman da','dhiman@gmail.com','$2y$10$Fef6vu5E67nm11hX7V5a2u1ThNCQ6n9DRCvRF9TD7stk.Pmt2R6O.','5ehQM6JIfiQfROgTbB5let0Z93vjLHS7rd9QD5RPNgOxli3xdo7fykU7vtTt','212','lioncoders',1,0,0,0,1,'2018-06-14 04:00:31','2020-11-05 13:06:51'),
 (6,'test','test@gmail.com','$2y$10$TDAeHcVqHyCmurki0wjLZeIl1SngKX3WLOhyTiCoZG3souQfqv.LS','KpW1gYYlOFacumklO2IcRfSsbC3KcWUZzOI37gqoqM388Xie6KdhaOHIFEYm','1234','212312',4,0,0,0,1,'2018-06-23 09:05:33','2018-06-23 09:13:45'),
@@ -2995,7 +2995,7 @@ CREATE TABLE `variants` (
 
 /*Data for the table `variants` */
 
-insert  into `variants`(`id`,`name`,`created_at`,`updated_at`) values 
+insert  into `variants`(`id`,`name`,`created_at`,`updated_at`) values
 (2,'Medium','2019-11-21 13:03:04','2019-11-24 14:43:52'),
 (3,'Small','2019-11-21 13:03:04','2019-11-24 14:43:52'),
 (5,'Large','2019-11-24 12:07:20','2019-11-24 14:44:56'),
@@ -3025,7 +3025,7 @@ CREATE TABLE `warehouses` (
 
 /*Data for the table `warehouses` */
 
-insert  into `warehouses`(`id`,`name`,`phone`,`email`,`address`,`is_active`,`created_at`,`updated_at`) values 
+insert  into `warehouses`(`id`,`name`,`phone`,`email`,`address`,`is_active`,`created_at`,`updated_at`) values
 (9,'Toko KM 9','+62813',NULL,'Jln. Kilo Meter 9, Depan jalan raya',1,'2022-11-14 23:03:52','2022-11-14 23:03:52'),
 (10,'Toko KM 12','+62813',NULL,'Jln Kilo Meter 12',1,'2022-11-14 23:04:32','2022-11-14 23:04:32'),
 (11,'Toko Kabupaten Aimas','+62813',NULL,'Kabupaten aimas unit II',1,'2022-11-14 23:05:35','2022-11-14 23:05:35');
