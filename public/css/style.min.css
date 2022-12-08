@@ -1,0 +1,110 @@
+@font-face {
+  font-family: Oblong;
+  src: url("../fonts/oblong/oblong.ttf");
+}
+@font-face {
+  font-family: Poppins;
+  src: url("../fonts/poppins/Poppins-Regular.otf");
+}
+.login {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: #CEE5D0;
+}
+.login .box-login {
+  height: 38rem;
+  width: 60rem;
+  border-radius: 15px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background: #FEFBF3;
+  display: flex;
+}
+.login .box-login .login-action {
+  width: 30rem;
+  margin: 22px 0px 0px 12px;
+}
+.login .box-login .login-action .logo {
+  display: flex;
+  margin-bottom: 5rem;
+}
+.login .box-login .login-action .logo img {
+  width: 32px;
+  height: 32px;
+}
+.login .box-login .login-action .logo h5 {
+  display: flex;
+  align-items: center;
+  height: 37px;
+  margin-left: 8px;
+}
+.login .box-login .login-action .action {
+  display: flex;
+  flex-direction: column;
+  width: 23rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+.login .box-login .login-action .action .header-welcome h2 {
+  text-align: center;
+}
+.login .box-login .login-action .action .header-welcome p {
+  text-align: center;
+  font-size: 14px;
+  color: #8D8DAA;
+}
+.login .box-login .login-action .action .input-field {
+  margin-bottom: 12px;
+}
+.login .box-login .login-action .action .input-field p {
+  margin-bottom: 2px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.login .box-login .login-action .action .input-field input {
+  width: 100%;
+  border-radius: 5px;
+  border: 2px solid rgba(180, 175, 175, 0.345);
+  padding: 8px;
+  color: #8D8DAA;
+}
+.login .box-login .login-action .action .input-field input:focus {
+  outline: none;
+}
+.login .box-login .login-action .action .btn-login {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  background-color: #4E6C50;
+  border-radius: 5px;
+  border: none;
+  padding: 8px;
+  color: white;
+  transition: all 0.2s ease;
+}
+.login .box-login .login-action .action .btn-login:hover {
+  opacity: 0.8;
+}
+.login .box-login .login-action .action a {
+  text-align: center;
+  color: #4E6C50;
+}
+.login .box-login .login-action .action a:hover {
+  text-decoration: none;
+}
+.login .box-login .login-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 5px 5px 0px;
+  width: 30rem;
+  background: #CEE5D0;
+  border-radius: 0px 10px 10px 0px;
+}
+
+.sc-header .logo-sistem img {
+  width: 5rem;
+  height: 4rem;
+}/*# sourceMappingURL=style.min.css.map */

@@ -1,0 +1,17 @@
+
+
+bootstrap/cache/cache/data
+storage/framework/
+storage/framework/sessions
+
+node_modules/
+npm-debug.log
+yarn-error.log
+.phpunit.result.cache
+
+
+/vendor/
+/storage
+/sass
+
+.env
