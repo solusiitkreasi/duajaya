@@ -29,7 +29,7 @@
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   </head>
     <style>
         .password-container{
@@ -123,7 +123,7 @@
 
               <div class="form-group-material">
                 <input id="login-password" type="password" name="password" required class="input-material" value="">
-                <!-- <i class="fa fa-eye" onclick="showPass()" id="eye" title="Show Password"></i> -->
+                <i class="fa fa-eye" onclick="showPass()" id="eye" title="Show Password"></i>
                 <label for="login-password" class="label-material">{{trans('file.Password')}}</label>
                 @if(session()->has('error'))
                     <p>
@@ -155,7 +155,7 @@
     var x;
     var e;
     function showPass() {
-        x = document.getElementById("password");
+        x = document.getElementById("login-password");
         e = document.getElementById("eye");
 
         if (x.type === "password") {
