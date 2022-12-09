@@ -10,6 +10,8 @@
     <meta name="robots" content="all,follow">
     <link rel="manifest" href="{{url('manifest.json')}}">
     <link rel="icon" type="image/png" href="{{url('public/logo', $general_setting->site_logo)}}" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="<?php echo asset('vendor/bootstrap/css/bootstrap.min.css') ?>" type="text/css">
 
@@ -27,10 +29,34 @@
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-
-    <script type="text/javascript" src="<?php echo asset('vendor/jquery/jquery.min.js') ?>"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.js"></script>
   </head>
-
+    <style>
+        .password-container{
+            width: 400px;
+            position: relative;
+        }
+        .password-container input[type="password"],
+        .password-container input[type="text"]{
+            width: 100%;
+            padding: 12px 36px 12px 12px;
+            box-sizing: border-box;
+        }
+        .fa-eye{
+            position: absolute;
+            top: 30%;
+            right: 2%;
+            cursor: pointer;
+            color: #7c7676;
+        }
+        .fa-eye-slash{
+            position: absolute;
+            top: 30%;
+            right: 2%;
+            cursor: pointer;
+            color: #7c7676;
+        }
+    </style>
   <body>
     {{-- <div class="login">
       <div class="box-login">
@@ -97,6 +123,7 @@
 
               <div class="form-group-material">
                 <input id="login-password" type="password" name="password" required class="input-material" value="">
+                <!-- <i class="fa fa-eye" onclick="showPass()" id="eye" title="Show Password"></i> -->
                 <label for="login-password" class="label-material">{{trans('file.Password')}}</label>
                 @if(session()->has('error'))
                     <p>
@@ -122,18 +149,37 @@
     </div>
   </body>
 </html>
+
+
 <script>
-    if ('serviceWorker' in navigator ) {
-        window.addEventListener('load', function() {
-            navigator.serviceWorker.register('/salepro/service-worker.js').then(function(registration) {
-                // Registration was successful
-                console.log('ServiceWorker registration successful with scope: ', registration.scope);
-            }, function(err) {
-                // registration failed :(
-                console.log('ServiceWorker registration failed: ', err);
-            });
-        });
+    var x;
+    var e;
+    function showPass() {
+        x = document.getElementById("password");
+        e = document.getElementById("eye");
+
+        if (x.type === "password") {
+            x.type = "text";
+            e.classList = "fa fa-eye-slash";
+            e.title = "Hidden";
+        } else {
+            x.type = "password";
+            e.classList = "fa fa-eye";
+            e.title = "Show Password";
+        }
     }
+
+    // if ('serviceWorker' in navigator ) {
+    //     window.addEventListener('load', function() {
+    //         navigator.serviceWorker.register('/salepro/service-worker.js').then(function(registration) {
+    //             // Registration was successful
+    //             console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    //         }, function(err) {
+    //             // registration failed :(
+    //             console.log('ServiceWorker registration failed: ', err);
+    //         });
+    //     });
+    // }
 </script>
 <script type="text/javascript">
     $('.admin-btn').on('click', function(){
@@ -141,16 +187,16 @@
         $("input[name='password']").focus().val('admin');
     });
 
-  $('.staff-btn').on('click', function(){
-      $("input[name='name']").focus().val('staff');
-      $("input[name='password']").focus().val('staff');
-  });
+    $('.staff-btn').on('click', function(){
+        $("input[name='name']").focus().val('staff');
+        $("input[name='password']").focus().val('staff');
+    });
 
-  $('.customer-btn').on('click', function(){
-      $("input[name='name']").focus().val('shakalaka');
-      $("input[name='password']").focus().val('shakalaka');
-  });
-  // ------------------------------------------------------- //
+    $('.customer-btn').on('click', function(){
+        $("input[name='name']").focus().val('shakalaka');
+        $("input[name='password']").focus().val('shakalaka');
+    });
+    // ------------------------------------------------------- //
     // Material Inputs
     // ------------------------------------------------------ //
 
@@ -174,4 +220,6 @@
             $(this).siblings('.label-material').removeClass('active');
         }
     });
+
+
 </script>
