@@ -24,6 +24,17 @@
       'ReCaptcha' => 'Biscolab\\ReCaptcha\\Facades\\ReCaptcha',
     ),
   ),
+  'codedge/laravel-fpdf' => 
+  array (
+    'aliases' => 
+    array (
+      'Fpdf' => 'Codedge\\Fpdf\\Facades\\Fpdf',
+    ),
+    'providers' => 
+    array (
+      0 => 'Codedge\\Fpdf\\FpdfServiceProvider',
+    ),
+  ),
   'darryldecode/cart' => 
   array (
     'providers' => 
