@@ -16,9 +16,17 @@ use DB;
 use Auth;
 use App\Mail\UserNotification;
 use Illuminate\Support\Facades\Mail;
+use Codedge\Fpdf\Fpdf\Fpdf;
 
 class DeliveryController extends Controller
 {
+    protected $fpdf;
+
+    public function __construct()
+    {
+        $this->fpdf = new Fpdf;
+    }
+
     public function index()
     {
         $role = Role::find(Auth::user()->role_id);
@@ -57,7 +65,7 @@ class DeliveryController extends Controller
             $delivery_data[] = $customer_sale[0]->name;
             $delivery_data[] = $customer_sale[0]->address.' '.$customer_sale[0]->city.' '.$customer_sale[0]->country;
             $delivery_data[] = '';
-        }        
+        }
         return $delivery_data;
     }
 
@@ -100,7 +108,7 @@ class DeliveryController extends Controller
             }
             catch(\Exception $e){
                 $message = 'Delivery created successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            }  
+            }
         }
         return redirect('delivery')->with('message', $message);
     }
@@ -192,7 +200,7 @@ class DeliveryController extends Controller
         }
         else
             $message = 'Customer does not have email!';
-        
+
         return redirect()->back()->with('message', $message);
     }
 
@@ -244,7 +252,7 @@ class DeliveryController extends Controller
             }
             catch(\Exception $e){
                 $message = 'Delivery updated successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            }   
+            }
         }
         return redirect('delivery')->with('message', $message);
     }
@@ -264,5 +272,17 @@ class DeliveryController extends Controller
         $lims_delivery_data = Delivery::find($id);
         $lims_delivery_data->delete();
         return redirect('delivery')->with('not_permitted', 'Delivery deleted successfully');
+    }
+
+
+    public function print_do($id)
+    {
+        // $this->fpdf->SetFont('Arial', 'B', 15);
+        // $this->fpdf->AddPage("L", ['100', '100']);
+        // $this->fpdf->Text(10, 10, "Hello World!");
+        // $this->fpdf->Output();
+        // exit;
+
+        return view('page_print.test');
     }
 }
