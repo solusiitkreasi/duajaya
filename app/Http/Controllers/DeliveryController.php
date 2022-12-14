@@ -16,16 +16,10 @@ use DB;
 use Auth;
 use App\Mail\UserNotification;
 use Illuminate\Support\Facades\Mail;
-use Codedge\Fpdf\Fpdf\Fpdf;
+use App\Pdf\Doprint;
 
 class DeliveryController extends Controller
 {
-    protected $fpdf;
-
-    public function __construct()
-    {
-        $this->fpdf = new Fpdf;
-    }
 
     public function index()
     {
@@ -283,6 +277,12 @@ class DeliveryController extends Controller
         // $this->fpdf->Output();
         // exit;
 
-        return view('page_print.test');
+        // return view('page_print.test');
+        $data = ['title' => 'Test', 'content'=> 'Isi isis'];
+        $myPdf = new Doprint($data);
+
+        $myPdf->Output('I', "Doprint.pdf", true);
+
+        exit;
     }
 }

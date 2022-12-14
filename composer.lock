@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b1a9eeea031283c96f2c5cb22f121e1c",
+    "content-hash": "f1fdffdf2508384884adb95e69cb2fc2",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -265,72 +265,6 @@
                 }
             ],
             "time": "2021-08-15T20:50:18+00:00"
-        },
-        {
-            "name": "codedge/laravel-fpdf",
-            "version": "1.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/codedge/laravel-fpdf.git",
-                "reference": "413b570477473293c8d216681bd40d635e1c3276"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/codedge/laravel-fpdf/zipball/413b570477473293c8d216681bd40d635e1c3276",
-                "reference": "413b570477473293c8d216681bd40d635e1c3276",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^6.0 || ^7.0 || ^8.0",
-                "php": ">=7.3 || ^8.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^6.21.0",
-                "phpunit/phpunit": "^9.5.9"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Fpdf": "Codedge\\Fpdf\\Facades\\Fpdf"
-                    },
-                    "providers": [
-                        "Codedge\\Fpdf\\FpdfServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Codedge\\Fpdf\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Holger Lösken",
-                    "email": "holger.loesken@codedge.de"
-                }
-            ],
-            "description": "Laravel package to include Fpdf. It ships with Fpdf 1.82.",
-            "keywords": [
-                "fpdf",
-                "laravel",
-                "pdf"
-            ],
-            "support": {
-                "issues": "https://github.com/codedge/laravel-fpdf/issues",
-                "source": "https://github.com/codedge/laravel-fpdf"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/codedge",
-                    "type": "github"
-                }
-            ],
-            "time": "2021-09-14T12:03:46+00:00"
         },
         {
             "name": "darryldecode/cart",
@@ -6849,6 +6783,66 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/2.2.5"
             },
             "time": "2022-09-12T13:28:28+00:00"
+        },
+        {
+            "name": "tjgazel/laravel-fpdf",
+            "version": "v1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tjgazel/laravel-fpdf.git",
+                "reference": "eeac42b6af4dc44027bdfd984ca81bef98c430df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tjgazel/laravel-fpdf/zipball/eeac42b6af4dc44027bdfd984ca81bef98c430df",
+                "reference": "eeac42b6af4dc44027bdfd984ca81bef98c430df",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "TJGazel\\LaraFpdf\\LaraFpdfServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaraFpdf": "TJGazel\\LaraFpdf\\Facades\\LaraFpdf"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TJGazel\\LaraFpdf\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Talles Gazel",
+                    "email": "tjgazel@gmail.com"
+                },
+                {
+                    "name": "Giovanni Camargo",
+                    "email": "vannipassos@gmail.com"
+                }
+            ],
+            "description": "Extension lib FPDF  for laravel 5.*",
+            "homepage": "https://github.com/tjgazel/laravel-fpdf",
+            "keywords": [
+                "fpdf",
+                "laravel",
+                "pdf"
+            ],
+            "support": {
+                "issues": "https://github.com/tjgazel/laravel-fpdf/issues",
+                "source": "https://github.com/tjgazel/laravel-fpdf/tree/v1.1.2"
+            },
+            "time": "2021-04-20T12:44:05+00:00"
         },
         {
             "name": "twilio/sdk",

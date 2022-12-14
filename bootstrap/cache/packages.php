@@ -24,17 +24,6 @@
       'ReCaptcha' => 'Biscolab\\ReCaptcha\\Facades\\ReCaptcha',
     ),
   ),
-  'codedge/laravel-fpdf' => 
-  array (
-    'aliases' => 
-    array (
-      'Fpdf' => 'Codedge\\Fpdf\\Facades\\Fpdf',
-    ),
-    'providers' => 
-    array (
-      0 => 'Codedge\\Fpdf\\FpdfServiceProvider',
-    ),
-  ),
   'darryldecode/cart' => 
   array (
     'providers' => 
@@ -186,6 +175,17 @@
     'aliases' => 
     array (
       'PayPal' => 'Srmklive\\PayPal\\Facades\\PayPal',
+    ),
+  ),
+  'tjgazel/laravel-fpdf' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'TJGazel\\LaraFpdf\\LaraFpdfServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'LaraFpdf' => 'TJGazel\\LaraFpdf\\Facades\\LaraFpdf',
     ),
   ),
   'unicodeveloper/laravel-paystack' => 

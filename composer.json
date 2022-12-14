@@ -12,7 +12,6 @@
         "akaunting/laravel-money": "^1.2",
         "barryvdh/laravel-translation-manager": "^0.6.3",
         "biscolab/laravel-recaptcha": "^5.4",
-        "codedge/laravel-fpdf": "^1.8",
         "darryldecode/cart": "^4.2",
         "doctrine/dbal": "^2.11",
         "fideloper/proxy": "^4.4",
@@ -35,6 +34,7 @@
         "srmklive/paypal": "^3.0",
         "stripe/stripe-php": "^7.57",
         "symfony/mailer": "^5.4 || ^6",
+        "tjgazel/laravel-fpdf": "^1.1",
         "twilio/sdk": "^6.10",
         "unicodeveloper/laravel-paystack": "^1.0"
     },
