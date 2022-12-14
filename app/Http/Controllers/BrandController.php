@@ -95,7 +95,7 @@ class BrandController extends Controller
             array_push($escapedHeader, $escapedItem);
         }
 
-        dd($escapedHeader);
+        // dd($escapedHeader);
         //looping through othe columns
         while($columns=fgetcsv($file))
         {
@@ -143,15 +143,15 @@ class BrandController extends Controller
             if($brand > 0) {
                 $data = Brand::where('id', $brand)->first();
                 $csvData[]=$data->title.','.$data->image;
-            }   
-        }        
+            }
+        }
         $filename=date('Y-m-d').".csv";
         $file_path=public_path().'/downloads/'.$filename;
-        $file_url=url('/').'/downloads/'.$filename;   
+        $file_url=url('/').'/downloads/'.$filename;
         $file = fopen($file_path,"w+");
         foreach ($csvData as $exp_data){
           fputcsv($file,explode(',',$exp_data));
-        }   
+        }
         fclose($file);
         return $file_url;
     }
