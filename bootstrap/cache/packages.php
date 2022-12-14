@@ -14,7 +14,7 @@
     ),
     'aliases' => 
     array (
-      'LaraFpdf' => 'Arya\\LaraFpdf\\Facades\\LaraFpdf',
+      'LaraFpdf' => 'Aryatama\\LaraFpdf\\Facades\\LaraFpdf',
     ),
   ),
   'barryvdh/laravel-translation-manager' => 
