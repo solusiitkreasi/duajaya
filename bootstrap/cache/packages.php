@@ -6,17 +6,6 @@
       0 => 'Akaunting\\Money\\Provider',
     ),
   ),
-  'aryatama045/laravel-fpdf' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Aryatama\\LaraFpdf\\LaraFpdfServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'LaraFpdf' => 'Aryatama\\LaraFpdf\\Facades\\LaraFpdf',
-    ),
-  ),
   'barryvdh/laravel-translation-manager' => 
   array (
     'providers' => 
@@ -33,6 +22,17 @@
     'aliases' => 
     array (
       'ReCaptcha' => 'Biscolab\\ReCaptcha\\Facades\\ReCaptcha',
+    ),
+  ),
+  'codedge/laravel-fpdf' => 
+  array (
+    'aliases' => 
+    array (
+      'Fpdf' => 'Codedge\\Fpdf\\Facades\\Fpdf',
+    ),
+    'providers' => 
+    array (
+      0 => 'Codedge\\Fpdf\\FpdfServiceProvider',
     ),
   ),
   'darryldecode/cart' => 
@@ -186,17 +186,6 @@
     'aliases' => 
     array (
       'PayPal' => 'Srmklive\\PayPal\\Facades\\PayPal',
-    ),
-  ),
-  'tjgazel/laravel-fpdf' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'TJGazel\\LaraFpdf\\LaraFpdfServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'LaraFpdf' => 'TJGazel\\LaraFpdf\\Facades\\LaraFpdf',
     ),
   ),
   'unicodeveloper/laravel-paystack' => 

@@ -1,8 +1,7 @@
 <?php namespace App\Pdf;
-// use Aryatama\LaraFpdf\LaraFpdf;
-use TJGazel\LaraFpdf\LaraFpdf;
+use Codedge\Fpdf\Fpdf\Fpdf;
 
-class Doprint extends LaraFpdf
+class Doprint extends Fpdf
 {
     private $data;
 
