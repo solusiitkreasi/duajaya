@@ -1,5 +1,5 @@
 <?php namespace App\Pdf;
-use Aryatama\LaraFpdf\LaraFpdf;
+use Aryatama045\LaraFpdf\LaraFpdf;
 
 class Doprint extends LaraFpdf
 {
