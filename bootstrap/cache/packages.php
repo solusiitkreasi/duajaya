@@ -188,6 +188,17 @@
       'PayPal' => 'Srmklive\\PayPal\\Facades\\PayPal',
     ),
   ),
+  'tjgazel/laravel-fpdf' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'TJGazel\\LaraFpdf\\LaraFpdfServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'LaraFpdf' => 'TJGazel\\LaraFpdf\\Facades\\LaraFpdf',
+    ),
+  ),
   'unicodeveloper/laravel-paystack' => 
   array (
     'providers' => 
