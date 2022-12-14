@@ -286,7 +286,7 @@ return [
         'Zipper' => Chumper\Zipper\Zipper::class,
         'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
         'Pusher' => Pusher\Pusher::class,
-        'LaraFpdf' => Aryatama\LaraFpdf\Facades\LaraFpdf::class,
+        'LaraFpdf' => Arya\LaraFpdf\Facades\LaraFpdf::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class
 
         //'Socialite' => Laravel\Socialite\Facades\Socialite::class,
