@@ -10,11 +10,11 @@
   array (
     'aliases' => 
     array (
-      'Fpdf' => 'Aryatama\\Fpdf\\Facades\\Fpdf',
+      'Fpdf' => 'Aryatama045\\Fpdf\\Facades\\Fpdf',
     ),
     'providers' => 
     array (
-      0 => 'Aryatama\\Fpdf\\FpdfServiceProvider',
+      0 => 'Aryatama045\\Fpdf\\FpdfServiceProvider',
     ),
   ),
   'barryvdh/laravel-translation-manager' => 

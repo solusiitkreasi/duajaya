@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "970ec9e46842d58e41f4ef8c5eda215a",
+    "content-hash": "0ae41e2d1cab7c3d5d8fa5bebc62a173",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -77,17 +77,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/aryatama045/laravel-fpdf.git",
-                "reference": "daf6256e8dd5d0cc19212236a1d0ea8426997669"
+                "reference": "8545dd92e6fe42c5eeddf2fd4372a67804592931"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aryatama045/laravel-fpdf/zipball/daf6256e8dd5d0cc19212236a1d0ea8426997669",
-                "reference": "daf6256e8dd5d0cc19212236a1d0ea8426997669",
+                "url": "https://api.github.com/repos/aryatama045/laravel-fpdf/zipball/8545dd92e6fe42c5eeddf2fd4372a67804592931",
+                "reference": "8545dd92e6fe42c5eeddf2fd4372a67804592931",
                 "shasum": ""
             },
             "require": {
                 "illuminate/support": "^7.0 || ^8.0 || ^9.0",
-                "php": "^7.3 || ^8.0 || ^8.1"
+                "php": "^7.3 || ^7.4 || ^8.0 || ^8.1"
             },
             "require-dev": {
                 "orchestra/testbench": "^6.24.1",
@@ -98,16 +98,16 @@
             "extra": {
                 "laravel": {
                     "aliases": {
-                        "Fpdf": "Aryatama\\Fpdf\\Facades\\Fpdf"
+                        "Fpdf": "Aryatama045\\Fpdf\\Facades\\Fpdf"
                     },
                     "providers": [
-                        "Aryatama\\Fpdf\\FpdfServiceProvider"
+                        "Aryatama045\\Fpdf\\FpdfServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Aryatama\\Fpdf\\": "src"
+                    "Aryatama045\\Fpdf\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -116,8 +116,8 @@
             ],
             "authors": [
                 {
-                    "name": "Aryatama045",
-                    "email": "Aryatama045@gmail.com"
+                    "name": "Rizki aryatama",
+                    "email": "aryatama045@gmail.com"
                 }
             ],
             "description": "Laravel package to include Fpdf. It ships with Fpdf 1.84.",
@@ -130,7 +130,7 @@
                 "issues": "https://github.com/aryatama045/laravel-fpdf/issues",
                 "source": "https://github.com/aryatama045/laravel-fpdf/tree/main"
             },
-            "time": "2022-12-14T13:37:25+00:00"
+            "time": "2022-12-14T14:04:21+00:00"
         },
         {
             "name": "barryvdh/laravel-translation-manager",

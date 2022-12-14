@@ -13,7 +13,7 @@
         "aryatama045/laravel-fpdf": "dev-main",
         "barryvdh/laravel-translation-manager": "^0.6.3",
         "biscolab/laravel-recaptcha": "^5.4",
-        "codedge/laravel-fpdf": "^1.8",
+        "codedge/laravel-fpdf": "^1.9",
         "darryldecode/cart": "^4.2",
         "doctrine/dbal": "^2.11",
         "fideloper/proxy": "^4.4",
