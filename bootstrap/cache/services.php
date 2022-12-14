@@ -59,7 +59,7 @@
     55 => 'Spatie\\CookieConsent\\CookieConsentServiceProvider',
     56 => 'Spatie\\EloquentSortable\\EloquentSortableServiceProvider',
     57 => 'Unicodeveloper\\Paystack\\PaystackServiceProvider',
-    58 => 'Aryatama\\LaraFpdf\\LaraFpdfServiceProvider',
+    58 => 'TJGazel\\LaraFpdf\\LaraFpdfServiceProvider',
     59 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
   ),
   'eager' => 
@@ -108,7 +108,7 @@
     41 => 'Spatie\\CookieConsent\\CookieConsentServiceProvider',
     42 => 'Spatie\\EloquentSortable\\EloquentSortableServiceProvider',
     43 => 'Unicodeveloper\\Paystack\\PaystackServiceProvider',
-    44 => 'Aryatama\\LaraFpdf\\LaraFpdfServiceProvider',
+    44 => 'TJGazel\\LaraFpdf\\LaraFpdfServiceProvider',
     45 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
   ),
   'deferred' => 
