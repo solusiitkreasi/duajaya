@@ -218,7 +218,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class,
         Spatie\Geocoder\GeocoderServiceProvider::class,
         Spatie\CookieConsent\CookieConsentServiceProvider::class,
         Spatie\EloquentSortable\EloquentSortableServiceProvider::class,
@@ -281,14 +280,13 @@ return [
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
         //'Image' => Intervention\Image\Facades\Image::class
         'Image' => Intervention\Image\ImageManagerStatic::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Geocoder' => Spatie\Geocoder\Facades\Geocoder::class,
         'DotenvEditor' => Brotzka\DotenvEditor\DotenvEditorFacade::class,
         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
         'Zipper' => Chumper\Zipper\Zipper::class,
         'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
         'Pusher' => Pusher\Pusher::class,
-        'LaraFpdf' => Arya\LaraFpdf\Facades\LaraFpdf::class,
+        'LaraFpdf' => Aryatama\LaraFpdf\Facades\LaraFpdf::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class
 
         //'Socialite' => Laravel\Socialite\Facades\Socialite::class,
