@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3.0|^7.4|^8.0",
         "akaunting/laravel-money": "^1.2",
+        "aryatama045/laravel-fpdf": "dev-main",
         "barryvdh/laravel-translation-manager": "^0.6.3",
         "biscolab/laravel-recaptcha": "^5.4",
         "codedge/laravel-fpdf": "^1.8",
