@@ -77,12 +77,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/aryatama045/laravel-fpdf.git",
-                "reference": "33d5a7f1c19330c0d7eac0fc02d691bc37b5370e"
+                "reference": "2d2800dff7bf5f2807aade0344254fbbe1ffab42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aryatama045/laravel-fpdf/zipball/33d5a7f1c19330c0d7eac0fc02d691bc37b5370e",
-                "reference": "33d5a7f1c19330c0d7eac0fc02d691bc37b5370e",
+                "url": "https://api.github.com/repos/aryatama045/laravel-fpdf/zipball/2d2800dff7bf5f2807aade0344254fbbe1ffab42",
+                "reference": "2d2800dff7bf5f2807aade0344254fbbe1ffab42",
                 "shasum": ""
             },
             "require": {
@@ -126,7 +126,7 @@
                 "issues": "https://github.com/aryatama045/laravel-fpdf/issues",
                 "source": "https://github.com/aryatama045/laravel-fpdf/tree/main"
             },
-            "time": "2022-12-14T04:36:30+00:00"
+            "time": "2022-12-14T04:55:05+00:00"
         },
         {
             "name": "barryvdh/laravel-translation-manager",
