@@ -271,14 +271,8 @@ class DeliveryController extends Controller
 
     public function print_do($id)
     {
-        // $this->fpdf->SetFont('Arial', 'B', 15);
-        // $this->fpdf->AddPage("L", ['100', '100']);
-        // $this->fpdf->Text(10, 10, "Hello World!");
-        // $this->fpdf->Output();
-        // exit;
 
-        // return view('page_print.test');
-        $data = ['title' => 'Test', 'content'=> 'Isi isis'];
+        $data = ['title' => 'Title', 'content'=> 'Isi isis'];
         $myPdf = new Doprint($data);
 
         $myPdf->Output('I', "Doprint.pdf", true);

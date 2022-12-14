@@ -6,6 +6,17 @@
       0 => 'Akaunting\\Money\\Provider',
     ),
   ),
+  'aryatama045/laravel-fpdf' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Aryatama\\LaraFpdf\\LaraFpdfServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'LaraFpdf' => 'Arya\\LaraFpdf\\Facades\\LaraFpdf',
+    ),
+  ),
   'barryvdh/laravel-translation-manager' => 
   array (
     'providers' => 
@@ -175,17 +186,6 @@
     'aliases' => 
     array (
       'PayPal' => 'Srmklive\\PayPal\\Facades\\PayPal',
-    ),
-  ),
-  'tjgazel/laravel-fpdf' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'TJGazel\\LaraFpdf\\LaraFpdfServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'LaraFpdf' => 'TJGazel\\LaraFpdf\\Facades\\LaraFpdf',
     ),
   ),
   'unicodeveloper/laravel-paystack' => 

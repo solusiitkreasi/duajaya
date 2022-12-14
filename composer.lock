@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f1fdffdf2508384884adb95e69cb2fc2",
+    "content-hash": "b297b9b11e95c8fc51fb2fbb860b9b93",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -70,6 +70,63 @@
                 "source": "https://github.com/akaunting/laravel-money/tree/1.2.3"
             },
             "time": "2021-09-28T06:19:54+00:00"
+        },
+        {
+            "name": "aryatama045/laravel-fpdf",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aryatama045/laravel-fpdf.git",
+                "reference": "33d5a7f1c19330c0d7eac0fc02d691bc37b5370e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aryatama045/laravel-fpdf/zipball/33d5a7f1c19330c0d7eac0fc02d691bc37b5370e",
+                "reference": "33d5a7f1c19330c0d7eac0fc02d691bc37b5370e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "default-branch": true,
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Aryatama\\LaraFpdf\\LaraFpdfServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaraFpdf": "Arya\\LaraFpdf\\Facades\\LaraFpdf"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aryatama\\LaraFpdf\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "aryatama045",
+                    "email": "aryatama045@gmail.com"
+                }
+            ],
+            "description": "Extension lib FPDF  for laravel 5.*",
+            "homepage": "https://github.com/aryatama045/laravel-fpdf",
+            "keywords": [
+                "fpdf",
+                "laravel",
+                "pdf"
+            ],
+            "support": {
+                "issues": "https://github.com/aryatama045/laravel-fpdf/issues",
+                "source": "https://github.com/aryatama045/laravel-fpdf/tree/main"
+            },
+            "time": "2022-12-14T04:36:30+00:00"
         },
         {
             "name": "barryvdh/laravel-translation-manager",
@@ -6785,66 +6842,6 @@
             "time": "2022-09-12T13:28:28+00:00"
         },
         {
-            "name": "tjgazel/laravel-fpdf",
-            "version": "v1.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tjgazel/laravel-fpdf.git",
-                "reference": "eeac42b6af4dc44027bdfd984ca81bef98c430df"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tjgazel/laravel-fpdf/zipball/eeac42b6af4dc44027bdfd984ca81bef98c430df",
-                "reference": "eeac42b6af4dc44027bdfd984ca81bef98c430df",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "package",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "TJGazel\\LaraFpdf\\LaraFpdfServiceProvider"
-                    ],
-                    "aliases": {
-                        "LaraFpdf": "TJGazel\\LaraFpdf\\Facades\\LaraFpdf"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "TJGazel\\LaraFpdf\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Talles Gazel",
-                    "email": "tjgazel@gmail.com"
-                },
-                {
-                    "name": "Giovanni Camargo",
-                    "email": "vannipassos@gmail.com"
-                }
-            ],
-            "description": "Extension lib FPDF  for laravel 5.*",
-            "homepage": "https://github.com/tjgazel/laravel-fpdf",
-            "keywords": [
-                "fpdf",
-                "laravel",
-                "pdf"
-            ],
-            "support": {
-                "issues": "https://github.com/tjgazel/laravel-fpdf/issues",
-                "source": "https://github.com/tjgazel/laravel-fpdf/tree/v1.1.2"
-            },
-            "time": "2021-04-20T12:44:05+00:00"
-        },
-        {
             "name": "twilio/sdk",
             "version": "6.43.4",
             "source": {
@@ -9343,7 +9340,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "aryatama045/laravel-fpdf": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

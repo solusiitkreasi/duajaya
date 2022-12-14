@@ -224,7 +224,7 @@ return [
         Spatie\EloquentSortable\EloquentSortableServiceProvider::class,
         Unicodeveloper\Paystack\PaystackServiceProvider::class,
         // JoeDixon\LaravelTranslation\TranslationServiceProvider::class
-        TJGazel\LaraFpdf\LaraFpdfServiceProvider::class,
+        Aryatama\LaraFpdf\LaraFpdfServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class
 
     ],
@@ -288,7 +288,7 @@ return [
         'Zipper' => Chumper\Zipper\Zipper::class,
         'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
         'Pusher' => Pusher\Pusher::class,
-        'LaraFpdf' => TGazel\LaraFpdf\Facades\LaraFpdf::class,
+        'LaraFpdf' => Arya\LaraFpdf\Facades\LaraFpdf::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class
 
         //'Socialite' => Laravel\Socialite\Facades\Socialite::class,
