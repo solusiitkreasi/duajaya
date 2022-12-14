@@ -1,5 +1,5 @@
 <?php namespace App\Pdf;
-use Aryatama045\Fpdf\Fpdf\Fpdf;
+use Codedge\Fpdf\Fpdf\Fpdf;
 
 class Doprint extends Fpdf
 {
