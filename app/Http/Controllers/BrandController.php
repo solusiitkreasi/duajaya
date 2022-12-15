@@ -108,6 +108,7 @@ class BrandController extends Controller
 
            $brand = Brand::firstOrNew([ 'title'=>$data['title'], 'is_active'=>true ]);
            $brand->title = $data['title'];
+           $brand->code = $data['code'];
            $brand->image = $data['image'];
            $brand->is_active = true;
            $brand->save();
