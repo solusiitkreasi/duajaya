@@ -6,17 +6,6 @@
       0 => 'Akaunting\\Money\\Provider',
     ),
   ),
-  'aryatama045/laravel-fpdf' => 
-  array (
-    'aliases' => 
-    array (
-      'Fpdf' => 'Aryatama045\\Fpdf\\Facades\\Fpdf',
-    ),
-    'providers' => 
-    array (
-      0 => 'Aryatama045\\Fpdf\\FpdfServiceProvider',
-    ),
-  ),
   'barryvdh/laravel-translation-manager' => 
   array (
     'providers' => 
