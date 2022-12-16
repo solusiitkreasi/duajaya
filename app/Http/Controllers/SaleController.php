@@ -1858,7 +1858,12 @@ class SaleController extends Controller
     public function printLastReciept()
     {
         $sale = Sale::where('sale_status', 1)->latest()->first();
-        return redirect()->route('sale.invoice', $sale->id);
+
+        if(!empty($sale))
+            return redirect()->route('sale.invoice', $sale->id);
+        else
+            return redirect()->back()->with('message', ' Reciept Not Avalaible !');
+
     }
 
     public function genInvoice($id)
