@@ -229,6 +229,7 @@ return [
 	'Sale Status' => 'Sale Status',
 	'Payment Status' => 'Payment Status',
 	'Generate Invoice' => 'Generate Invoice',
+	'Generate Receipt' => 'Generate Receipt',
 	'Add Payment' => 'Add Payment',
 	'View Payment' => 'View Payment',
 	'Add Delivery' => 'Add Delivery',

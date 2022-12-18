@@ -94,7 +94,7 @@ return [
 
 	"Price" => "Harga",
 
-	"Type" => "Tupe",
+	"Type" => "Tipe",
 
 	"Barcode Symbology" => "Barcode",
 
@@ -458,7 +458,9 @@ return [
 
 	"Payment Status" => "Status pembayaran",
 
-	"Generate Invoice" => "Hasilkan invoice",
+	"Generate Invoice" => "Hasilkan Invoice",
+
+	"Generate Receipt" => "Hasilkan Struk",
 
 	"Add Payment" => "Tambah Pembayaran",
 
