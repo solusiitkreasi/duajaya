@@ -758,6 +758,88 @@
         });
     });
 
+    function detail_doc(id) {
+		//Ajax Load data from ajax
+		$.ajax({
+			url: base_url + 'leaves/report/detail_doc/' + id,
+			type: "GET",
+			dataType: "JSON",
+			success: function(data) {
+
+				$('#DetailReport').modal('show'); // show bootstrap modal when complete loaded
+				$('.modal-title').text('Detail - ' + id); // Set title to Bootstrap modal title
+				header_report ="";
+				header_report += '<div class="form-group row">' +
+					'<label class="col-sm-4 col-form-label"> NIP</label>' +
+					'<div class="col-sm-8"> : <b>' + data.nip + '</b></div> </div>' +
+
+					'<div class="form-group row">' +
+					'<label class="col-sm-4 col-form-label"> POTONG CUTI</label>' +
+					'<div class="col-sm-8"> : <b>' + data.potong + '</b></div> </div>' +
+
+					'<div class="form-group row">' +
+					'<label class="col-sm-4 col-form-label"> KETERANGAN</label>' +
+					'<div class="col-sm-8"> : <b>' + data.keterangan + '</b></div> </div>';
+				document.getElementById("header_report").innerHTML = header_report;
+
+				text = "";
+				textapp = "";
+				var array = data;
+				detailtem(array);
+				detailapp(array);
+				document.getElementById("data_report").innerHTML = text;
+
+				document.getElementById("data_approve").innerHTML = textapp;
+				// $('.data_report').innerHTML = text;
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert('Error get data from ajax');
+			}
+		});
+	};
+
+	function detailtem(array) {
+		text += '<h5>Detail Cuti</h5><hr> <table class="table table-bordered data-table">';
+		text += '<thead>' +
+        '<tr>' +
+        '<th>TGL CUTI</th>' +
+		'<th>HARI</th>' +
+        '<th>KETERANGAN</th>' +
+        '</tr>' +
+        '</thead><tbody>';
+		for (val of array.data) {
+			console.log(val);
+			text +=
+				'<tr>' +
+				'<td><input class="input-sm form-control" type="text" value="'+ val[0] + '"></td>' +
+				'<td>' + val[1] + '</td>' +
+				'<td>' + val[2] + '</td></tr>';
+		}
+		text += '</tbody></table>';
+	};
+
+	function detailapp(array) {
+		textapp += '<h5>Detail Approve</h5><hr> <table class="table table-bordered data-table">';
+		textapp += '<thead>' +
+        '<tr>' +
+        '<th>App</th>' +
+		'<th>Tgl App</th>' +
+        '<th>Tgl Rej</th>' +
+		'<th>Keterangan</th>' +
+        '</tr>' +
+        '</thead><tbody>';
+		for (val of array.approve) {
+			console.log(val);
+			textapp +=
+				'<tr>' +
+				'<td>' + val[0] + '</td>' +
+				'<td>' + val[1] + '</td>' +
+				'<td>' + val[2] + '</td>' +
+				'<td>' + val[3] + '</td></tr>';
+		}
+		textapp += '</tbody></table>';
+	};
+
     function pointCalculation(amount) {
         availablePoints = $('table.sale-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.points').val();
         required_point = Math.ceil(amount / reward_point_setting['per_point_amount']);
