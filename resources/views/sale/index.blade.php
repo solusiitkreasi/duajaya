@@ -802,9 +802,10 @@
 		text += '<h5>Detail Cuti</h5><hr> <table class="table table-bordered data-table">';
 		text += '<thead>' +
         '<tr>' +
-        '<th>TGL CUTI</th>' +
-		'<th>HARI</th>' +
-        '<th>KETERANGAN</th>' +
+        '<th>No.</th>' +
+		'<th>Code</th>' +
+        '<th>Qty Beli</th>' +
+        '<th>Qty Kirim</th>' +
         '</tr>' +
         '</thead><tbody>';
 		for (val of array.data) {
@@ -839,6 +840,36 @@
 		}
 		textapp += '</tbody></table>';
 	};
+
+    //<input id="num" type="number" step="1" min="0" max="4" />
+
+    document.getElementById("num").addEventListener("click", function(e) {
+        const value = this.value,
+            max = this.getAttribute("max"),
+            min = this.getAttribute("min"),
+            minned = this.dataset.minned === "true";
+        maxed = this.dataset.maxed === "true";
+        if (value === max && maxed) {
+            alert("Value is max");
+        }
+        if (value === min && minned) {
+            alert("Value is at 0");
+        }
+        this.dataset.maxed = value === max ? "true" : "false";
+        this.dataset.minned = value === min ? "true" : "false";
+    })
+
+    document.getElementById("num").addEventListener("input", function(e) {
+        const value = this.value || 0,
+            min = this.getAttribute("min"),
+            max = this.getAttribute("max");
+        if (value != "" && value > max || value < min) {
+            alert(`Value should be between ${min} and ${max}`);
+            this.value = "";
+        }
+        this.dataset.maxed = value === max ? "true" : "false";
+        this.dataset.minned = value === min ? "true" : "false";
+    })
 
     function pointCalculation(amount) {
         availablePoints = $('table.sale-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.points').val();

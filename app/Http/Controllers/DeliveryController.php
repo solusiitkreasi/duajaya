@@ -64,6 +64,23 @@ class DeliveryController extends Controller
             $delivery_data[] = $customer_sale[0]->name;
             $delivery_data[] = $customer_sale[0]->address.' '.$customer_sale[0]->city.' '.$customer_sale[0]->country;
             $delivery_data[] = '';
+
+            $detail_sale = DB::table('sales')->
+                join('customers', 'sales.customer_id', '=', 'customers.id')
+                ->where('sales.id', $id)
+                ->select('sales.reference_no','customers.name',
+                    'customers.address', 'customers.city', 'customers.country')
+                ->get();
+            if($detail_sale){
+                foreach ($detail_sale as $key => $value) {
+                    $delivery_data['detail_sale'][$key] = array(
+                        $value['code'],
+                        $value['qty'],
+                        $value['qty']
+                    );
+                }
+            }
+
         // }
         return $delivery_data;
     }
