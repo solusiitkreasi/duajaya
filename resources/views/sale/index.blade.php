@@ -352,13 +352,29 @@
                         <label>{{trans('file.Sale Reference')}}</label>
                         <p id="sr"></p>
                     </div>
-                    <div class="col-md-12 form-group">
+                    <div class="col-md-12 form-group mb-2">
                         <label>{{trans('file.Status')}} *</label>
                         <select name="status" required class="form-control selectpicker">
                             <option value="1">{{trans('file.Packing')}}</option>
                             <option value="2">{{trans('file.Delivering')}}</option>
                             <option value="3">{{trans('file.Delivered')}}</option>
                         </select>
+                    </div>
+                    <div class="col-md-12 form-group mt-3 mb-2">
+                        <label><i style="font-size: 15px;">{{trans('file.Delivery Details')}}</i></label>
+                        <table class="table table-bordered product-delivery-list">
+                            <thead>
+                                <th>No</th>
+                                <th>Code</th>
+                                <th>Description</th>
+                                <th>{{trans('file.Batch No')}}</th>
+                                <th>{{trans('file.Expired Date')}}</th>
+                                <th>Qty Beli</th>
+                                <th>Qty Kirim</th>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                     <div class="col-md-6 mt-2 form-group">
                         <label>{{trans('file.Delivered By')}}</label>
@@ -385,6 +401,7 @@
                         <textarea rows="3" name="note" class="form-control"></textarea>
                     </div>
                 </div>
+
                 <input type="hidden" name="reference_no">
                 <input type="hidden" name="sale_id">
                 <button type="submit" class="btn btn-primary">{{trans('file.submit')}}</button>
