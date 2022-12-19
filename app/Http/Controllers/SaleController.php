@@ -1210,6 +1210,7 @@ class SaleController extends Controller
         $product_variant_id = null;
         $lims_product_data = Product::where([
             ['code', $product_code[0]],
+            ['qty', '>', 0],
             ['is_active', true]
         ])->first();
         if(!$lims_product_data) {
