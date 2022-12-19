@@ -1089,36 +1089,53 @@ class SaleController extends Controller
 
         $data = [];
         if(($category_id != 0) && ($brand_id != 0)){
-            $lims_product_list = DB::table('products')
-                                ->join('categories', 'products.category_id', '=', 'categories.id')
-                                ->where([
-                                    ['products.is_active', true],
-                                    ['products.category_id', $category_id],
-                                    ['brand_id', $brand_id]
-                                ])->orWhere([
-                                    ['categories.parent_id', $category_id],
-                                    ['products.is_active', true],
-                                    ['brand_id', $brand_id]
-                                ])->select('products.name', 'products.code', 'products.image')->get();
+            $lims_product_list =  DB::table('product_warehouse as pw')
+                        ->leftjoin('products as p', 'pw.product_id', '=', 'p.id')
+                        ->join('categories as pc', 'p.category_id', '=', 'pc.id')
+                        ->where([
+                            ['p.brand_id', $brand_id],
+                            ['p.category_id', $category_id],
+                            ['p.is_active', true],
+                            ['pw.warehouse_id', $warehouse_id]
+                        ])
+                        ->orWhere([
+                            ['p.brand_id', $brand_id],
+                            ['pc.parent_id', $category_id],
+                            ['p.is_active', true],
+                            ['pw.warehouse_id', $warehouse_id]
+                        ])
+                        ->select('p.id', 'p.name', 'p.code', 'pw.price', 'p.image', 'p.is_variant')->get();
         }
         elseif(($category_id != 0) && ($brand_id == 0)){
-            $lims_product_list = DB::table('products')
-                                ->join('categories', 'products.category_id', '=', 'categories.id')
-                                ->where([
-                                    ['products.is_active', true],
-                                    ['products.category_id', $category_id],
-                                ])->orWhere([
-                                    ['categories.parent_id', $category_id],
-                                    ['products.is_active', true]
-                                ])->select('products.id', 'products.name', 'products.code', 'products.image', 'products.is_variant')->get();
+            $lims_product_list = DB::table('product_warehouse as pw')
+                ->leftjoin('products as p', 'pw.product_id', '=', 'p.id')
+                ->join('categories as pc', 'p.category_id', '=', 'pc.id')
+                ->where([
+                    ['p.category_id', $category_id],
+                    ['p.is_active', true],
+                    ['pw.warehouse_id', $warehouse_id]
+                ])
+                ->orWhere([
+                    ['pc.parent_id', $category_id],
+                    ['p.is_active', true],
+                    ['pw.warehouse_id', $warehouse_id]
+                ])
+                ->select('p.id', 'p.name', 'p.code', 'pw.price', 'p.image', 'p.is_variant')->get();
         }
         elseif(($category_id == 0) && ($brand_id != 0)){
-            $lims_product_list = Product::where([
-                                ['brand_id', $brand_id],
-                                ['is_active', true]
-                            ])
-                            ->select('products.id', 'products.name', 'products.code', 'products.image', 'products.is_variant')
-                            ->get();
+            $lims_product_list = DB::table('product_warehouse as pw')
+                ->leftjoin('products as p', 'pw.product_id', '=', 'p.id')
+                ->where([
+                    ['p.brand_id', $brand_id],
+                    ['p.is_active', true],
+                    ['pw.warehouse_id', $warehouse_id]
+                ])
+                ->orWhere([
+                    ['p.brand_id', $brand_id],
+                    ['p.is_active', true],
+                    ['pw.warehouse_id', $warehouse_id]
+                ])
+                ->select('p.id', 'p.name', 'p.code', 'pw.price', 'p.image', 'p.is_variant')->get();
         }
         elseif(!empty($product_search)){
             $lims_product_list = DB::table('product_warehouse as pw')
