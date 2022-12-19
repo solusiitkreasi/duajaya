@@ -1,7 +1,7 @@
 <?php namespace App\Pdf;
 use Aryatama045\Fpdf\Fpdf\Fpdf;
 
-class Doprint extends Fpdf
+class Poprint extends Fpdf
 {
     private $data;
 
@@ -10,7 +10,7 @@ class Doprint extends Fpdf
         $this->data = $data;
         parent::__construct('P', 'mm', 'A4');
         $this->SetA4();
-        $this->SetTitle('Delivery Order', true);
+        $this->SetTitle('Purchase Order', true);
         $this->SetAuthor('None', true);
         $this->AddPage('P');
         $this->Body();
