@@ -362,19 +362,7 @@
                     </div>
                     <div class="col-md-12 form-group mt-3 mb-2">
                         <label><i style="font-size: 15px;">{{trans('file.Delivery Details')}}</i></label>
-                        <table class="table table-bordered product-delivery-list">
-                            <thead>
-                                <th>No</th>
-                                <th>Code</th>
-                                <th>Description</th>
-                                <th>{{trans('file.Batch No')}}</th>
-                                <th>{{trans('file.Expired Date')}}</th>
-                                <th>Qty Beli</th>
-                                <th>Qty Kirim</th>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+                        <p id="detail_product"></p>
                     </div>
                     <div class="col-md-6 mt-2 form-group">
                         <label>{{trans('file.Delivered By')}}</label>
@@ -761,35 +749,34 @@
     function detail_doc(id) {
 		//Ajax Load data from ajax
 		$.ajax({
-			url: base_url + 'leaves/report/detail_doc/' + id,
+			url: 'delivery/create/'+id,
 			type: "GET",
 			dataType: "JSON",
 			success: function(data) {
 
-				$('#DetailReport').modal('show'); // show bootstrap modal when complete loaded
+				$('#add-delivery').modal('show'); // show bootstrap modal when complete loaded
 				$('.modal-title').text('Detail - ' + id); // Set title to Bootstrap modal title
-				header_report ="";
-				header_report += '<div class="form-group row">' +
-					'<label class="col-sm-4 col-form-label"> NIP</label>' +
-					'<div class="col-sm-8"> : <b>' + data.nip + '</b></div> </div>' +
+				$('#dr').text(data[0]);
+                $('#sr').text(data[1]);
 
-					'<div class="form-group row">' +
-					'<label class="col-sm-4 col-form-label"> POTONG CUTI</label>' +
-					'<div class="col-sm-8"> : <b>' + data.potong + '</b></div> </div>' +
-
-					'<div class="form-group row">' +
-					'<label class="col-sm-4 col-form-label"> KETERANGAN</label>' +
-					'<div class="col-sm-8"> : <b>' + data.keterangan + '</b></div> </div>';
-				document.getElementById("header_report").innerHTML = header_report;
+                $('select[name="status"]').val(data[2]);
+                $('.selectpicker').selectpicker('refresh');
+                $('input[name="delivered_by"]').val(data[3]);
+                $('input[name="recieved_by"]').val(data[4]);
+                $('#customer').text(data[5]);
+                $('textarea[name="address"]').val(data[6]);
+                $('textarea[name="note"]').val(data[7]);
+                $('input[name="reference_no"]').val(data[0]);
+                $('input[name="sale_id"]').val(id);
 
 				text = "";
-				textapp = "";
+				// textapp = "";
 				var array = data;
 				detailtem(array);
-				detailapp(array);
-				document.getElementById("data_report").innerHTML = text;
+				// detailapp(array);
+				document.getElementById("detail_product").innerHTML = text;
 
-				document.getElementById("data_approve").innerHTML = textapp;
+				// document.getElementById("data_approve").innerHTML = textapp;
 				// $('.data_report').innerHTML = text;
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
@@ -799,77 +786,79 @@
 	};
 
 	function detailtem(array) {
-		text += '<h5>Detail Cuti</h5><hr> <table class="table table-bordered data-table">';
+		text += '<h5>Detail </h5><hr> <table class="table table-bordered data-table">';
 		text += '<thead>' +
         '<tr>' +
-        '<th>No.</th>' +
-		'<th>Code</th>' +
+		'<th>SKU</th>' +
+        '<th>Name</th>' +
         '<th>Qty Beli</th>' +
         '<th>Qty Kirim</th>' +
         '</tr>' +
         '</thead><tbody>';
-		for (val of array.data) {
+		for (val of array.detail_sale) {
 			console.log(val);
 			text +=
-				'<tr>' +
-				'<td><input class="input-sm form-control" type="text" value="'+ val[0] + '"></td>' +
-				'<td>' + val[1] + '</td>' +
-				'<td>' + val[2] + '</td></tr>';
-		}
-		text += '</tbody></table>';
-	};
-
-	function detailapp(array) {
-		textapp += '<h5>Detail Approve</h5><hr> <table class="table table-bordered data-table">';
-		textapp += '<thead>' +
-        '<tr>' +
-        '<th>App</th>' +
-		'<th>Tgl App</th>' +
-        '<th>Tgl Rej</th>' +
-		'<th>Keterangan</th>' +
-        '</tr>' +
-        '</thead><tbody>';
-		for (val of array.approve) {
-			console.log(val);
-			textapp +=
 				'<tr>' +
 				'<td>' + val[0] + '</td>' +
 				'<td>' + val[1] + '</td>' +
 				'<td>' + val[2] + '</td>' +
-				'<td>' + val[3] + '</td></tr>';
+                '<td>' + val[3] + '</td>' +
+                '</tr>';
 		}
-		textapp += '</tbody></table>';
+		text += '</tbody></table>';
 	};
+
+	// function detailapp(array) {
+	// 	textapp += '<h5>Detail Approve</h5><hr> <table class="table table-bordered data-table">';
+	// 	textapp += '<thead>' +
+    //     '<tr>' +
+    //     '<th>App</th>' +
+	// 	'<th>Tgl App</th>' +
+    //     '<th>Tgl Rej</th>' +
+	// 	'<th>Keterangan</th>' +
+    //     '</tr>' +
+    //     '</thead><tbody>';
+	// 	for (val of array.approve) {
+	// 		console.log(val);
+	// 		textapp +=
+	// 			'<tr>' +
+	// 			'<td>' + val[0] + '</td>' +
+	// 			'<td>' + val[1] + '</td>' +
+	// 			'<td>' + val[2] + '</td>' +
+	// 			'<td>' + val[3] + '</td></tr>';
+	// 	}
+	// 	textapp += '</tbody></table>';
+	// };
 
     //<input id="num" type="number" step="1" min="0" max="4" />
 
-    document.getElementById("num").addEventListener("click", function(e) {
-        const value = this.value,
-            max = this.getAttribute("max"),
-            min = this.getAttribute("min"),
-            minned = this.dataset.minned === "true";
-        maxed = this.dataset.maxed === "true";
-        if (value === max && maxed) {
-            alert("Value is max");
-        }
-        if (value === min && minned) {
-            alert("Value is at 0");
-        }
-        this.dataset.maxed = value === max ? "true" : "false";
-        this.dataset.minned = value === min ? "true" : "false";
-    })
+    // document.getElementById("num").addEventListener("click", function(e) {
+    //     const value = this.value,
+    //         max = this.getAttribute("max"),
+    //         min = this.getAttribute("min"),
+    //         minned = this.dataset.minned === "true";
+    //     maxed = this.dataset.maxed === "true";
+    //     if (value === max && maxed) {
+    //         alert("Value is max");
+    //     }
+    //     if (value === min && minned) {
+    //         alert("Value is at 0");
+    //     }
+    //     this.dataset.maxed = value === max ? "true" : "false";
+    //     this.dataset.minned = value === min ? "true" : "false";
+    // });
 
-    document.getElementById("num").addEventListener("input", function(e) {
-        const value = this.value || 0,
-            min = this.getAttribute("min"),
-            max = this.getAttribute("max");
-        if (value != "" && value > max || value < min) {
-            alert(`Value should be between ${min} and ${max}`);
-            this.value = "";
-        }
-        this.dataset.maxed = value === max ? "true" : "false";
-        this.dataset.minned = value === min ? "true" : "false";
-    })
+    // document.getElementById("num").addEventListener("input", function(e) {
+    //     const value = this.value || 0,
+    //         min = this.getAttribute("min"),
+    //         max = this.getAttribute("max");
+    //     if (value != "" && value > max || value < min) {
+    //         alert(`Value should be between ${min} and ${max}`);
+    //         this.value = "";
+    //     }
+    //     this.dataset.maxed = value === max ? "true" : "false";
+    //     this.dataset.minned = value === min ? "true" : "false";
+    // });
 
     function pointCalculation(amount) {
         availablePoints = $('table.sale-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.points').val();

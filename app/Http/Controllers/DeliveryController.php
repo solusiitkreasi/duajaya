@@ -16,7 +16,9 @@ use DB;
 use Auth;
 use App\Mail\UserNotification;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use App\Pdf\Doprint;
+
 
 class DeliveryController extends Controller
 {
@@ -35,7 +37,7 @@ class DeliveryController extends Controller
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
     }
     public function create($id){
-        // $lims_delivery_data = Delivery::where('sale_id', $id)->first();
+        $lims_delivery_data = Delivery::where('sale_id', $id)->first();
         // if($lims_delivery_data){
         //     $customer_sale = DB::table('sales')->join('customers', 'sales.customer_id', '=', 'customers.id')->where('sales.id', $id)->select('sales.reference_no','customers.name')->get();
 
@@ -65,21 +67,33 @@ class DeliveryController extends Controller
             $delivery_data[] = $customer_sale[0]->address.' '.$customer_sale[0]->city.' '.$customer_sale[0]->country;
             $delivery_data[] = '';
 
-            $detail_sale = DB::table('sales')->
-                join('customers', 'sales.customer_id', '=', 'customers.id')
-                ->where('sales.id', $id)
-                ->select('sales.reference_no','customers.name',
-                    'customers.address', 'customers.city', 'customers.country')
+            $uuid = Str::uuid();
+
+
+            $detail_sale = DB::table('product_sales as ps')
+                ->join('sales as s', 'ps.sale_id', '=', 's.id')
+                ->leftjoin('products as p', 'ps.product_id', '=', 'p.id')
+                ->where('ps.sale_id', $id)
+                ->select('p.code','p.name','ps.qty', )
                 ->get();
+
             if($detail_sale){
                 foreach ($detail_sale as $key => $value) {
+                    $qty_beli = '<input type="numeric" class="form-control" min="0" max="'.$value->qty.'">';
                     $delivery_data['detail_sale'][$key] = array(
-                        $value['code'],
-                        $value['qty'],
-                        $value['qty']
+                        $value->code,
+                        $value->name,
+                        $value->qty,
+                        $qty_beli
                     );
                 }
             }
+
+            //  dd($uuid, $detail_sale, $delivery_data['detail_sale']);
+
+
+
+
 
         // }
         return $delivery_data;
