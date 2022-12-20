@@ -808,6 +808,20 @@
 		text += '</tbody></table>';
 	};
 
+    function checkValue(sender) {
+        let min = sender.min;
+        let max = sender.max;
+        // here we perform the parsing instead of calling another function
+        let value = parseInt(sender.value);
+        if (value>max) {
+            sender.value = min;
+            alert('Max Qty' + max);
+        } else if (value<min) {
+            sender.value = max;
+            alert('Max Qty' + max);
+        }
+    }
+
 	// function detailapp(array) {
 	// 	textapp += '<h5>Detail Approve</h5><hr> <table class="table table-bordered data-table">';
 	// 	textapp += '<thead>' +

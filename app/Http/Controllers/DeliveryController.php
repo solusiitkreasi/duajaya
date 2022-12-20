@@ -79,7 +79,7 @@ class DeliveryController extends Controller
 
             if($detail_sale){
                 foreach ($detail_sale as $key => $value) {
-                    $qty_beli = '<input type="numeric" class="form-control" min="0" max="'.$value->qty.'">';
+                    $qty_beli = '<input type="number" class="form-control" min="0" max="'.$value->qty.'" oninput="checkValue(this);" required>';
                     $delivery_data['detail_sale'][$key] = array(
                         $value->code,
                         $value->name,
