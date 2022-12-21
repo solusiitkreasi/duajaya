@@ -308,12 +308,43 @@ class DeliveryController extends Controller
     public function print_do($id)
     {
 
-        $data['header'] = array('name' => 'test');
-        $data['detail'] = array('name' => 'test');
-        $myPdf = new Doprint($data);
+        if (!empty($id)){
+            $data_header =Delivery::find($id);  //Delivery::where('sale_id', $id)->first();
+            $customer_sale = DB::table('sales')
+            ->join('customers', 'sales.customer_id', '=', 'customers.id')
+            ->where('sales.id', $data_header->sale_id)
+            ->select('sales.reference_no','customers.name','customers.company_name')
+            ->get();
 
-        $myPdf->Output('I', "Doprint.pdf", true);
+            // dd($data_header);
+            $output['data']['detail'] = array();
+			$output['data']['header'] = array();
+            if($data_header) {
+                // DB::enableQueryLog();
+                $data_detail = DB::table('deliveries_detail as dd')
+                ->join('deliveries as d', 'dd.id_deliveries', '=', 'd.id')
+                ->join('sales as s', 'd.sale_id', '=', 's.id')
+                ->leftjoin('products as p', 'dd.id_product', '=', 'p.id')
+                ->where('dd.id_deliveries', $data_header->id)
+                ->select('p.code','p.name','dd.qty_beli','dd.qty_kirim')
+                ->get();
+                // dd(\DB::getQueryLog());
+                // dd($customer_sale);
 
-        exit;
+                if($data_detail){
+                    $output['customer']		= $customer_sale;
+                    $output['data']['header']		= $data_header;
+                    $output['data']['detail']		= $data_detail;
+
+                }
+            }
+
+            $myPdf = new Doprint($output);
+
+            $myPdf->Output('I', "Doprint.pdf", true);
+
+            exit;
+        }
+
     }
 }
