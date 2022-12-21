@@ -45,6 +45,25 @@ class Poprint extends Fpdf
         $this->Ln(4);
         $this->cell(207,1,'',0,0,'L');
         $this->cell(22,1,'Halaman',0,0,'L');
+
+        $this->HeaderList();
+    }
+
+    function HeaderList(){
+        $this->Ln(4);
+        $this->Line(11,$this->GetY(),206,$this->GetY());
+        $this->Ln(5);
+        $this->cell(10,1,'NO.',0,0,'R');
+        $this->cell(5,1,'',0,0,'R');
+        $this->cell(30,1,'SKU',0,0,'L');
+        $this->cell(75,1,'NAMA BARANG',0,0,'L');
+        $this->cell(10,1,'QTY.',0,0,'R');
+        $this->cell(20,1,'HARGA',0,0,'R');
+        $this->cell(20,1,'DISC.',0,0,'R');
+        $this->cell(25,1,'TOTAL',0,0,'R');
+        $this->Ln(5);
+        $this->Line(11,$this->GetY(),206,$this->GetY());
+        $this->Ln(4);
     }
 
     public function Body(){

@@ -308,7 +308,8 @@ class DeliveryController extends Controller
     public function print_do($id)
     {
 
-        $data = ['title' => 'Title', 'content'=> 'Isi isis'];
+        $data['header'] = array('name' => 'test');
+        $data['detail'] = array('name' => 'test');
         $myPdf = new Doprint($data);
 
         $myPdf->Output('I', "Doprint.pdf", true);
