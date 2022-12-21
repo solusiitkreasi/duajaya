@@ -32,7 +32,7 @@ class Poprint extends Fpdf
         $this->Ln(0.8);
         $this->Line(11,$this->GetY(),269.4,$this->GetY());
         $this->setFont('Arial','BU',12);
-        $this->cell(0,10,'DELIVERY ORDER',0,0,'C');
+        $this->cell(0,10,'PURCHASE ORDER',0,0,'C');
         $this->Ln(14);
         $this->setFont('Arial','',8);
         $this->Ln(1);
