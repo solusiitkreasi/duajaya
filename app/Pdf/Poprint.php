@@ -1,7 +1,7 @@
 <?php namespace App\Pdf;
 use Aryatama045\Fpdf\Fpdf\Fpdf;
 
-class Doprint extends Fpdf
+class Poprint extends Fpdf
 {
     private $data;
     private $grand_total;
