@@ -49,6 +49,7 @@ use Srmklive\PayPal\Services\ExpressCheckout;
 use Srmklive\PayPal\Services\AdaptivePayments;
 use GeniusTS\HijriDate\Date;
 use Illuminate\Support\Facades\Validator;
+use App\Pdf\Poprint;
 
 class SaleController extends Controller
 {
@@ -1902,6 +1903,17 @@ class SaleController extends Controller
         $numberInWords = $numberTransformer->toWords($lims_sale_data->grand_total);
 
         return view('sale.invoice', compact('lims_sale_data', 'lims_product_sale_data', 'lims_biller_data', 'lims_warehouse_data', 'lims_customer_data', 'lims_payment_data', 'numberInWords'));
+    }
+
+    public function print_po($id)
+    {
+
+        $data = ['title' => 'Title', 'content'=> 'Isi isi'];
+        $myPdf = new Poprint($data);
+
+        $myPdf->Output('I', "Poprint.pdf", true);
+
+        exit;
     }
 
     public function addPayment(Request $request)
