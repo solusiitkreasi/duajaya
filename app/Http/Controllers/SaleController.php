@@ -1905,10 +1905,11 @@ class SaleController extends Controller
         return view('sale.invoice', compact('lims_sale_data', 'lims_product_sale_data', 'lims_biller_data', 'lims_warehouse_data', 'lims_customer_data', 'lims_payment_data', 'numberInWords'));
     }
 
-    public function print_po($id)
+    public function genPo($id)
     {
 
-        $data = ['title' => 'Title', 'content'=> 'Isi isi'];
+        $data['header'] = array('name' => 'test');
+        $data['detail'] = array('name' => 'test');
         $myPdf = new Poprint($data);
 
         $myPdf->Output('I', "Poprint.pdf", true);
