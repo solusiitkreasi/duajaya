@@ -103,27 +103,22 @@ class DeliveryController extends Controller
             if($detail_sale){
                 foreach ($detail_sale as $key => $value) {
 
-                    // if($sisa[$key] != NULL || $sisa[$key]!= ""){
-                    //     $sisa_nilai = $sisa[$key];
-                    // }else{
-                    //     $sisa_nilai = '0';
-                    // }
-                    // $sisa_kirim = $value->qty - $sisa_nilai;
 
                     if(!empty($value->qty_kirim)){
-                        $maxkirim = $value->qty_kirim;
+                        $maxkirim = $value->qty - $value->qty_kirim;
                     }else{
                         $maxkirim = $value->qty;
                     }
 
-
                     $qty_kirim = '<input type="number" name="qty_kirim[]" class="form-control" min="0" max="'.$maxkirim.'" oninput="checkValue(this);" required>
                                 <input type="text" name="id_product[]" value="'.$value->id.'" hidden>
-                                <input type="text" name="qty_beli[]" value="'.$value->qty.'" hidden>   ';
+                                <input type="text" name="qty_beli[]" value="'.$value->qty.'" hidden>';
+
                     $delivery_data['detail_sale'][$key] = array(
                         $value->code,
                         $value->name,
                         $value->qty,
+                        $maxkirim,
                         $qty_kirim
                     );
                 }
@@ -164,6 +159,16 @@ class DeliveryController extends Controller
         $qty_beli  = $data['qty_beli'];
         $qty_kirim  = $data['qty_kirim'];
 
+        $detail_sale = DB::table('product_sales as ps')
+        ->join('sales as s', 'ps.sale_id', '=', 's.id')
+        ->leftjoin('products as p', 'ps.product_id', '=', 'p.id')
+        ->where('ps.sale_id',  $data['sale_id'])
+        ->select('p.id' ,'p.code','p.name','ps.qty', 'ps.qty_kirim')
+        ->get();
+
+        foreach($detail_sale as $i => $v ){
+            $sale_kirim[] = $v->qty_kirim;
+        }
 
         $delivery_detail=[];
         foreach ($id_product as $i => $id) {
@@ -174,7 +179,7 @@ class DeliveryController extends Controller
             $delivery_detail['reference_po']    = $data['sale_id'];
             DeliveryDetail::create($delivery_detail);
 
-            $product_sale['qty_kirim'] = $qty_kirim[$i];
+            $product_sale['qty_kirim'] = $sale_kirim[$i] + $qty_kirim[$i];
             Product_Sale::where('product_id',$id)->where('sale_id',$data['sale_id'])->update($product_sale);
         }
 

@@ -792,6 +792,7 @@
 		'<th>SKU</th>' +
         '<th>Name</th>' +
         '<th>Qty Beli</th>' +
+        '<th>Sisa Kirim</th>' +
         '<th>Qty Kirim</th>' +
         '</tr>' +
         '</thead><tbody>';
@@ -803,6 +804,7 @@
 				'<td>' + val[1] + '</td>' +
 				'<td>' + val[2] + '</td>' +
                 '<td>' + val[3] + '</td>' +
+                '<td>' + val[4] + '</td>' +
                 '</tr>';
 		}
 		text += '</tbody></table>';
