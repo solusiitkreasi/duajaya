@@ -30,6 +30,12 @@ class BrandController extends Controller
         ]);
 
         $input = $request->except('image');
+
+        $codeBrand = Brand::where('code', 'LIKE', 'M%')->count();
+        $codeBrand++;
+        $genCode = 'M'. str_pad($codeBrand, 4, '0', STR_PAD_LEFT);
+
+        $input['code']      = $genCode;
         $input['is_active'] = true;
         $image = $request->image;
         if ($image) {
