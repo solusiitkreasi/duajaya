@@ -828,7 +828,6 @@ class ProductController extends Controller
     public function generateCode($nmProduct, $codeBrand, $codeCategories)
     {
 
-        dd($nmProduct);
         $codeProduct = "";
         $inptCode = $codeCategories . $codeBrand;
         $validateName = Product::select('code')
