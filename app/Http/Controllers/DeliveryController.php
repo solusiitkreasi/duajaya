@@ -10,6 +10,7 @@ use App\Product;
 use App\ProductVariant;
 use App\ProductBatch;
 use App\Delivery;
+use App\DeliveryDetail;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use DB;
@@ -74,17 +75,19 @@ class DeliveryController extends Controller
                 ->join('sales as s', 'ps.sale_id', '=', 's.id')
                 ->leftjoin('products as p', 'ps.product_id', '=', 'p.id')
                 ->where('ps.sale_id', $id)
-                ->select('p.code','p.name','ps.qty', )
+                ->select('p.id' ,'p.code','p.name','ps.qty')
                 ->get();
 
             if($detail_sale){
                 foreach ($detail_sale as $key => $value) {
-                    $qty_beli = '<input type="number" class="form-control" min="0" max="'.$value->qty.'" oninput="checkValue(this);" required>';
+                    $qty_kirim = '<input type="number" name="qty_kirim[]" class="form-control" min="0" max="'.$value->qty.'" oninput="checkValue(this);" required>
+                                <input type="text" name="id_product[]" value="'.$value->id.'" hidden>
+                                <input type="text" name="qty_beli[]" value="'.$value->qty.'" hidden>   ';
                     $delivery_data['detail_sale'][$key] = array(
                         $value->code,
                         $value->name,
                         $value->qty,
-                        $qty_beli
+                        $qty_kirim
                     );
                 }
             }
@@ -101,8 +104,8 @@ class DeliveryController extends Controller
 
     public function store(Request $request)
     {
+
         $data = $request->except('file');
-        $delivery = Delivery::firstOrNew(['reference_no' => $data['reference_no'] ]);
         $document = $request->file;
         if ($document) {
             $ext = pathinfo($document->getClientOriginalName(), PATHINFO_EXTENSION);
@@ -110,6 +113,9 @@ class DeliveryController extends Controller
             $document->move('public/documents/delivery', $documentName);
             $delivery->file = $documentName;
         }
+
+        // Delivery::create($data);
+        $delivery = Delivery::firstOrNew(['reference_no' => $data['reference_no'] ]);
         $delivery->sale_id = $data['sale_id'];
         $delivery->user_id = Auth::id();
         $delivery->address = $data['address'];
@@ -118,6 +124,25 @@ class DeliveryController extends Controller
         $delivery->status = $data['status'];
         $delivery->note = $data['note'];
         $delivery->save();
+
+        $delivery_data = Delivery::latest()->first();
+
+        $id_product = $data['id_product'];
+        $qty_beli  = $data['qty_beli'];
+        $qty_kirim  = $data['qty_kirim'];
+
+
+        $delivery_detail=[];
+        foreach ($id_product as $i => $id) {
+            $delivery_detail['id_deliveries']   = $delivery_data->id;
+            $delivery_detail['id_product']      = $id;
+            $delivery_detail['qty_beli']        = $qty_beli[$i];
+            $delivery_detail['qty_kirim']       = $qty_kirim[$i];
+            DeliveryDetail::create($delivery_detail);
+        }
+
+
+
         $lims_sale_data = Sale::find($data['sale_id']);
         $lims_customer_data = Customer::find($lims_sale_data->customer_id);
         $message = 'Delivery created successfully';
@@ -146,8 +171,13 @@ class DeliveryController extends Controller
     public function productDeliveryData($id)
     {
         $lims_delivery_data = Delivery::find($id);
-        //return 'madarchod';
+
         $lims_product_sale_data = Product_Sale::where('sale_id', $lims_delivery_data->sale->id)->get();
+        $lims_product_delivery = DB::table('deliveries_detail')->where('id_deliveries', $id)->select('qty_kirim')->get();
+
+        foreach ($lims_product_delivery as $k => $v){
+            $qty_kirim[] = $v->qty_kirim;
+        }
 
         foreach ($lims_product_sale_data as $key => $product_sale_data) {
             $product = Product::select('name', 'code')->find($product_sale_data->product_id);
@@ -166,11 +196,14 @@ class DeliveryController extends Controller
                 $batch_no = 'N/A';
                 $expired_date = 'N/A';
             }
+
+
             $product_sale[0][$key] = $product->code;
             $product_sale[1][$key] = $product->name;
             $product_sale[2][$key] = $batch_no;
             $product_sale[3][$key] = $expired_date;
             $product_sale[4][$key] = $product_sale_data->qty;
+            $product_sale[5][$key] = $qty_kirim[$key];
         }
         return $product_sale;
     }

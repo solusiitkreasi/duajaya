@@ -5,6 +5,8 @@ class Doprint extends Fpdf
 {
 
     private $grand_total;
+    private $grand_beli;
+    private $grand_kirim;
     private $grand_harga;
     private $total;
     private $halaman;
@@ -72,11 +74,10 @@ class Doprint extends Fpdf
         $this->cell(10,1,'NO.',0,0,'R');
         $this->cell(5,1,'',0,0,'R');
         $this->cell(45,1,'SKU',0,0,'L');
-        $this->cell(75,1,'NAMA BARANG',0,0,'L');
-        $this->cell(10,1,'QTY.',0,0,'R');
-        $this->cell(20,1,'HARGA',0,0,'R');
-        $this->cell(20,1,'DISC.',0,0,'R');
-        $this->cell(25,1,'TOTAL',0,0,'R');
+        $this->cell(60,1,'NAMA BARANG',0,0,'L');
+        $this->cell(25,1,'HARGA',0,0,'C');
+        $this->cell(20,1,'QTY BELI',0,0,'C');
+        $this->cell(20,1,'QTY KIRIM',0,0,'C');
         $this->Ln(5);
         $this->Line(11,$this->GetY(),206,$this->GetY());
         $this->Ln(4);
@@ -84,27 +85,29 @@ class Doprint extends Fpdf
 
     function Body(){
         $baris = 1;
+        $row=1;
         foreach ($this->detail as $value) {
             if($baris==66){
                 $this->FooterSubTotal();
                 $this->AddPage();
                 $baris = 1;
             }
-            $this->cell(10,1,'0',0,0,'R');
+            $this->cell(10,1,$row++,0,0,'R');
             $this->cell(5,1,'',0,0,'R');
             $this->cell(45,1,$value->code,0,0,'L');
-            $this->cell(75,1,$value->name,0,0,'L');
-            $this->cell(10,1,number_format($value->qty_beli,0,"",'.'),0,0,'R');
-            $this->cell(20,1,number_format('0',0,"",'.'),0,0,'R');
-            $this->cell(20,1,number_format('5',0,"",'.'),0,0,'R');
-            $this->cell(25,1,number_format('10',0,"",'.'),0,0,'R');
-            $this->grand_total += $value->qty_beli;
+            $this->cell(60,1,$value->name,0,0,'L');
+            $this->cell(25,1,number_format($value->qty_beli,0,"",'.'),0,0,'C');
+            $this->cell(20,1,number_format($value->qty_beli,0,"",'.'),0,0,'C');
+            $this->cell(20,1,number_format($value->qty_kirim,0,"",'.'),0,0,'C');
+            $this->grand_beli += $value->qty_beli;
+            $this->grand_kirim += $value->qty_kirim;
             $this->grand_harga += '10';
             $this->Ln(4);
             $baris++;
         }
         $this->FooterTotal();
-        $this->grand_total = 0;
+        $this->grand_beli = 0;
+        $this->grand_kirim = 0;
     }
 
     function FooterTotal(){
@@ -113,11 +116,11 @@ class Doprint extends Fpdf
         $this->Ln(2);
         $this->Line(11,$this->GetY(),199,$this->GetY());
         $this->Ln(2);
-        $this->cell(18,1,'* = BELUM ADA HARGA',0,0,'L');
-        $this->cell(132,1,'Total',0,0,'R');
-        $this->cell(10,1,$this->grand_total,0,0,'R');
-        $this->cell(15,1,$this->grand_total,0,0,'R');
-        $this->cell(15,1,$this->grand_total,0,0,'R');
+        $this->cell(18,1,'*Note : '.$this->header['note'],0,0,'L');
+        $this->cell(95,1,'Total',0,0,'R');
+        $this->cell(20,1,$this->grand_total,0,0,'R');
+        $this->cell(20,1,$this->grand_beli,0,0,'R');
+        $this->cell(20,1,$this->grand_kirim,0,0,'R');
         $this->Ln(4);
         $this->Line(11,$this->GetY(),199,$this->GetY());
         $this->Ln(4);

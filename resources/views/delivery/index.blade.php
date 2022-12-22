@@ -113,7 +113,8 @@
                     <th>Description</th>
                     <th>{{trans('file.Batch No')}}</th>
                     <th>{{trans('file.Expired Date')}}</th>
-                    <th>Qty</th>
+                    <th>Qty Beli</th>
+                    <th>Qty Kirim</th>
                 </thead>
                 <tbody>
                 </tbody>
@@ -254,6 +255,7 @@
             var batch_no = data[2];
             var expired_date = data[3];
             var qty = data[4];
+            var qty_kirim = data[5];
             var newBody = $("<tbody>");
             $.each(code, function(index) {
                 var newRow = $("<tr>");
@@ -264,6 +266,7 @@
                 cols += '<td>' + batch_no[index] + '</td>';
                 cols += '<td>' + expired_date[index] + '</td>';
                 cols += '<td>' + qty[index] + '</td>';
+                cols += '<td>' + qty_kirim[index] + '</td>';
                 newRow.append(cols);
                 newBody.append(newRow);
             });
