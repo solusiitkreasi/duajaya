@@ -245,7 +245,7 @@ class ProductController extends Controller
         $cdBrand = Brand::select('code')->where('id','=', $data['brand_id'])->first()->code;
         $cdCategory = Category::select('code')->where('id','=',$data['category_id'])->first()->code;
 
-        $codeProduct = $this->generateCode($cdBrand, $cdCategory);
+        $codeProduct = $this->generateCode($data['name'],$cdBrand, $cdCategory);
 
         $data['code'] = $codeProduct;
 
@@ -827,6 +827,8 @@ class ProductController extends Controller
 
     public function generateCode($nmProduct, $codeBrand, $codeCategories)
     {
+
+        dd($nmProduct);
         $codeProduct = "";
         $inptCode = $codeCategories . $codeBrand;
         $validateName = Product::select('code')
@@ -852,10 +854,10 @@ class ProductController extends Controller
                     $codeProduct = $inptCode.date('mY')."00".$serialNumber;
                 } elseif ($length == 3) {
                     $codeProduct = $inptCode.date('mY')."0".$serialNumber;
-                    dd($codeProduct);
+                    // dd($codeProduct);
                 } else {
                     $codeProduct = $inptCode.date('mY').$serialNumber;
-                    dd($codeProduct);
+                    // dd($codeProduct);
                 }
             } else {
                 $codeProduct = $inptCode.date('mY')."0001";
