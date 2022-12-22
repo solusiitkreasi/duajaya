@@ -815,10 +815,10 @@
         let value = parseInt(sender.value);
         if (value>max) {
             sender.value = min;
-            alert('Max Qty' + max);
+            alert('Max Qty = ' + max);
         } else if (value<min) {
             sender.value = max;
-            alert('Max Qty' + max);
+            alert('Max Qty = ' + max);
         }
     }
 
