@@ -9,7 +9,7 @@ class DeliveryDetail extends Model
     protected $table = 'deliveries_detail';
 
     protected $fillable =[
-        "id_deliveries", "id_product", "qty_beli","qty_kirim", "qty_terima"
+        "id_deliveries", "id_product", "qty_beli","qty_kirim", "qty_terima", "reference_po"
     ];
 
     public function product()

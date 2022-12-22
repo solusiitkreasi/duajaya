@@ -88,12 +88,36 @@ class DeliveryController extends Controller
                 ->join('sales as s', 'ps.sale_id', '=', 's.id')
                 ->leftjoin('products as p', 'ps.product_id', '=', 'p.id')
                 ->where('ps.sale_id', $id)
-                ->select('p.id' ,'p.code','p.name','ps.qty')
+                ->select('p.id' ,'p.code','p.name','ps.qty', 'ps.qty_kirim')
                 ->get();
+
+            // $detail_delivery_sisa = DB::table('deliveries_detail')
+            //     ->where('reference_po', $id)
+            //     ->select('qty_kirim')->get();
+            // foreach ($detail_delivery_sisa as $k => $v){
+            //     $sisa[] = $v->qty_kirim;
+            // }
+
+            // dd($sisa);
 
             if($detail_sale){
                 foreach ($detail_sale as $key => $value) {
-                    $qty_kirim = '<input type="number" name="qty_kirim[]" class="form-control" min="0" max="'.$value->qty.'" oninput="checkValue(this);" required>
+
+                    // if($sisa[$key] != NULL || $sisa[$key]!= ""){
+                    //     $sisa_nilai = $sisa[$key];
+                    // }else{
+                    //     $sisa_nilai = '0';
+                    // }
+                    // $sisa_kirim = $value->qty - $sisa_nilai;
+
+                    if(!empty($value->qty_kirim)){
+                        $maxkirim = $value->qty_kirim;
+                    }else{
+                        $maxkirim = $value->qty;
+                    }
+
+
+                    $qty_kirim = '<input type="number" name="qty_kirim[]" class="form-control" min="0" max="'.$maxkirim.'" oninput="checkValue(this);" required>
                                 <input type="text" name="id_product[]" value="'.$value->id.'" hidden>
                                 <input type="text" name="qty_beli[]" value="'.$value->qty.'" hidden>   ';
                     $delivery_data['detail_sale'][$key] = array(
@@ -147,7 +171,11 @@ class DeliveryController extends Controller
             $delivery_detail['id_product']      = $id;
             $delivery_detail['qty_beli']        = $qty_beli[$i];
             $delivery_detail['qty_kirim']       = $qty_kirim[$i];
+            $delivery_detail['reference_po']    = $data['sale_id'];
             DeliveryDetail::create($delivery_detail);
+
+            $product_sale['qty_kirim'] = $qty_kirim[$i];
+            Product_Sale::where('product_id',$id)->where('sale_id',$data['sale_id'])->update($product_sale);
         }
 
 
