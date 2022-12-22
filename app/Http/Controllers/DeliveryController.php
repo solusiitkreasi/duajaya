@@ -88,6 +88,7 @@ class DeliveryController extends Controller
                 ->join('sales as s', 'ps.sale_id', '=', 's.id')
                 ->leftjoin('products as p', 'ps.product_id', '=', 'p.id')
                 ->where('ps.sale_id', $id)
+                ->whereRaw('ps.qty != ps.qty_kirim')
                 ->select('p.id' ,'p.code','p.name','ps.qty', 'ps.qty_kirim')
                 ->get();
 
