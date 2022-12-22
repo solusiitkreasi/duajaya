@@ -38,19 +38,32 @@ class DeliveryController extends Controller
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
     }
     public function create($id){
+
+        $qty_beli = Product_Sale::where('sale_id', $id)->sum('qty');
+        $qty_kirim = DB::table('deliveries_detail')
+        ->where('reference_po', $id)
+        ->sum('qty_kirim');
+
+        // dd($qty_beli,$qty_kirim);
+
+        if($qty_beli == $qty_kirim){
+            return false;
+        }
+
+
         $lims_delivery_data = Delivery::where('sale_id', $id)->first();
         // if($lims_delivery_data){
-        //     $customer_sale = DB::table('sales')->join('customers', 'sales.customer_id', '=', 'customers.id')->where('sales.id', $id)->select('sales.reference_no','customers.name')->get();
+            //     $customer_sale = DB::table('sales')->join('customers', 'sales.customer_id', '=', 'customers.id')->where('sales.id', $id)->select('sales.reference_no','customers.name')->get();
 
-        //     $delivery_data[] = $lims_delivery_data->reference_no;
-        //     $delivery_data[] = $customer_sale[0]->reference_no;
-        //     $delivery_data[] = $lims_delivery_data->status;
-        //     $delivery_data[] = $lims_delivery_data->delivered_by;
-        //     $delivery_data[] = $lims_delivery_data->recieved_by;
-        //     $delivery_data[] = $customer_sale[0]->name;
-        //     $delivery_data[] = $lims_delivery_data->address;
-        //     $delivery_data[] = $lims_delivery_data->note;
-        // }
+            //     $delivery_data[] = $lims_delivery_data->reference_no;
+            //     $delivery_data[] = $customer_sale[0]->reference_no;
+            //     $delivery_data[] = $lims_delivery_data->status;
+            //     $delivery_data[] = $lims_delivery_data->delivered_by;
+            //     $delivery_data[] = $lims_delivery_data->recieved_by;
+            //     $delivery_data[] = $customer_sale[0]->name;
+            //     $delivery_data[] = $lims_delivery_data->address;
+            //     $delivery_data[] = $lims_delivery_data->note;
+            // }
         // else{
             $customer_sale = DB::table('sales')->
             join('customers', 'sales.customer_id', '=', 'customers.id')
@@ -93,13 +106,9 @@ class DeliveryController extends Controller
             }
 
             //  dd($uuid, $detail_sale, $delivery_data['detail_sale']);
-
-
-
-
-
         // }
         return $delivery_data;
+
     }
 
     public function store(Request $request)

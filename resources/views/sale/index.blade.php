@@ -780,7 +780,7 @@
 				// $('.data_report').innerHTML = text;
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
-				alert('Error get data from ajax');
+				alert('Data Product Sudah Terkirim Semua');
 			}
 		});
 	};
