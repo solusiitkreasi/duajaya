@@ -43,9 +43,9 @@ class Doprint extends Fpdf
         $this->Ln(4);
         $this->cell(0,2,'Jakarta',0,0,'L');
         $this->Ln(4);
-        $this->Line(11,$this->GetY(),269.4,$this->GetY());
+        $this->Line(11,$this->GetY(),206,$this->GetY());
         $this->Ln(0.8);
-        $this->Line(11,$this->GetY(),269.4,$this->GetY());
+        $this->Line(11,$this->GetY(),206,$this->GetY());
         $this->setFont('Arial','BU',12);
         $this->cell(0,10,'DELIVERY ORDER ',0,0,'C');
         $this->Ln(14);
