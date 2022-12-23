@@ -215,8 +215,6 @@ class DeliveryController extends Controller
     {
         $lims_delivery_data = Delivery::find($id);
 
-        $lims_product_sale_data = Product_Sale::where('sale_id', $lims_delivery_data->sale->id)
-                                    ->get();
         $lims_product_delivery = DB::table('deliveries_detail as dd')
                                 ->leftjoin('sales as s', 'dd.reference_po', '=', 's.id')
                                 ->leftjoin('product_sales as ps', 's.id', '=', 'ps.id')
@@ -224,14 +222,14 @@ class DeliveryController extends Controller
                                 ->select('dd.qty_kirim','ps.product_id', 'ps.variant_id', 'ps.product_batch_id','ps.qty','dd.qty_kirim' )
                                 ->get();
 
-        foreach ($lims_product_delivery as $key => $product_sale_data) {
-            $product = Product::select('name', 'code')->find($product_sale_data->product_id);
-            if($product_sale_data->variant_id) {
-                $lims_product_variant_data = ProductVariant::select('item_code')->FindExactProduct($product_sale_data->product_id, $product_sale_data->variant_id)->first();
+        foreach ($lims_product_delivery as $key => $product_delivery) {
+            $product = Product::select('name', 'code')->find($product_delivery->product_id);
+            if($product_delivery->variant_id) {
+                $lims_product_variant_data = ProductVariant::select('item_code')->FindExactProduct($product_delivery->product_id, $product_delivery->variant_id)->first();
                 $product->code = $lims_product_variant_data->item_code;
             }
-            if($product_sale_data->product_batch_id) {
-                $product_batch_data = ProductBatch::select('batch_no', 'expired_date')->find($product_sale_data->product_batch_id);
+            if($product_delivery->product_batch_id) {
+                $product_batch_data = ProductBatch::select('batch_no', 'expired_date')->find($product_delivery->product_batch_id);
                 if($product_batch_data) {
                     $batch_no = $product_batch_data->batch_no;
                     $expired_date = date(config('date_format'), strtotime($product_batch_data->expired_date));
@@ -247,8 +245,8 @@ class DeliveryController extends Controller
             $product_sale[1][$key] = $product->name;
             $product_sale[2][$key] = $batch_no;
             $product_sale[3][$key] = $expired_date;
-            $product_sale[4][$key] = $product_sale_data->qty;
-            $product_sale[5][$key] = $product_sale_data->qty_kirim;
+            $product_sale[4][$key] = $product_delivery->qty;
+            $product_sale[5][$key] = $product_delivery->qty_kirim;
         }
         return $product_sale;
     }
