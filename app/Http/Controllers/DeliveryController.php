@@ -215,14 +215,16 @@ class DeliveryController extends Controller
     {
         $lims_delivery_data = Delivery::find($id);
 
-        $lims_product_sale_data = Product_Sale::where('sale_id', $lims_delivery_data->sale->id)->get();
-        $lims_product_delivery = DB::table('deliveries_detail')->where('id_deliveries', $id)->select('qty_kirim')->get();
+        $lims_product_sale_data = Product_Sale::where('sale_id', $lims_delivery_data->sale->id)
+                                    ->get();
+        $lims_product_delivery = DB::table('deliveries_detail as dd')
+                                ->leftjoin('sales as s', 'dd.reference_po', '=', 's.id')
+                                ->leftjoin('product_sales as ps', 's.id', '=', 'ps.id')
+                                ->where('dd.id_deliveries', $id)
+                                ->select('dd.qty_kirim','ps.product_id', 'ps.variant_id', 'ps.product_batch_id','ps.qty','dd.qty_kirim' )
+                                ->get();
 
-        foreach ($lims_product_delivery as $k => $v){
-            $qty_kirim[] = $v->qty_kirim;
-        }
-
-        foreach ($lims_product_sale_data as $key => $product_sale_data) {
+        foreach ($lims_product_delivery as $key => $product_sale_data) {
             $product = Product::select('name', 'code')->find($product_sale_data->product_id);
             if($product_sale_data->variant_id) {
                 $lims_product_variant_data = ProductVariant::select('item_code')->FindExactProduct($product_sale_data->product_id, $product_sale_data->variant_id)->first();
@@ -246,7 +248,7 @@ class DeliveryController extends Controller
             $product_sale[2][$key] = $batch_no;
             $product_sale[3][$key] = $expired_date;
             $product_sale[4][$key] = $product_sale_data->qty;
-            $product_sale[5][$key] = $qty_kirim[$key];
+            $product_sale[5][$key] = $product_sale_data->qty_kirim;
         }
         return $product_sale;
     }
