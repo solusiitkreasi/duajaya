@@ -116,6 +116,7 @@ class Doprint extends Fpdf
         $this->Ln(4);
         $this->setFont('Arial','',8);
         $this->cell(195,2,'Jl. S. Mamberamo, Sorong - Papua Barat',0,0,'C');
+        $this->cell(0,2,'Page '.$this->halaman." of ".$this->total_halaman,0,0,'R');
         $this->Ln(4);
         $this->Line(11,$this->GetY(),206,$this->GetY());
         $this->Ln(0.8);
