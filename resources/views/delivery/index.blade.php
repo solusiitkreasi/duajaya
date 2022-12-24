@@ -54,7 +54,7 @@
                               <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
-                                <li><a href="{{route('delivery.print_do', $delivery->id)}}" class="btn btn-link"><i class="fa fa-copy"></i> Generate Do</a></li>
+                                <li><a target="_blank" href="{{route('delivery.print_do', $delivery->id)}}" class="btn btn-link"><i class="fa fa-copy"></i> Generate Do</a></li>
                                 <li>
                                     <button type="button" data-id="{{$delivery->id}}" class="open-EditCategoryDialog btn btn-link"><i class="dripicons-document-edit"></i> {{trans('file.edit')}}</button>
                                 </li>
