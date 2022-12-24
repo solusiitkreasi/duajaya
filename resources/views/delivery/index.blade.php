@@ -54,6 +54,7 @@
                               <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
+                                <li><a href="{{route('delivery.print_do', $delivery->id)}}" class="btn btn-link"><i class="fa fa-copy"></i> Generate Do</a></li>
                                 <li>
                                     <button type="button" data-id="{{$delivery->id}}" class="open-EditCategoryDialog btn btn-link"><i class="dripicons-document-edit"></i> {{trans('file.edit')}}</button>
                                 </li>
@@ -112,7 +113,8 @@
                     <th>Description</th>
                     <th>{{trans('file.Batch No')}}</th>
                     <th>{{trans('file.Expired Date')}}</th>
-                    <th>Qty</th>
+                    <th>Qty Beli</th>
+                    <th>Qty Kirim</th>
                 </thead>
                 <tbody>
                 </tbody>
@@ -253,6 +255,7 @@
             var batch_no = data[2];
             var expired_date = data[3];
             var qty = data[4];
+            var qty_kirim = data[5];
             var newBody = $("<tbody>");
             $.each(code, function(index) {
                 var newRow = $("<tr>");
@@ -263,6 +266,7 @@
                 cols += '<td>' + batch_no[index] + '</td>';
                 cols += '<td>' + expired_date[index] + '</td>';
                 cols += '<td>' + qty[index] + '</td>';
+                cols += '<td>' + qty_kirim[index] + '</td>';
                 newRow.append(cols);
                 newBody.append(newRow);
             });

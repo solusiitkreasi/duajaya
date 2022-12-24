@@ -49,6 +49,7 @@ use Srmklive\PayPal\Services\ExpressCheckout;
 use Srmklive\PayPal\Services\AdaptivePayments;
 use GeniusTS\HijriDate\Date;
 use Illuminate\Support\Facades\Validator;
+use App\Pdf\Poprint;
 
 class SaleController extends Controller
 {
@@ -295,7 +296,8 @@ class SaleController extends Controller
                         <button type="button" class="get-payment btn btn-link" data-id = "'.$sale->id.'"><i class="fa fa-money"></i> '.trans('file.View Payment').'</button>
                     </li>
                     <li>
-                        <button type="button" class="add-delivery btn btn-link" data-id = "'.$sale->id.'"><i class="fa fa-truck"></i> '.trans('file.Add Delivery').'</button>
+
+                        <a href="#" class="btn btn-link" onclick="detail_doc('.$sale->id.')" > <i class="fa fa-truck"></i> '.trans('file.Add Delivery').' </a>
                     </li>';
                 if(in_array("sales-delete", $request['all_permission']))
                     $nestedData['options'] .= \Form::open(["route" => ["sales.destroy", $sale->id], "method" => "DELETE"] ).'
@@ -1089,36 +1091,53 @@ class SaleController extends Controller
 
         $data = [];
         if(($category_id != 0) && ($brand_id != 0)){
-            $lims_product_list = DB::table('products')
-                                ->join('categories', 'products.category_id', '=', 'categories.id')
-                                ->where([
-                                    ['products.is_active', true],
-                                    ['products.category_id', $category_id],
-                                    ['brand_id', $brand_id]
-                                ])->orWhere([
-                                    ['categories.parent_id', $category_id],
-                                    ['products.is_active', true],
-                                    ['brand_id', $brand_id]
-                                ])->select('products.name', 'products.code', 'products.image')->get();
+            $lims_product_list =  DB::table('product_warehouse as pw')
+                        ->leftjoin('products as p', 'pw.product_id', '=', 'p.id')
+                        ->join('categories as pc', 'p.category_id', '=', 'pc.id')
+                        ->where([
+                            ['p.brand_id', $brand_id],
+                            ['p.category_id', $category_id],
+                            ['p.is_active', true],
+                            ['pw.warehouse_id', $warehouse_id]
+                        ])
+                        ->orWhere([
+                            ['p.brand_id', $brand_id],
+                            ['pc.parent_id', $category_id],
+                            ['p.is_active', true],
+                            ['pw.warehouse_id', $warehouse_id]
+                        ])
+                        ->select('p.id', 'p.name', 'p.code', 'pw.price', 'p.image', 'p.is_variant')->get();
         }
         elseif(($category_id != 0) && ($brand_id == 0)){
-            $lims_product_list = DB::table('products')
-                                ->join('categories', 'products.category_id', '=', 'categories.id')
-                                ->where([
-                                    ['products.is_active', true],
-                                    ['products.category_id', $category_id],
-                                ])->orWhere([
-                                    ['categories.parent_id', $category_id],
-                                    ['products.is_active', true]
-                                ])->select('products.id', 'products.name', 'products.code', 'products.image', 'products.is_variant')->get();
+            $lims_product_list = DB::table('product_warehouse as pw')
+                ->leftjoin('products as p', 'pw.product_id', '=', 'p.id')
+                ->join('categories as pc', 'p.category_id', '=', 'pc.id')
+                ->where([
+                    ['p.category_id', $category_id],
+                    ['p.is_active', true],
+                    ['pw.warehouse_id', $warehouse_id]
+                ])
+                ->orWhere([
+                    ['pc.parent_id', $category_id],
+                    ['p.is_active', true],
+                    ['pw.warehouse_id', $warehouse_id]
+                ])
+                ->select('p.id', 'p.name', 'p.code', 'pw.price', 'p.image', 'p.is_variant')->get();
         }
         elseif(($category_id == 0) && ($brand_id != 0)){
-            $lims_product_list = Product::where([
-                                ['brand_id', $brand_id],
-                                ['is_active', true]
-                            ])
-                            ->select('products.id', 'products.name', 'products.code', 'products.image', 'products.is_variant')
-                            ->get();
+            $lims_product_list = DB::table('product_warehouse as pw')
+                ->leftjoin('products as p', 'pw.product_id', '=', 'p.id')
+                ->where([
+                    ['p.brand_id', $brand_id],
+                    ['p.is_active', true],
+                    ['pw.warehouse_id', $warehouse_id]
+                ])
+                ->orWhere([
+                    ['p.brand_id', $brand_id],
+                    ['p.is_active', true],
+                    ['pw.warehouse_id', $warehouse_id]
+                ])
+                ->select('p.id', 'p.name', 'p.code', 'pw.price', 'p.image', 'p.is_variant')->get();
         }
         elseif(!empty($product_search)){
             $lims_product_list = DB::table('product_warehouse as pw')
@@ -1884,6 +1903,18 @@ class SaleController extends Controller
         $numberInWords = $numberTransformer->toWords($lims_sale_data->grand_total);
 
         return view('sale.invoice', compact('lims_sale_data', 'lims_product_sale_data', 'lims_biller_data', 'lims_warehouse_data', 'lims_customer_data', 'lims_payment_data', 'numberInWords'));
+    }
+
+    public function genPo($id)
+    {
+
+        $data['header'] = array('name' => 'test');
+        $data['detail'] = array('name' => 'test');
+        $myPdf = new Poprint($data);
+
+        $myPdf->Output('I', "Poprint.pdf", true);
+
+        exit;
     }
 
     public function addPayment(Request $request)

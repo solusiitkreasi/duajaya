@@ -352,13 +352,17 @@
                         <label>{{trans('file.Sale Reference')}}</label>
                         <p id="sr"></p>
                     </div>
-                    <div class="col-md-12 form-group">
+                    <div class="col-md-12 form-group mb-2">
                         <label>{{trans('file.Status')}} *</label>
                         <select name="status" required class="form-control selectpicker">
                             <option value="1">{{trans('file.Packing')}}</option>
                             <option value="2">{{trans('file.Delivering')}}</option>
                             <option value="3">{{trans('file.Delivered')}}</option>
                         </select>
+                    </div>
+                    <div class="col-md-12 form-group mt-3 mb-2">
+                        <label><i style="font-size: 15px;">{{trans('file.Delivery Details')}}</i></label>
+                        <p id="detail_product"></p>
                     </div>
                     <div class="col-md-6 mt-2 form-group">
                         <label>{{trans('file.Delivered By')}}</label>
@@ -385,6 +389,7 @@
                         <textarea rows="3" name="note" class="form-control"></textarea>
                     </div>
                 </div>
+
                 <input type="hidden" name="reference_no">
                 <input type="hidden" name="sale_id">
                 <button type="submit" class="btn btn-primary">{{trans('file.submit')}}</button>
@@ -740,6 +745,136 @@
             $('#add-delivery').modal('show');
         });
     });
+
+    function detail_doc(id) {
+		//Ajax Load data from ajax
+		$.ajax({
+			url: 'delivery/create/'+id,
+			type: "GET",
+			dataType: "JSON",
+			success: function(data) {
+
+				$('#add-delivery').modal('show'); // show bootstrap modal when complete loaded
+				$('.modal-title').text('Detail - ' + id); // Set title to Bootstrap modal title
+				$('#dr').text(data[0]);
+                $('#sr').text(data[1]);
+
+                $('select[name="status"]').val(data[2]);
+                $('.selectpicker').selectpicker('refresh');
+                $('input[name="delivered_by"]').val(data[3]);
+                $('input[name="recieved_by"]').val(data[4]);
+                $('#customer').text(data[5]);
+                $('textarea[name="address"]').val(data[6]);
+                $('textarea[name="note"]').val(data[7]);
+                $('input[name="reference_no"]').val(data[0]);
+                $('input[name="sale_id"]').val(id);
+
+				text = "";
+				// textapp = "";
+				var array = data;
+				detailtem(array);
+				// detailapp(array);
+				document.getElementById("detail_product").innerHTML = text;
+
+				// document.getElementById("data_approve").innerHTML = textapp;
+				// $('.data_report').innerHTML = text;
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert('Data Product Sudah Terkirim Semua');
+			}
+		});
+	};
+
+	function detailtem(array) {
+		text += '<h5>Detail </h5><hr> <table class="table table-bordered data-table">';
+		text += '<thead>' +
+        '<tr>' +
+		'<th>SKU</th>' +
+        '<th>Name</th>' +
+        '<th>Qty Beli</th>' +
+        '<th>Sisa Kirim</th>' +
+        '<th>Qty Kirim</th>' +
+        '</tr>' +
+        '</thead><tbody>';
+		for (val of array.detail_sale) {
+			console.log(val);
+			text +=
+				'<tr>' +
+				'<td>' + val[0] + '</td>' +
+				'<td>' + val[1] + '</td>' +
+				'<td>' + val[2] + '</td>' +
+                '<td>' + val[3] + '</td>' +
+                '<td>' + val[4] + '</td>' +
+                '</tr>';
+		}
+		text += '</tbody></table>';
+	};
+
+    function checkValue(sender) {
+        let min = sender.min;
+        let max = sender.max;
+        // here we perform the parsing instead of calling another function
+        let value = parseInt(sender.value);
+        if (value>max) {
+            sender.value = min;
+            alert('Max Qty = ' + max);
+        } else if (value<min) {
+            sender.value = max;
+            alert('Max Qty = ' + max);
+        }
+    }
+
+	// function detailapp(array) {
+	// 	textapp += '<h5>Detail Approve</h5><hr> <table class="table table-bordered data-table">';
+	// 	textapp += '<thead>' +
+    //     '<tr>' +
+    //     '<th>App</th>' +
+	// 	'<th>Tgl App</th>' +
+    //     '<th>Tgl Rej</th>' +
+	// 	'<th>Keterangan</th>' +
+    //     '</tr>' +
+    //     '</thead><tbody>';
+	// 	for (val of array.approve) {
+	// 		console.log(val);
+	// 		textapp +=
+	// 			'<tr>' +
+	// 			'<td>' + val[0] + '</td>' +
+	// 			'<td>' + val[1] + '</td>' +
+	// 			'<td>' + val[2] + '</td>' +
+	// 			'<td>' + val[3] + '</td></tr>';
+	// 	}
+	// 	textapp += '</tbody></table>';
+	// };
+
+    //<input id="num" type="number" step="1" min="0" max="4" />
+
+    // document.getElementById("num").addEventListener("click", function(e) {
+    //     const value = this.value,
+    //         max = this.getAttribute("max"),
+    //         min = this.getAttribute("min"),
+    //         minned = this.dataset.minned === "true";
+    //     maxed = this.dataset.maxed === "true";
+    //     if (value === max && maxed) {
+    //         alert("Value is max");
+    //     }
+    //     if (value === min && minned) {
+    //         alert("Value is at 0");
+    //     }
+    //     this.dataset.maxed = value === max ? "true" : "false";
+    //     this.dataset.minned = value === min ? "true" : "false";
+    // });
+
+    // document.getElementById("num").addEventListener("input", function(e) {
+    //     const value = this.value || 0,
+    //         min = this.getAttribute("min"),
+    //         max = this.getAttribute("max");
+    //     if (value != "" && value > max || value < min) {
+    //         alert(`Value should be between ${min} and ${max}`);
+    //         this.value = "";
+    //     }
+    //     this.dataset.maxed = value === max ? "true" : "false";
+    //     this.dataset.minned = value === min ? "true" : "false";
+    // });
 
     function pointCalculation(amount) {
         availablePoints = $('table.sale-list tbody tr:nth-child(' + (rowindex + 1) + ')').find('.points').val();

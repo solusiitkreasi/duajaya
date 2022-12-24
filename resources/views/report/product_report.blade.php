@@ -160,7 +160,7 @@
                     'next': '<i class="dripicons-chevron-right"></i>'
             }
         },
-        order:[['1', 'desc']],
+        order:[['1', 'asc']],
         'columnDefs': [
             {
                 "orderable": false,
