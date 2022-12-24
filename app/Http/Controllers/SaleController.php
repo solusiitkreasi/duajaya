@@ -273,7 +273,7 @@ class SaleController extends Controller
                               <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
-                                <li><a href="'.route('sale.invoice', $sale->id).'" class="btn btn-link"><i class="fa fa-copy"></i> '.trans('file.Generate Receipt').'</a></li>
+                                <li><a href="'.route('sale.receipt', $sale->id).'" class="btn btn-link"><i class="fa fa-copy"></i> '.trans('file.Generate Receipt').'</a></li>
                                 <li><a href="'.route('sale.invoice', $sale->id).'" class="btn btn-link"><i class="fa fa-copy"></i> '.trans('file.Generate Invoice').'</a></li>
                                 <li>
                                     <button type="button" class="btn btn-link view"><i class="fa fa-eye"></i> '.trans('file.View').'</button>
@@ -752,7 +752,7 @@ class SaleController extends Controller
             }
         }
         if($lims_sale_data->sale_status == '1')
-            return redirect('sales/gen_invoice/' . $lims_sale_data->id)->with('message', $message);
+            return redirect('sales/gen_receipt/' . $lims_sale_data->id)->with('message', $message);
         elseif($data['pos'])
             return redirect('pos')->with('message', $message);
         else
@@ -1886,7 +1886,7 @@ class SaleController extends Controller
 
     }
 
-    public function genInvoice($id)
+    public function genReceipt($id)
     {
         $lims_sale_data = Sale::find($id);
         $lims_product_sale_data = Product_Sale::where('sale_id', $id)->get();
@@ -1902,10 +1902,10 @@ class SaleController extends Controller
             $numberTransformer = $numberToWords->getNumberTransformer(\App::getLocale());
         $numberInWords = $numberTransformer->toWords($lims_sale_data->grand_total);
 
-        return view('sale.invoice', compact('lims_sale_data', 'lims_product_sale_data', 'lims_biller_data', 'lims_warehouse_data', 'lims_customer_data', 'lims_payment_data', 'numberInWords'));
+        return view('sale.receipt', compact('lims_sale_data', 'lims_product_sale_data', 'lims_biller_data', 'lims_warehouse_data', 'lims_customer_data', 'lims_payment_data', 'numberInWords'));
     }
 
-    public function genPo($id)
+    public function genInvoice($id)
     {
 
         $data['header'] = array('name' => 'test');

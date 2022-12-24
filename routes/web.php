@@ -110,8 +110,8 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::get('sales/get_gift_card', 'SaleController@getGiftCard');
 	Route::get('sales/paypalSuccess', 'SaleController@paypalSuccess');
 	Route::get('sales/paypalPaymentSuccess/{id}', 'SaleController@paypalPaymentSuccess');
-	Route::get('sales/gen_invoice/{id}', 'SaleController@genInvoice')->name('sale.invoice');
-    Route::get('sales/gen_po/{id}', 'SaleController@genPo')->name('sale.invoice');
+	Route::get('sales/gen_receipt/{id}', 'SaleController@genReceipt')->name('sale.receipt');
+    Route::get('sales/gen_invoice/{id}', 'SaleController@genInvoice')->name('sale.invoice');
 	Route::post('sales/add_payment', 'SaleController@addPayment')->name('sale.add-payment');
 	Route::get('sales/getpayment/{id}', 'SaleController@getPayment')->name('sale.get-payment');
 	Route::post('sales/updatepayment', 'SaleController@updatePayment')->name('sale.update-payment');
