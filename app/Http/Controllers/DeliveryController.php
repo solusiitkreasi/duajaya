@@ -374,8 +374,9 @@ class DeliveryController extends Controller
                 ->join('deliveries as d', 'dd.id_deliveries', '=', 'd.id')
                 ->join('sales as s', 'd.sale_id', '=', 's.id')
                 ->leftjoin('products as p', 'dd.id_product', '=', 'p.id')
+                ->leftjoin('units as u', 'p.unit_id', '=', 'u.id')
                 ->where('dd.id_deliveries', $data_header->id)
-                ->select('p.code','p.name','dd.qty_beli','dd.qty_kirim')
+                ->select('p.code','p.name','dd.qty_beli','dd.qty_kirim', 'u.unit_code', 'p.price')
                 ->get();
                 // dd(\DB::getQueryLog());
                 // dd($customer_sale);
