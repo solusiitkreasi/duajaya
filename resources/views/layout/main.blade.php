@@ -869,7 +869,7 @@
             <div class="navbar-holder d-flex align-items-center justify-content-between">
               <a id="toggle-btn" href="#" class="menu-btn"><i class="fa fa-bars"> </i></a>
               <span class="logo-sistem">
-                <img src="{{ url('public/logo/logo-cipta-jaya.png') }}">
+                <img src="{{url('public/logo', $general_setting->site_logo)}}">
               </span>
 
               <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
