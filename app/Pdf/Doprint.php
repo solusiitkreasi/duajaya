@@ -182,7 +182,7 @@ class Doprint extends Fpdf
         $baris = 1;
         $row=1;
         foreach ($this->detail as $value) {
-            if($baris==66){
+            if($baris==44){
                 $this->FooterSubTotal();
                 $this->AddPage();
                 $baris = 1;
