@@ -151,7 +151,7 @@ class Doprint extends Fpdf
         $this->cell(20,1,'Address',0,0,'L');
         $this->cell(100,1,': '.$this->customer['0']->address,0,0,'L');
         $this->cell(25,1,'Expedition',0,0,'L');
-        $this->cell(15,1,': '.$this->customer['0']->reference_no,0,0,'L');
+        $this->cell(15,1,': ',0,0,'L');
         $this->Ln(4);
 
         $this->cell(20,1,'',0,0,'L');
