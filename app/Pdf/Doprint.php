@@ -141,16 +141,23 @@ class Doprint extends Fpdf
         $this->cell(15,1,': '.$this->customer['0']->reference_no,0,0,'L');
         $this->Ln(4);
 
-        $this->cell(20,1,'Address',0,0,'L');
-        $this->cell(100,1,': '.$this->header['address'],0,0,'L');
-        $this->cell(25,1,'Tgl. Doc',0,0,'L');
+        $this->cell(20,1,'Contact',0,0,'L');
+        $this->cell(100,1,': '.$this->customer['0']->phone_number,0,0,'L');
+        $this->cell(25,1,'Doc Date',0,0,'L');
         $this->cell(100,1,': '.date('d-m-Y',strtotime($this->header['created_at'])),0,0,'L');
         $this->Ln(4);
 
-        $this->cell(20,1,'',0,0,'L');
-        $this->cell(100,1,'',0,0,'L');
+        $this->cell(20,1,'Address',0,0,'L');
+        $this->cell(100,1,': '.$this->customer['0']->address,0,0,'L');
         $this->cell(25,1,'Expedition',0,0,'L');
         $this->cell(15,1,': '.$this->customer['0']->reference_no,0,0,'L');
+        $this->Ln(4);
+
+        $this->cell(20,1,'',0,0,'L');
+        $this->cell(100,1,'  '.$this->customer['0']->city.', '
+            .$this->customer['0']->state.'-'.$this->customer['0']->postal_code.' '
+            .$this->customer['0']->country
+            ,0,0,'L');
 
         $this->HeaderList();
     }

@@ -361,7 +361,8 @@ class DeliveryController extends Controller
             $customer_sale = DB::table('sales')
             ->join('customers', 'sales.customer_id', '=', 'customers.id')
             ->where('sales.id', $data_header->sale_id)
-            ->select('sales.reference_no','customers.name','customers.company_name')
+            ->select('sales.reference_no','customers.name','customers.company_name','customers.phone_number',
+            'customers.address','customers.city','customers.state','customers.postal_code','customers.country')
             ->get();
 
             // dd($data_header);
