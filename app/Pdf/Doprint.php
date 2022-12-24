@@ -109,8 +109,7 @@ class Doprint extends Fpdf
         $this->total_halaman =  ceil(count($this->detail)/48);
         $this->halaman++;
         $this->Ln(1);
-        $this->Image('public/logo/'.$this->general_setting->site_logo, 10, 4, 30, 15);
-
+        $this->Image('public/logo/'.$this->general_setting->site_logo, 12, 2, 25, 14);
         $this->setFont('Arial','B',12);
         $this->cell(195,1,'CV. KLALIN SEJAHTERA MANDIRI',0,0, 'C');
         $this->setFont('Arial','B',16);
