@@ -37,96 +37,68 @@ class DeliveryController extends Controller
         else
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
     }
+
     public function create($id){
 
         $qty_beli = Product_Sale::where('sale_id', $id)->sum('qty');
-        $qty_kirim = DB::table('deliveries_detail')
-        ->where('reference_po', $id)
-        ->sum('qty_kirim');
-
-        // dd($qty_beli,$qty_kirim);
+        $qty_kirim = DB::table('deliveries_detail')->where('reference_po', $id)->sum('qty_kirim');
 
         if($qty_beli == $qty_kirim){
             return false;
         }
 
-
         $lims_delivery_data = Delivery::where('sale_id', $id)->first();
-        // if($lims_delivery_data){
-            //     $customer_sale = DB::table('sales')->join('customers', 'sales.customer_id', '=', 'customers.id')->where('sales.id', $id)->select('sales.reference_no','customers.name')->get();
 
-            //     $delivery_data[] = $lims_delivery_data->reference_no;
-            //     $delivery_data[] = $customer_sale[0]->reference_no;
-            //     $delivery_data[] = $lims_delivery_data->status;
-            //     $delivery_data[] = $lims_delivery_data->delivered_by;
-            //     $delivery_data[] = $lims_delivery_data->recieved_by;
-            //     $delivery_data[] = $customer_sale[0]->name;
-            //     $delivery_data[] = $lims_delivery_data->address;
-            //     $delivery_data[] = $lims_delivery_data->note;
-            // }
-        // else{
-            $customer_sale = DB::table('sales')->
-            join('customers', 'sales.customer_id', '=', 'customers.id')
-            ->where('sales.id', $id)
-            ->select('sales.reference_no','customers.name',
-                'customers.address', 'customers.city', 'customers.country')
+        $customer_sale = DB::table('sales')->
+        join('customers', 'sales.customer_id', '=', 'customers.id')
+        ->where('sales.id', $id)
+        ->select('sales.reference_no','customers.name','customers.address', 'customers.city', 'customers.country')
+        ->get();
+
+        $delivery_data[] = 'dr-' . date("Ymd") . '-'. date("his");
+        $delivery_data[] = $customer_sale[0]->reference_no;
+        $delivery_data[] = '';
+        $delivery_data[] = '';
+        $delivery_data[] = '';
+        $delivery_data[] = $customer_sale[0]->name;
+        $delivery_data[] = $customer_sale[0]->address.' '.$customer_sale[0]->city.' '.$customer_sale[0]->country;
+        $delivery_data[] = '';
+
+        $uuid = Str::uuid();
+
+        $detail_sale = DB::table('product_sales as ps')
+            ->join('sales as s', 'ps.sale_id', '=', 's.id')
+            ->leftjoin('products as p', 'ps.product_id', '=', 'p.id')
+            ->where('ps.sale_id', $id)
+            ->whereRaw('ps.qty != ps.qty_kirim')
+            ->select('p.id' ,'p.code','p.name','ps.qty', 'ps.qty_kirim')
             ->get();
 
-            $delivery_data[] = 'dr-' . date("Ymd") . '-'. date("his");
-            $delivery_data[] = $customer_sale[0]->reference_no;
-            $delivery_data[] = '';
-            $delivery_data[] = '';
-            $delivery_data[] = '';
-            $delivery_data[] = $customer_sale[0]->name;
-            $delivery_data[] = $customer_sale[0]->address.' '.$customer_sale[0]->city.' '.$customer_sale[0]->country;
-            $delivery_data[] = '';
 
-            $uuid = Str::uuid();
+        if($detail_sale){
+            foreach ($detail_sale as $key => $value) {
 
 
-            $detail_sale = DB::table('product_sales as ps')
-                ->join('sales as s', 'ps.sale_id', '=', 's.id')
-                ->leftjoin('products as p', 'ps.product_id', '=', 'p.id')
-                ->where('ps.sale_id', $id)
-                ->whereRaw('ps.qty != ps.qty_kirim')
-                ->select('p.id' ,'p.code','p.name','ps.qty', 'ps.qty_kirim')
-                ->get();
-
-            // $detail_delivery_sisa = DB::table('deliveries_detail')
-            //     ->where('reference_po', $id)
-            //     ->select('qty_kirim')->get();
-            // foreach ($detail_delivery_sisa as $k => $v){
-            //     $sisa[] = $v->qty_kirim;
-            // }
-
-            // dd($sisa);
-
-            if($detail_sale){
-                foreach ($detail_sale as $key => $value) {
-
-
-                    if(!empty($value->qty_kirim)){
-                        $maxkirim = $value->qty - $value->qty_kirim;
-                    }else{
-                        $maxkirim = $value->qty;
-                    }
-
-                    $qty_kirim = '<input type="number" name="qty_kirim[]" class="form-control" min="0" max="'.$maxkirim.'" oninput="checkValue(this);" required>
-                                <input type="text" name="id_product[]" value="'.$value->id.'" hidden>
-                                <input type="text" name="qty_beli[]" value="'.$value->qty.'" hidden>';
-
-                    $delivery_data['detail_sale'][$key] = array(
-                        $value->code,
-                        $value->name,
-                        $value->qty,
-                        $maxkirim,
-                        $qty_kirim
-                    );
+                if(!empty($value->qty_kirim)){
+                    $maxkirim = $value->qty - $value->qty_kirim;
+                }else{
+                    $maxkirim = $value->qty;
                 }
-            }
 
-            //  dd($uuid, $detail_sale, $delivery_data['detail_sale']);
-        // }
+                $qty_kirim = '<input type="number" name="qty_kirim[]" class="form-control" min="0" max="'.$maxkirim.'" oninput="checkValue(this);" required>
+                            <input type="text" name="id_product[]" value="'.$value->id.'" hidden>
+                            <input type="text" name="qty_beli[]" value="'.$value->qty.'" hidden>';
+
+                $delivery_data['detail_sale'][$key] = array(
+                    $value->code,
+                    $value->name,
+                    $value->qty,
+                    $maxkirim,
+                    $qty_kirim
+                );
+            }
+        }
+
         return $delivery_data;
 
     }
@@ -406,12 +378,13 @@ class DeliveryController extends Controller
                 ->get();
                 // dd(\DB::getQueryLog());
                 // dd($customer_sale);
+                $general_setting = DB::table('general_settings')->latest()->first();
 
                 if($data_detail){
-                    $output['customer']		= $customer_sale;
+                    $output['general_setting']		= $general_setting;
+                    $output['customer']		        = $customer_sale;
                     $output['data']['header']		= $data_header;
                     $output['data']['detail']		= $data_detail;
-
                 }
             }
 

@@ -18,6 +18,8 @@ class Doprint extends Fpdf
         $this->header   = $this->data['data']['header'];
         $this->detail   = $this->data['data']['detail'];
         $this->customer = $this->data['customer'];
+        $this->general_setting = $this->data['general_setting'];
+
         $this->halaman=0;
         parent::__construct('P', 'mm', 'A4');
         $this->SetA4();
@@ -107,7 +109,7 @@ class Doprint extends Fpdf
         $this->total_halaman =  ceil(count($this->detail)/48);
         $this->halaman++;
         $this->Ln(1);
-        $this->Image('public/logo/ksm.png', 10, 5, 41, 15);
+        $this->Image('public/logo/'.$this->general_setting->site_logo, 10, 4, 30, 15);
 
         $this->setFont('Arial','B',12);
         $this->cell(195,1,'CV. KLALIN SEJAHTERA MANDIRI',0,0, 'C');
