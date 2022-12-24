@@ -868,8 +868,12 @@
           <div class="container-fluid">
             <div class="navbar-holder d-flex align-items-center justify-content-between">
               <a id="toggle-btn" href="#" class="menu-btn"><i class="fa fa-bars"> </i></a>
-              <span class="logo-sistem">
-                <img src="{{url('public/logo', $general_setting->site_logo)}}">
+              <span class="brand-big">
+                @if($general_setting->site_logo)
+                <a href="{{url('/')}}"><img src="{{url('public/logo', $general_setting->site_logo)}}" width="115"></a>
+                @else
+                  <a href="{{url('/')}}"><h1 class="d-inline">{{$general_setting->site_title}}</h1></a>
+                @endif
               </span>
 
               <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
