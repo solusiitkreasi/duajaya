@@ -133,6 +133,7 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::post('delivery/deletebyselection', 'DeliveryController@deleteBySelection');
 	Route::post('delivery/delete/{id}', 'DeliveryController@delete')->name('delivery.delete');
     Route::get('delivery/print_do/{id}', 'DeliveryController@print_do')->name('delivery.print_do');
+    Route::get('delivery/print_suratjalan/{id}', 'DeliveryController@print_suratjalan')->name('delivery.print_suratjalan');
 
 	Route::get('quotations/product_quotation/{id}','QuotationController@productQuotationData');
 	Route::get('quotations/lims_product_search', 'QuotationController@limsProductSearch')->name('product_quotation.search');

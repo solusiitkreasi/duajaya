@@ -19,7 +19,7 @@ use App\Mail\UserNotification;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Pdf\Doprint;
-
+use App\Pdf\Suratjalan;
 
 class DeliveryController extends Controller
 {
@@ -393,6 +393,53 @@ class DeliveryController extends Controller
             $myPdf = new Doprint($output);
 
             $myPdf->Output('I', "Doprint.pdf", true);
+
+            exit;
+        }
+
+    }
+
+    public function print_suratjalan($id)
+    {
+
+        if (!empty($id)){
+            $data_header =Delivery::find($id);  //Delivery::where('sale_id', $id)->first();
+            $customer_sale = DB::table('sales')
+                ->join('customers', 'sales.customer_id', '=', 'customers.id')
+                ->where('sales.id', $data_header->sale_id)
+                ->select('sales.reference_no','customers.name','customers.company_name','customers.phone_number',
+                'customers.address','customers.city','customers.state','customers.postal_code','customers.country')
+            ->get();
+
+            // dd($data_header);
+            $output['data']['detail'] = array();
+			$output['data']['header'] = array();
+            if($data_header) {
+                // DB::enableQueryLog();
+                $data_detail = DB::table('deliveries_detail as dd')
+                    ->join('deliveries as d', 'dd.id_deliveries', '=', 'd.id')
+                    ->join('sales as s', 'd.sale_id', '=', 's.id')
+                    ->leftjoin('products as p', 'dd.id_product', '=', 'p.id')
+                    ->leftjoin('units as u', 'p.unit_id', '=', 'u.id')
+                    ->where('dd.id_deliveries', $data_header->id)
+                    ->select('p.code','p.name','dd.qty_beli','dd.qty_kirim', 'u.unit_code', 'p.price')
+                ->get();
+                // dd(\DB::getQueryLog());
+                // dd($customer_sale);
+                $general_setting = DB::table('general_settings')->latest()->first();
+
+                if($data_detail){
+                    $output['title_page']		= 'SURAT JALAN';
+                    $output['general_setting']		= $general_setting;
+                    $output['customer']		        = $customer_sale;
+                    $output['data']['header']		= $data_header;
+                    $output['data']['detail']		= $data_detail;
+                }
+            }
+
+            $myPdf = new Suratjalan($output);
+
+            $myPdf->Output('I', "Suratjalan.pdf", true);
 
             exit;
         }
