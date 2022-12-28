@@ -1,7 +1,7 @@
 {
   "name": "POS",
   "short_name": "POS",
-  "start_url": "/pos/",
+  "start_url": "/duajaya/",
   "background_color": "#fff",
   "display": "standalone",
   "orientation": "portrait",
