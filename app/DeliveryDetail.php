@@ -21,4 +21,14 @@ class DeliveryDetail extends Model
     {
     	return $this->belongsTo("App\Delivery");
     }
+
+    public function unit()
+    {
+    	return $this->belongsTo("App\Unit");
+    }
+
+    public function sale()
+    {
+    	return $this->belongsTo("App\Sale");
+    }
 }

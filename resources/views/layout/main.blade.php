@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="manifest" href="{{url('manifest.json')}}">
+    {{-- <link rel="manifest" href="{{url('manifest.json')}}"> --}}
 
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="<?php echo asset('vendor/bootstrap/css/bootstrap.min.css') ?>" type="text/css">
@@ -1389,20 +1389,6 @@
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
     @endif
     @stack('scripts')
-
-    <script>
-        if ('serviceWorker' in navigator ) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register({{url('service-worker.js')}}).then(function(registration) {
-                    // Registration was successful
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                }, function(err) {
-                    // registration failed :(
-                    console.log('ServiceWorker registration failed: ', err);
-                });
-            });
-        }
-    </script> 
 
 
     <script type="text/javascript">

@@ -153,7 +153,7 @@ class DeliveryController extends Controller
             DeliveryDetail::create($delivery_detail);
 
             $product_sale['qty_kirim'] = $sale_kirim[$i] + $qty_kirim[$i];
-            Product_Sale::where('product_id',$id)->where('sale_id',$data['sale_id'])->update($product_sale);
+            DB::table('product_sales')->where('product_id',$id)->where('sale_id',$data['sale_id'])->update($product_sale);
         }
 
 
@@ -191,11 +191,11 @@ class DeliveryController extends Controller
                                 ->leftjoin('sales as s', 'dd.reference_po', '=', 's.id')
                                 ->leftjoin('product_sales as ps', 's.id', '=', 'ps.id')
                                 ->where('dd.id_deliveries', $id)
-                                ->select('dd.qty_kirim','ps.product_id', 'ps.variant_id', 'ps.product_batch_id','ps.qty','dd.qty_kirim' )
+                                ->select('dd.qty_kirim','dd.id_product', 'ps.variant_id', 'ps.product_batch_id','ps.qty','dd.qty_kirim' )
                                 ->get();
 
         foreach ($lims_product_delivery as $key => $product_delivery) {
-            $product = Product::select('name', 'code')->find($product_delivery->product_id);
+            $product = Product::select('name', 'code')->find($product_delivery->id_product);
             if($product_delivery->variant_id) {
                 $lims_product_variant_data = ProductVariant::select('item_code')->FindExactProduct($product_delivery->product_id, $product_delivery->variant_id)->first();
                 $product->code = $lims_product_variant_data->item_code;
@@ -378,6 +378,7 @@ class DeliveryController extends Controller
                 ->where('dd.id_deliveries', $data_header->id)
                 ->select('p.code','p.name','dd.qty_beli','dd.qty_kirim', 'u.unit_code', 'p.price')
                 ->get();
+
                 // dd(\DB::getQueryLog());
                 // dd($customer_sale);
                 $general_setting = DB::table('general_settings')->latest()->first();

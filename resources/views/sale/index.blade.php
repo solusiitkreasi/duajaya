@@ -755,7 +755,7 @@
 			success: function(data) {
 
 				$('#add-delivery').modal('show'); // show bootstrap modal when complete loaded
-				$('.modal-title').text('Detail - ' + id); // Set title to Bootstrap modal title
+				$('.modal-title').text('Detail : ' + data[0]); // Set title to Bootstrap modal title
 				$('#dr').text(data[0]);
                 $('#sr').text(data[1]);
 

@@ -1,7 +1,7 @@
 <?php namespace App\Pdf;
 use Aryatama045\Fpdf\Fpdf\Fpdf;
 
-class Doprint extends Fpdf
+class Pointernal extends Fpdf
 {
 
     private $grand_total;
@@ -23,7 +23,7 @@ class Doprint extends Fpdf
         $this->halaman=0;
         parent::__construct('P', 'mm', 'A4');
         $this->SetA4();
-        $this->SetTitle('Delivery Order - '.$this->header['reference_no'], true);
+        $this->SetTitle('Delivery Order'.$this->header['reference_no'], true);
         $this->SetAuthor('None', true);
         $this->AddPage('P');
         $this->Body();
