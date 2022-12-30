@@ -133,30 +133,41 @@ class DeliveryController extends Controller
         $qty_kirim  = $data['qty_kirim'];
 
         $detail_sale = DB::table('product_sales as ps')
-        ->join('sales as s', 'ps.sale_id', '=', 's.id')
-        ->leftjoin('products as p', 'ps.product_id', '=', 'p.id')
-        ->where('ps.sale_id',  $data['sale_id'])
-        ->select('p.id' ,'p.code','p.name','ps.qty', 'ps.qty_kirim')
+            ->leftjoin('sales as s', 'ps.sale_id', '=', 's.id')
+            ->leftjoin('products as p', 'ps.product_id', '=', 'p.id')
+            ->where('ps.sale_id',  $data['sale_id'])
+            ->select('p.id' ,'p.code','p.name','ps.qty', 'ps.qty_kirim')
         ->get();
 
         foreach($detail_sale as $i => $v ){
             $sale_kirim[] = $v->qty_kirim;
         }
 
-        $delivery_detail=[];
-        foreach ($id_product as $i => $id) {
-            $delivery_detail['id_deliveries']   = $delivery_data->id;
-            $delivery_detail['id_product']      = $id;
-            $delivery_detail['qty_beli']        = $qty_beli[$i];
-            $delivery_detail['qty_kirim']       = $qty_kirim[$i];
-            $delivery_detail['reference_po']    = $data['sale_id'];
-            DeliveryDetail::create($delivery_detail);
+
+        $delivery_detail= array();
+        $product_sale=[];
+        $logDetail = array();
+
+        
+        for($i=0; $i < count($id_product); $i++) {
+
+
+            $delivery_detail = array(
+                'id_deliveries' =>  $delivery_data->id,
+                'id_product'      => $id_product[$i],
+                'qty_beli'        => $qty_beli[$i],
+                'qty_kirim'       => $qty_kirim[$i],
+                'reference_po'    => $data['sale_id'],
+            );
+            array_push( $logDetail, $delivery_detail);
 
             $product_sale['qty_kirim'] = $sale_kirim[$i] + $qty_kirim[$i];
-            DB::table('product_sales')->where('product_id',$id)->where('sale_id',$data['sale_id'])->update($product_sale);
+            
+            if($qty_kirim[$i] > 0){
+            DeliveryDetail::create($delivery_detail);
+            DB::table('product_sales')->where('product_id',$id_product[$i])->where('sale_id',$data['sale_id'])->update($product_sale);
+            }
         }
-
-
 
         $lims_sale_data = Sale::find($data['sale_id']);
         $lims_customer_data = Customer::find($lims_sale_data->customer_id);
