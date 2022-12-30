@@ -998,14 +998,15 @@
                                             <label>{{trans('file.Paid By')}}</label>
                                             <select name="paid_by_id_select" class="form-control selectpicker">
                                                 <option value="1">Cash</option>
-                                                <option value="2">Gift Card</option>
+                                                {{-- <option value="2">Gift Card</option>
                                                 <option value="3">Credit Card</option>
                                                 <option value="4">Cheque</option>
                                                 <option value="5">Paypal</option>
-                                                <option value="6">Deposit</option>
-                                                @if($lims_reward_point_setting_data->is_active)
+                                                <option value="6">Deposit</option> --}}
+                                                <option value="6">Kredit</option>
+                                                {{-- @if($lims_reward_point_setting_data->is_active)
                                                 <option value="7">Points</option>
-                                                @endif
+                                                @endif --}}
                                             </select>
                                         </div>
                                         <div class="form-group col-md-12 mt-3">
@@ -1632,7 +1633,7 @@
                                           <td>{{trans('file.Cash Payment')}}:</td>
                                           <td id="cash_payment" class="text-right"></td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                           <td>{{trans('file.Credit Card Payment')}}:</td>
                                           <td id="credit_card_payment" class="text-right"></td>
                                         </tr>
@@ -1643,15 +1644,15 @@
                                         <tr>
                                           <td>{{trans('file.Gift Card Payment')}}:</td>
                                           <td id="gift_card_payment" class="text-right"></td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                           <td>{{trans('file.Deposit Payment')}}:</td>
                                           <td id="deposit_payment" class="text-right"></td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                           <td>{{trans('file.Paypal Payment')}}:</td>
                                           <td id="paypal_payment" class="text-right"></td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                           <td>{{trans('file.Total Sale Return')}}:</td>
                                           <td id="total_sale_return" class="text-right"></td>
@@ -1701,7 +1702,7 @@
                                           <td>{{trans('file.Cash Payment')}}:</td>
                                           <td class="cash_payment text-right"></td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                           <td>{{trans('file.Credit Card Payment')}}:</td>
                                           <td class="credit_card_payment text-right"></td>
                                         </tr>
@@ -1720,7 +1721,7 @@
                                         <tr>
                                           <td>{{trans('file.Paypal Payment')}}:</td>
                                           <td class="paypal_payment text-right"></td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                           <td>{{trans('file.Total Payment')}}:</td>
                                           <td class="total_payment text-right"></td>
