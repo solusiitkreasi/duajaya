@@ -347,19 +347,7 @@
     <script type="text/javascript" src="<?php echo asset('vendor/daterange/js/daterangepicker.min.js') ?>"></script>
     <script type="text/javascript" src="<?php echo asset('vendor/datatable/jquery.dataTables.min.js') ?>"></script>
     @stack('scripts')
-    <script>
-        if ('serviceWorker' in navigator ) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('{{url(service-worker.js)}}').then(function(registration) {
-                    // Registration was successful
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                }, function(err) {
-                    // registration failed :(
-                    console.log('ServiceWorker registration failed: ', err);
-                });
-            });
-        }
-    </script>
+
     <script type="text/javascript">
 
           function myFunction() {

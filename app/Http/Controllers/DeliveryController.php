@@ -29,9 +29,9 @@ class DeliveryController extends Controller
         $role = Role::find(Auth::user()->role_id);
         if($role->hasPermissionTo('delivery')) {
             if(Auth::user()->role_id > 2 && config('staff_access') == 'own')
-                $lims_delivery_all = Delivery::orderBy('id', 'desc')->where('user_id', Auth::id())->get();
+                $lims_delivery_all = Delivery::with(['user','sale'])->orderBy('id', 'desc')->where('user_id', Auth::id())->get();
             else
-                $lims_delivery_all = Delivery::orderBy('id', 'desc')->get();
+                $lims_delivery_all = Delivery::with(['user','sale'])->orderBy('id', 'desc')->get();
             return view('delivery.index', compact('lims_delivery_all'));
         }
         else

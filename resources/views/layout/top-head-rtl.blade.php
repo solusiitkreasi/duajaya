@@ -342,7 +342,7 @@
     <!-- end supplier modal -->
 
     @yield('scripts')
-    <script>
+    {{-- <script>
         if ('serviceWorker' in navigator ) {
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('{{url(service-worker.js)}}').then(function(registration) {
@@ -354,7 +354,7 @@
                 });
             });
         }
-    </script>
+    </script> --}}
     <script type="text/javascript">
 
           function myFunction() {
