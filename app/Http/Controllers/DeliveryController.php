@@ -169,6 +169,19 @@ class DeliveryController extends Controller
             }
         }
 
+        // $delivery_detail=[];
+        // foreach ($id_product as $i => $id) {
+        //     $delivery_detail['id_deliveries']   = $delivery_data->id;
+        //     $delivery_detail['id_product']      = $id;
+        //     $delivery_detail['qty_beli']        = $qty_beli[$i];
+        //     $delivery_detail['qty_kirim']       = $qty_kirim[$i];
+        //     $delivery_detail['reference_po']    = $data['sale_id'];
+        //     DeliveryDetail::create($delivery_detail);
+
+        //     $product_sale['qty_kirim'] = $sale_kirim[$i] + $qty_kirim[$i];
+        //     DB::table('product_sales')->where('product_id',$id)->where('sale_id',$data['sale_id'])->update($product_sale);
+        // }
+
         $lims_sale_data = Sale::find($data['sale_id']);
         $lims_customer_data = Customer::find($lims_sale_data->customer_id);
         $message = 'Delivery created successfully';
