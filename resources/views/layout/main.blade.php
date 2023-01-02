@@ -531,6 +531,11 @@
                       ->where([
                         ['permissions.name', 'product-report'],
                         ['role_id', $role->id] ])->first();
+                $supplier_price_report_active = DB::table('permissions')
+                    ->join('role_has_permissions', 'permissions.id', '=', 'role_has_permissions.permission_id')
+                    ->where([
+                        ['permissions.name', 'supplier-price-report'],
+                        ['role_id', $role->id] ])->first();
                 $daily_sale_active = DB::table('permissions')
                       ->join('role_has_permissions', 'permissions.id', '=', 'role_has_permissions.permission_id')
                       ->where([
@@ -617,6 +622,14 @@
                     <input type="hidden" name="end_date" value="{{date('Y-m-d')}}" />
                     <input type="hidden" name="warehouse_id" value="0" />
                     <a id="report-link" href="">{{trans('file.Product Report')}}</a>
+                    {!! Form::close() !!}
+                  </li>
+                  @endif
+                  @if($supplier_price_report_active)
+                  <li id="supplier-price-report-menu">
+                    {!! Form::open(['route' => 'report.supplierPriceReport', 'method' => 'get', 'id' => 'supplier-price-report-form']) !!}
+                    <input type="hidden" name="warehouse_id" value="0" />
+                    <a id="supplier-price-report-link" href="">{{trans('file.Supplier Price Report')}}</a>
                     {!! Form::close() !!}
                   </li>
                   @endif
@@ -1449,6 +1462,11 @@
       $("a#report-link").click(function(e){
         e.preventDefault();
         $("#product-report-form").submit();
+      });
+
+      $("a#supplier-price-report-link").click(function(e){
+        e.preventDefault();
+        $("#supplier-price-report-form").submit();
       });
 
       $("a#purchase-report-link").click(function(e){

@@ -556,6 +556,8 @@ return [
 
 	"Product Report" => "Laporan Produk",
 
+    "Supplier Price Report" => "Laporan Harga Pemasok",
+
 	"Sale Report" => "Laporan Penjualan",
 
 	"Purchase Report" => "Laporan Pembelian",

@@ -22,10 +22,10 @@ class RoleController extends Controller
             return redirect()->back()->with('not_permitted', 'Sorry! You are not allowed to access this module');
     }
 
-    
+
     public function create()
     {
-        
+
     }
 
     public function store(Request $request)
@@ -649,6 +649,15 @@ class RoleController extends Controller
         }
         else
             $role->revokePermissionTo('product-report');
+
+        if($request->has('supplier-price-report')){
+            $permission = Permission::firstOrCreate(['name' => 'supplier-price-report']);
+            if(!$role->hasPermissionTo('supplier-price-report')){
+                $role->givePermissionTo($permission);
+            }
+        }
+        else
+            $role->revokePermissionTo('supplier-price-report');
 
         if($request->has('daily-sale')){
             $permission = Permission::firstOrCreate(['name' => 'daily-sale']);

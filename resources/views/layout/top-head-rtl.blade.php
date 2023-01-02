@@ -408,6 +408,11 @@
         $("#product-report-form").submit();
       });
 
+      $("a#supplier-price-report-link").click(function(e){
+        e.preventDefault();
+        $("#supplier-price-report-form").submit();
+      });
+
       $("a#purchase-report-link").click(function(e){
         e.preventDefault();
         $("#purchase-report-form").submit();

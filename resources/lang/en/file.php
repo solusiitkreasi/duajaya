@@ -135,6 +135,7 @@ return [
 	'Best Seller' => 'Best Seller',
 	'Best Seller From' => 'Best Seller From',
 	'Product Report' => 'Product Report',
+    'Supplier Price Report' => 'Supplier Price Report',
 	'Purchased' => 'Purchased',
 	'Sold' => 'Sold',
 	'In Stock' => 'In Stock',

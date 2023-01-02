@@ -1302,6 +1302,89 @@ class ReportController extends Controller
         echo json_encode($json_data);
     }
 
+    public function supplierPriceReport(Request $request)
+    {
+        $data = $request->all();
+        $warehouse_id = $data['warehouse_id'];
+        $lims_warehouse_list = Warehouse::where('is_active', true)->get();
+        return view('report.supplier_price_report',compact('warehouse_id', 'lims_warehouse_list'));
+    }
+
+    public function supplierPriceReportData(Request $request)
+    {
+        $data = $request->all();
+        $warehouse_id = $data['warehouse_id'];
+        $product_id = [];
+        $variant_id = [];
+        $product_name = [];
+        $product_qty = [];
+
+        $columns = array(
+            1 => 'name'
+        );
+
+        $draw		= $_REQUEST['draw'];
+		$length		= $_REQUEST['length'];
+		$start		= $_REQUEST['start'];
+		$column 	= $_REQUEST['order'][0]['column'];
+		$order 		= $_REQUEST['order'][0]['dir'];
+		$search_no  = $_REQUEST['columns'][0]['search']["value"];
+
+
+
+        if($request->input('search.value')) {
+            $search = $request->input('search.value');
+            $totalData = Product::where([
+                ['name', 'LIKE', "%{$search}%"],
+                ['is_active', true]
+            ])->count();
+            $lims_product_all = Product::select('id', 'name', 'qty', 'is_variant')
+                                ->where([
+                                    ['name', 'LIKE', "%{$search}%"],
+                                    ['is_active', true]
+                                ])
+                                ->orderBy($column, $order)
+                                ->get();
+        }
+        else {
+            $totalData = Product::where('is_active', true)->count();
+            $lims_product_all = Product::select('id', 'name', 'qty', 'is_variant')
+                                ->where('is_active', true)
+
+                                ->orderBy($column, $order)
+                                ->get();
+        }
+
+        $totalFiltered = $totalData;
+        $data = [];
+        foreach ($lims_product_all as $product) {
+            $variant_id_all = [];
+            if($warehouse_id == 0) {
+                $nestedData['key'] = count($data);
+                $nestedData['name'] = $product->name;
+            }
+            else {
+                    $nestedData['key'] = count($data);
+                    $nestedData['name'] = $product->name;
+
+                    $product_warehouse = Product_Warehouse::where([
+                        ['product_id', $product->id],
+                        ['warehouse_id', $warehouse_id]
+                    ])->select('qty')->first();
+
+                    $data[] = $nestedData;
+            }
+        }
+        $json_data = array(
+            "draw"            => intval($request->input('draw')),
+            "recordsTotal"    => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data"            => $data
+        );
+
+        echo json_encode($json_data);
+    }
+
     public function purchaseReport(Request $request)
     {
     	$data = $request->all();

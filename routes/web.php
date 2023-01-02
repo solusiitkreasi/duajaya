@@ -202,7 +202,11 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::post('report/best_seller', 'ReportController@bestSellerByWarehouse')->name('report.bestSellerByWarehouse');
 	Route::post('report/profit_loss', 'ReportController@profitLoss')->name('report.profitLoss');
 	Route::get('report/product_report', 'ReportController@productReport')->name('report.product');
-	Route::post('report/product_report_data', 'ReportController@productReportData');
+    Route::post('report/product_report_data', 'ReportController@productReportData');
+
+    Route::get('report/supplier_price_report', 'ReportController@supplierPriceReport')->name('report.supplierPriceReport');
+    Route::post('report/supplier_price_report_data', 'ReportController@supplierPriceReportData');
+
 	Route::post('report/purchase', 'ReportController@purchaseReport')->name('report.purchase');
 	Route::post('report/sale_report', 'ReportController@saleReport')->name('report.sale');
 	Route::post('report/payment_report_by_date', 'ReportController@paymentReportByDate')->name('report.paymentByDate');

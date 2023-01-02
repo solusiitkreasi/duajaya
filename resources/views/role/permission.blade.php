@@ -900,6 +900,18 @@
 								                </div>
 								            </div>
 						                </span>
+                                        <span>
+						                    <div aria-checked="false" aria-disabled="false">
+								                <div class="checkbox">
+							                    	@if(in_array("supplier-price-report", $all_permission))
+							                    	<input type="checkbox" value="1" id="supplier-price-report" name="supplier-price-report" checked>
+							                    	@else
+							                    	<input type="checkbox" value="1" id="supplier-price-report" name="supplier-price-report">
+							                    	@endif
+								                    <label for="supplier-price-report" class="padding05">{{trans('file.Supplier Price Report')}} &nbsp;&nbsp;</label>
+								                </div>
+								            </div>
+						                </span>
 						                <span>
 						                    <div aria-checked="false" aria-disabled="false">
 								                <div class="checkbox">

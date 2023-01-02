@@ -659,6 +659,14 @@
                     {!! Form::close() !!}
                   </li>
                   @endif
+                  @if($supplier_price_report_active)
+                  <li id="supplier-price-report-menu">
+                    {!! Form::open(['route' => 'report.supplierPriceReport', 'method' => 'get', 'id' => 'supplier-price-report-form']) !!}
+                    <input type="hidden" name="warehouse_id" value="0" />
+                    <a id="supplier-price-report-link" href="">{{trans('file.Supplier Price Report')}}</a>
+                    {!! Form::close() !!}
+                  </li>
+                  @endif
                   @if($daily_sale_active)
                   <li id="daily-sale-report-menu">
                     <a href="{{url('report/daily_sale/'.date('Y').'/'.date('m'))}}">{{trans('file.Daily Sale')}}</a>
@@ -1442,6 +1450,11 @@
       $("a#report-link").click(function(e){
         e.preventDefault();
         $("#product-report-form").submit();
+      });
+
+      $("a#supplier-price-report-link").click(function(e){
+        e.preventDefault();
+        $("#supplier-price-report-form").submit();
       });
 
       $("a#purchase-report-link").click(function(e){
