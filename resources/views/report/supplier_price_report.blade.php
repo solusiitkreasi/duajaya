@@ -38,6 +38,7 @@
             <thead>
                 <tr>
                     <th class="not-exported"></th>
+                    <th>{{trans('file.Product Code')}}</th>
                     <th>{{trans('file.Product Name')}}</th>
                     <th>{{trans('file.Supplier')}}</th>
                     <th>{{trans('file.Price')}}</th>
@@ -80,6 +81,7 @@
         },
         "columns": [
             {"data": "key"},
+            {"data": "code"},
             {"data": "name"},
             {"data": "supplier"},
             {"data": "price"},
@@ -98,7 +100,7 @@
         'columnDefs': [
             {
                 "orderable": false,
-                'targets': [0, 1,2]
+                'targets': [0,1,2]
             },
             {
                 'render': function(data, type, row, meta){

@@ -1333,13 +1333,13 @@ class ReportController extends Controller
         if($supplier_id == 0){
             if($request->input('search.value')) {
                 $search = $request->input('search.value');
-                $totalData = DB::table('product_supplier as ps')->select('ps.id', 'p.name')
+                $totalData = DB::table('product_supplier as ps')->select('ps.id', 'p.name','p.code')
                 ->leftjoin('products as p', 'ps.product_id','=','p.id')
                 ->where([
                     ['p.name', 'LIKE', "%{$search}%"],
                     ['p.is_active', true]
                 ])->count();
-                $lims_product_all = DB::table('product_supplier as ps')->select('ps.id', 'p.name',
+                $lims_product_all = DB::table('product_supplier as ps')->select('ps.id', 'p.name','p.code',
                                     'p.price','ps.price as price_supplier','s.name as supplier')
                                     ->leftjoin('suppliers as s', 'ps.supplier_id','=','s.id')
                                     ->leftjoin('products as p', 'ps.product_id','=','p.id')
@@ -1352,12 +1352,12 @@ class ReportController extends Controller
                                     ->get();
 
             } else {
-                $totalData = DB::table('product_supplier as ps')->select('ps.id', 'p.name')
+                $totalData = DB::table('product_supplier as ps')->select('ps.id', 'p.name','p.code')
                 ->leftjoin('products as p', 'ps.product_id','=','p.id')
                 ->where([
                     ['p.is_active', true]
                 ])->count();
-                $lims_product_all = DB::table('product_supplier as ps')->select('ps.id', 'p.name',
+                $lims_product_all = DB::table('product_supplier as ps')->select('ps.id', 'p.name','p.code',
                                     'p.price','ps.price as price_supplier','s.name as supplier')
                                     ->leftjoin('suppliers as s', 'ps.supplier_id','=','s.id')
                                     ->leftjoin('products as p', 'ps.product_id','=','p.id')
@@ -1371,7 +1371,7 @@ class ReportController extends Controller
         }else{
             if($request->input('search.value')) {
                 $search = $request->input('search.value');
-                $totalData = DB::table('product_supplier as ps')->select('ps.id', 'p.name')
+                $totalData = DB::table('product_supplier as ps')->select('ps.id', 'p.name','p.code')
                 ->leftjoin('suppliers as s', 'ps.supplier_id','=','s.id')
                 ->leftjoin('products as p', 'ps.product_id','=','p.id')
                 ->where([
@@ -1379,7 +1379,7 @@ class ReportController extends Controller
                     ['p.is_active', true],
                     ['ps.supplier_id', $supplier_id]
                 ])->count();
-                $lims_product_all = DB::table('product_supplier as ps')->select('ps.id', 'p.name',
+                $lims_product_all = DB::table('product_supplier as ps')->select('ps.id', 'p.name','p.code',
                                     'p.price','ps.price as price_supplier','s.name as supplier')
                                     ->leftjoin('suppliers as s', 'ps.supplier_id','=','s.id')
                                     ->leftjoin('products as p', 'ps.product_id','=','p.id')
@@ -1393,14 +1393,14 @@ class ReportController extends Controller
                                     ->get();
 
             } else {
-                $totalData = DB::table('product_supplier as ps')->select('ps.id', 'p.name')
+                $totalData = DB::table('product_supplier as ps')->select('ps.id', 'p.name','p.code')
                 ->leftjoin('suppliers as s', 'ps.supplier_id','=','s.id')
                 ->leftjoin('products as p', 'ps.product_id','=','p.id')
                 ->where([
                     ['p.is_active', true],
                     ['ps.supplier_id', $supplier_id]
                 ])->count();
-                $lims_product_all = DB::table('product_supplier as ps')->select('ps.id', 'p.name',
+                $lims_product_all = DB::table('product_supplier as ps')->select('ps.id', 'p.name','p.code',
                                     'p.price','ps.price as price_supplier','s.name as supplier')
                                     ->leftjoin('suppliers as s', 'ps.supplier_id','=','s.id')
                                     ->leftjoin('products as p', 'ps.product_id','=','p.id')
@@ -1421,6 +1421,7 @@ class ReportController extends Controller
         foreach ($lims_product_all as $product) {
 
             $nestedData['key']              = count($data);
+            $nestedData['code']             = $product->code;
             $nestedData['name']             = $product->name;
             $nestedData['supplier']         = $product->supplier;
             $nestedData['price']            = number_format($product->price, 0, ',', '.');
