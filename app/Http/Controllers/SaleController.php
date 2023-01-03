@@ -263,7 +263,11 @@ class SaleController extends Controller
                     $nestedData['payment_status'] = '<div class="badge badge-warning">'.trans('file.Partial').'</div>';
                 else
                     $nestedData['payment_status'] = '<div class="badge badge-success">'.trans('file.Paid').'</div>';
-                    $check_disabled = 'disabled';
+                    $check_disabled = 'ok';
+
+                if($sale->sale_status == 1 && $check_disabled =='ok')
+                    $disabled = 'disabled';
+
 
                 $nestedData['grand_total'] = number_format($sale->grand_total, 2);
                 $nestedData['paid_amount'] = number_format($sale->paid_amount, 2);
@@ -298,7 +302,7 @@ class SaleController extends Controller
                     </li>
                     <li>
 
-                        <a href="#" class="btn btn-link" onclick="detail_doc('.$sale->id.')" > <i class="fa fa-truck"></i> '.trans('file.Add Delivery').' </a>
+                        <a href="#" class="btn btn-link '.$disabled.' " onclick="detail_doc('.$sale->id.')" > <i class="fa fa-truck"></i> '.trans('file.Add Delivery').' </a>
                     </li>';
                 if(in_array("sales-delete", $request['all_permission']))
                     $nestedData['options'] .= \Form::open(["route" => ["sales.destroy", $sale->id], "method" => "DELETE"] ).'
