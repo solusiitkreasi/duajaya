@@ -264,12 +264,16 @@ class SaleController extends Controller
                 else
                     $nestedData['payment_status'] = '<div class="badge badge-success">'.trans('file.Paid').'</div>';
 
-                if($sale->sale_status == 1){
+                if($sale->sale_status == 1 && $sale->payment_status == 4){
                     $disabled_delete = 'disabled';
+                }else{
+                    $disabled_delete = '';
                 }
 
                 if($sale->payment_status == 4){
                     $disabled_edit = 'disabled';
+                }else{
+                    $disabled_edit = '';
                 }
 
 
