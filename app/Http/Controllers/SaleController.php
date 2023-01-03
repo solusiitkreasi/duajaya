@@ -263,10 +263,14 @@ class SaleController extends Controller
                     $nestedData['payment_status'] = '<div class="badge badge-warning">'.trans('file.Partial').'</div>';
                 else
                     $nestedData['payment_status'] = '<div class="badge badge-success">'.trans('file.Paid').'</div>';
-                    $check_disabled = 'ok';
 
-                if($sale->sale_status == 1 && $check_disabled =='ok')
-                    $disabled = 'disabled';
+                if($sale->sale_status == 1){
+                    $disabled_delete = 'disabled';
+                }
+
+                if($sale->payment_status == 4){
+                    $disabled_edit = 'disabled';
+                }
 
 
                 $nestedData['grand_total'] = number_format($sale->grand_total, 2);
@@ -286,11 +290,11 @@ class SaleController extends Controller
                 if(in_array("sales-edit", $request['all_permission'])){
                     if($sale->sale_status != 3)
                         $nestedData['options'] .= '<li>
-                            <a href="'.route('sales.edit', $sale->id).'" class="btn btn-link"><i class="dripicons-document-edit"></i> '.trans('file.edit').'</a>
+                            <a href="'.route('sales.edit', $sale->id).'" class="btn btn-link '.$disabled_edit.'"><i class="dripicons-document-edit"></i> '.trans('file.edit').'</a>
                             </li>';
                     else
                         $nestedData['options'] .= '<li>
-                            <a href="'.url('sales/'.$sale->id.'/create').'" class="btn btn-link"><i class="dripicons-document-edit"></i> '.trans('file.edit').'</a>
+                            <a href="'.url('sales/'.$sale->id.'/create').'" class="btn btn-link '.$disabled_edit.'"><i class="dripicons-document-edit"></i> '.trans('file.edit').'</a>
                         </li>';
                 }
                 $nestedData['options'] .=
@@ -302,12 +306,12 @@ class SaleController extends Controller
                     </li>
                     <li>
 
-                        <a href="#" class="btn btn-link '.$disabled.' " onclick="detail_doc('.$sale->id.')" > <i class="fa fa-truck"></i> '.trans('file.Add Delivery').' </a>
+                        <a href="#" class="btn btn-link " onclick="detail_doc('.$sale->id.')" > <i class="fa fa-truck"></i> '.trans('file.Add Delivery').' </a>
                     </li>';
                 if(in_array("sales-delete", $request['all_permission']))
                     $nestedData['options'] .= \Form::open(["route" => ["sales.destroy", $sale->id], "method" => "DELETE"] ).'
                             <li>
-                              <button type="submit" class="btn btn-link" onclick="return confirmDelete()"><i class="dripicons-trash"></i> '.trans("file.delete").'</button>
+                              <button type="submit" class="btn btn-link " onclick="return confirmDelete()" '.$disabled_delete.'><i class="dripicons-trash"></i> '.trans("file.delete").'</button>
                             </li>'.\Form::close().'
                         </ul>
                     </div>';
