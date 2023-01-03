@@ -263,6 +263,7 @@ class SaleController extends Controller
                     $nestedData['payment_status'] = '<div class="badge badge-warning">'.trans('file.Partial').'</div>';
                 else
                     $nestedData['payment_status'] = '<div class="badge badge-success">'.trans('file.Paid').'</div>';
+                    $check_disabled = 'disabled';
 
                 $nestedData['grand_total'] = number_format($sale->grand_total, 2);
                 $nestedData['paid_amount'] = number_format($sale->paid_amount, 2);
