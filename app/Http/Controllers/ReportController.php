@@ -26,6 +26,7 @@ use App\Customer;
 use App\Supplier;
 use App\Variant;
 use App\ProductVariant;
+use App\SupplierPrice;
 use DB;
 use Auth;
 use Spatie\Permission\Models\Role;
@@ -1305,75 +1306,127 @@ class ReportController extends Controller
     public function supplierPriceReport(Request $request)
     {
         $data = $request->all();
-        $warehouse_id = $data['warehouse_id'];
-        $lims_warehouse_list = Warehouse::where('is_active', true)->get();
-        return view('report.supplier_price_report',compact('warehouse_id', 'lims_warehouse_list'));
+        $supplier_id = $data['supplier_id'];
+        $lims_supplier_list = Supplier::where('is_active', true)->get();
+        return view('report.supplier_price_report',compact('supplier_id', 'lims_supplier_list'));
     }
 
     public function supplierPriceReportData(Request $request)
     {
         $data = $request->all();
-        $warehouse_id = $data['warehouse_id'];
+        $supplier_id = $data['supplier_id'];
         $product_id = [];
-        $variant_id = [];
         $product_name = [];
-        $product_qty = [];
 
         $columns = array(
             1 => 'name'
         );
 
-        $draw		= $_REQUEST['draw'];
-		$length		= $_REQUEST['length'];
-		$start		= $_REQUEST['start'];
-		$column 	= $_REQUEST['order'][0]['column'];
-		$order 		= $_REQUEST['order'][0]['dir'];
-		$search_no  = $_REQUEST['columns'][0]['search']["value"];
+        if($request->input('length') != -1)
+            $limit = $request->input('length');
+        else
+            $limit = $totalData;
+        //return $request;
+        $start = $request->input('start');
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+        if($supplier_id == 0){
+            if($request->input('search.value')) {
+                $search = $request->input('search.value');
+                $totalData = DB::table('product_supplier as ps')->select('ps.id', 'p.name')
+                ->leftjoin('products as p', 'ps.product_id','=','p.id')
+                ->where([
+                    ['p.name', 'LIKE', "%{$search}%"],
+                    ['p.is_active', true]
+                ])->count();
+                $lims_product_all = DB::table('product_supplier as ps')->select('ps.id', 'p.name',
+                                    'p.price','ps.price as price_supplier','s.name as supplier')
+                                    ->leftjoin('suppliers as s', 'ps.supplier_id','=','s.id')
+                                    ->leftjoin('products as p', 'ps.product_id','=','p.id')
+                                    ->where([
+                                        ['p.name', 'LIKE', "%{$search}%"],
+                                        ['p.is_active', true] ])
+                                    ->offset($start)
+                                    ->limit($limit)
+                                    ->orderBy($order, $dir)
+                                    ->get();
 
+            } else {
+                $totalData = DB::table('product_supplier as ps')->select('ps.id', 'p.name')
+                ->leftjoin('products as p', 'ps.product_id','=','p.id')
+                ->where([
+                    ['p.is_active', true]
+                ])->count();
+                $lims_product_all = DB::table('product_supplier as ps')->select('ps.id', 'p.name',
+                                    'p.price','ps.price as price_supplier','s.name as supplier')
+                                    ->leftjoin('suppliers as s', 'ps.supplier_id','=','s.id')
+                                    ->leftjoin('products as p', 'ps.product_id','=','p.id')
+                                    ->where('p.is_active', true)
+                                    ->offset($start)
+                                    ->limit($limit)
+                                    ->orderBy($order, $dir)
+                                    ->get();
+            }
 
+        }else{
+            if($request->input('search.value')) {
+                $search = $request->input('search.value');
+                $totalData = DB::table('product_supplier as ps')->select('ps.id', 'p.name')
+                ->leftjoin('suppliers as s', 'ps.supplier_id','=','s.id')
+                ->leftjoin('products as p', 'ps.product_id','=','p.id')
+                ->where([
+                    ['p.name', 'LIKE', "%{$search}%"],
+                    ['p.is_active', true],
+                    ['ps.supplier_id', $supplier_id]
+                ])->count();
+                $lims_product_all = DB::table('product_supplier as ps')->select('ps.id', 'p.name',
+                                    'p.price','ps.price as price_supplier','s.name as supplier')
+                                    ->leftjoin('suppliers as s', 'ps.supplier_id','=','s.id')
+                                    ->leftjoin('products as p', 'ps.product_id','=','p.id')
+                                    ->where([
+                                        ['p.name', 'LIKE', "%{$search}%"],
+                                        ['p.is_active', true],
+                                        ['ps.supplier_id', $supplier_id] ])
+                                    ->offset($start)
+                                    ->limit($limit)
+                                    ->orderBy($order, $dir)
+                                    ->get();
 
-        if($request->input('search.value')) {
-            $search = $request->input('search.value');
-            $totalData = Product::where([
-                ['name', 'LIKE', "%{$search}%"],
-                ['is_active', true]
-            ])->count();
-            $lims_product_all = Product::select('id', 'name', 'qty', 'is_variant')
-                                ->where([
-                                    ['name', 'LIKE', "%{$search}%"],
-                                    ['is_active', true]
-                                ])
-                                ->orderBy($column, $order)
-                                ->get();
-        }
-        else {
-            $totalData = Product::where('is_active', true)->count();
-            $lims_product_all = Product::select('id', 'name', 'qty', 'is_variant')
-                                ->where('is_active', true)
+            } else {
+                $totalData = DB::table('product_supplier as ps')->select('ps.id', 'p.name')
+                ->leftjoin('suppliers as s', 'ps.supplier_id','=','s.id')
+                ->leftjoin('products as p', 'ps.product_id','=','p.id')
+                ->where([
+                    ['p.is_active', true],
+                    ['ps.supplier_id', $supplier_id]
+                ])->count();
+                $lims_product_all = DB::table('product_supplier as ps')->select('ps.id', 'p.name',
+                                    'p.price','ps.price as price_supplier','s.name as supplier')
+                                    ->leftjoin('suppliers as s', 'ps.supplier_id','=','s.id')
+                                    ->leftjoin('products as p', 'ps.product_id','=','p.id')
+                                    ->where([
+                                        ['p.is_active', true],
+                                        ['ps.supplier_id', $supplier_id] ])
+                                    ->offset($start)
+                                    ->limit($limit)
+                                    ->orderBy($order, $dir)
+                                    ->get();
+            }
 
-                                ->orderBy($column, $order)
-                                ->get();
         }
 
         $totalFiltered = $totalData;
         $data = [];
+
         foreach ($lims_product_all as $product) {
-            $variant_id_all = [];
-            if($warehouse_id == 0) {
-                $nestedData['key'] = count($data);
-                $nestedData['name'] = $product->name;
-            }
-            else {
-                    $nestedData['key'] = count($data);
-                    $nestedData['name'] = $product->name;
 
-                    $product_warehouse = Product_Warehouse::where([
-                        ['product_id', $product->id],
-                        ['warehouse_id', $warehouse_id]
-                    ])->select('qty')->first();
+            $nestedData['key']              = count($data);
+            $nestedData['name']             = $product->name;
+            $nestedData['supplier']         = $product->supplier;
+            $nestedData['price']            = number_format($product->price, 0, ',', '.');
+            $nestedData['price_supplier']   = number_format($product->price_supplier, 0, ',', '.');
+            $data[] = $nestedData;
 
-                    $data[] = $nestedData;
-            }
         }
         $json_data = array(
             "draw"            => intval($request->input('draw')),

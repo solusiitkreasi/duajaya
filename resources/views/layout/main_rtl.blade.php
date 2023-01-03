@@ -662,7 +662,7 @@
                   @if($supplier_price_report_active)
                   <li id="supplier-price-report-menu">
                     {!! Form::open(['route' => 'report.supplierPriceReport', 'method' => 'get', 'id' => 'supplier-price-report-form']) !!}
-                    <input type="hidden" name="warehouse_id" value="0" />
+                    <input type="hidden" name="supplier_id" value="0" />
                     <a id="supplier-price-report-link" href="">{{trans('file.Supplier Price Report')}}</a>
                     {!! Form::close() !!}
                   </li>

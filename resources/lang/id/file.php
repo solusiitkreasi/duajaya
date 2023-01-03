@@ -82,6 +82,8 @@ return [
 
 	"price" => "Harga",
 
+    "Price Supplier" => "Harga Supplier",
+
 	"Image" => "Gambar",
 
 	"Code" => "Kode",
@@ -821,6 +823,8 @@ return [
 	"Add Warehouse" => "Tambah Gudang",
 
 	"All Warehouse" => "Semua Gudang",
+
+    "All Supplier" => "Semua Pemasok",
 
 	"Net Profit" => "Profit bersih",
 
