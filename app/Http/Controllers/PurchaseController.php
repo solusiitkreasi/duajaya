@@ -26,6 +26,7 @@ use App\ProductBatch;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Validator;
+use App\Pdf\Pointernal;
 
 class PurchaseController extends Controller
 {
@@ -217,6 +218,7 @@ class PurchaseController extends Controller
                               <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
+                                <li><a href="'.route('purchases.invoice', $purchase->id).'" class="btn btn-link"><i class="fa fa-copy"></i> '.trans('file.Generate Invoice').'</a></li>
                                 <li>
                                     <button type="button" class="btn btn-link view"><i class="fa fa-eye"></i> '.trans('file.View').'</button>
                                 </li>';
