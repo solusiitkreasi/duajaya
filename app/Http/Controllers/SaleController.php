@@ -1921,13 +1921,47 @@ class SaleController extends Controller
     public function genInvoice($id)
     {
 
-        $data['header'] = array('name' => 'test');
-        $data['detail'] = array('name' => 'test');
-        $myPdf = new Poprint($data);
+        if (!empty($id)){
 
-        $myPdf->Output('I', "Poprint.pdf", true);
+            $data_header = DB::table('sales as s')
+            ->leftjoin('customers as c', 's.customer_id', '=', 'c.id')
+            ->leftjoin('warehouses as wh', 's.warehouse_id', '=', 'wh.id')
+            ->where('s.id', $id)
+            ->select('s.reference_no','s.sale_note','s.created_at',
+            'wh.name as toko','wh.phone as phone_toko','wh.address as address_toko',
+            'c.name as c_name','c.company_name','c.phone_number',
+            'c.address','c.city','c.state','c.postal_code','c.country')
+            ->get();
 
-        exit;
+
+            $output['detail'] = array();
+			$output['header'] = array();
+
+            if($data_header) {
+                $data_detail = DB::table('product_sales as ps')
+                ->leftjoin('products as p', 'ps.product_id', '=', 'p.id')
+                ->leftjoin('units as u', 'ps.sale_unit_id', '=', 'u.id')
+                ->where('ps.sale_id', $id)
+                ->select('p.code', 'p.name', 'ps.qty', 'u.unit_code as unit', 'ps.net_unit_price as price')
+                ->get();
+
+
+                $general_setting = DB::table('general_settings')->latest()->first();
+
+                if($data_detail){
+                    $output['general_setting']		= $general_setting;
+                    $output['header']		= $data_header;
+                    $output['detail']		= $data_detail;
+                }
+            }
+
+            $myPdf = new Poeksternal($output);
+
+            $myPdf->Output('I', "Poeksternal.pdf", true);
+
+            exit;
+        }
+
     }
 
     public function addPayment(Request $request)

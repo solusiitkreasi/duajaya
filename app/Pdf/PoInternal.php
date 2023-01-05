@@ -15,93 +15,21 @@ class Pointernal extends Fpdf
     public function __construct($data)
     {
         $this->data     = $data;
-        $this->header   = $this->data['data']['header'];
-        $this->detail   = $this->data['data']['detail'];
-        $this->customer = $this->data['customer'];
+        $this->header   = $this->data['header'];
+        $this->detail   = $this->data['detail'];
         $this->general_setting = $this->data['general_setting'];
+
 
         $this->halaman=0;
         parent::__construct('P', 'mm', 'A4');
         $this->SetA4();
-        $this->SetTitle('Delivery Order'.$this->header['reference_no'], true);
+        $this->SetTitle('Purchase Order - '.$this->header[0]->no_po, true);
         $this->SetAuthor('None', true);
         $this->AddPage('P');
         $this->Body();
         $this->AliasNbPages();
     }
 
-    // Set Setting Logo
-        // LogoImage
-        const DPI           = 96;
-        const MM_IN_INCH    = 25.4;
-        const A4_HEIGHT     = 354;
-        const A4_WIDTH      = 28;
-        // CenterImage
-        const DPI_C         = 120;
-        const MM_IN_INCH_C  = 45.4;
-        const A4_HEIGHT_C   = 220;
-        const A4_WIDTH_C    = 230;
-        // tweak these values (in pixels)
-        const MAX_WIDTH     = 800;
-        const MAX_HEIGHT    = 200;
-
-        // 1.Logo Image
-        function pixelsToMM($val) {
-            return $val * self::MM_IN_INCH / self::DPI;
-        }
-        function resizeToFit($imgFilename) {
-            list($width, $height) = getimagesize($imgFilename);
-
-            $widthScale = self::MAX_WIDTH / $width;
-            $heightScale = self::MAX_HEIGHT / $height;
-            $scale = min($widthScale, $heightScale);
-
-            return array(
-                round($this->pixelsToMM($scale * $width)),
-                round($this->pixelsToMM($scale * $height))
-            );
-        }
-        function logoImage($img) {
-            list($width, $height) = $this->resizeToFit($img);
-
-            // you will probably want to swap the width/height
-            // around depending on the page's orientation
-            $this->Image(
-                $img, (self::A4_HEIGHT - $width) / 2,
-                (self::A4_WIDTH - $height) / 2,
-                $width,
-                $height
-            );
-        }
-        // 2.Center Image
-        function centerToMM($val) {
-            return $val * self::MM_IN_INCH_C / self::DPI_C;
-        }
-        function centerToFit($imgFilename) {
-            list($width, $height) = getimagesize($imgFilename);
-
-            $widthScale = self::MAX_WIDTH / $width;
-            $heightScale = self::MAX_HEIGHT / $height;
-            $scale = min($widthScale, $heightScale);
-
-            return array(
-                round($this->centerToMM($scale * $width)),
-                round($this->centerToMM($scale * $height))
-            );
-        }
-        function centerImage($img) {
-            list($width, $height) = $this->centerToFit($img);
-
-            // you will probably want to swap the width/height
-            // around depending on the page's orientation
-            $this->Image(
-                $img, (self::A4_HEIGHT_C - $width) / 2,
-                (self::A4_WIDTH_C - $height) / 2,
-                $width,
-                $height
-            );
-        }
-    // End Set Setting Logo
 
     function Header()
     {
@@ -122,43 +50,34 @@ class Pointernal extends Fpdf
         $this->Ln(0.8);
         $this->Line(11,$this->GetY(),206,$this->GetY());
         $this->setFont('Arial','B',10);
-        $this->cell(0,10,'DELIVERY ORDER',0,0,'C');
-        // $this->Ln(4);
-        // $this->setFont('Arial','',9);
-        // $this->cell(0,10,$this->header['reference_no'],0,0,'C');
+        $this->cell(0,10,'PURCHASE ORDER',0,0,'C');
         $this->Ln(14);
 
         $this->setFont('Arial','',8);
-        $this->cell(20,1,'To Customer',0,0,'L');
-        $this->cell(100,1,': '.$this->customer['0']->name,0,0,'L');
-
-        $this->cell(25,1,'No. Do',0,0,'L');
-        $this->cell(0,1,': '.$this->header['reference_no'],0,0,'L');
-        $this->Ln(4);
-
-        $this->cell(20,1,'Company',0,0,'L');
-        $this->cell(100,1,': '.$this->customer['0']->company_name,0,0,'L');
-        $this->cell(25,1,'No. Po.',0,0,'L');
-        $this->cell(15,1,': '.$this->customer['0']->reference_no,0,0,'L');
-        $this->Ln(4);
-
-        $this->cell(20,1,'Contact',0,0,'L');
-        $this->cell(100,1,': '.$this->customer['0']->phone_number,0,0,'L');
-        $this->cell(25,1,'Doc Date',0,0,'L');
-        $this->cell(100,1,': '.date('d-m-Y',strtotime($this->header['created_at'])),0,0,'L');
+        $this->cell(20,1,'Store',0,0,'L');
+        $this->cell(100,1,': '.$this->header[0]->toko,0,0,'L');
+        $this->cell(25,1,'No. Po',0,0,'L');
+        $this->cell(0,1,': '.$this->header[0]->no_po,0,0,'L');
         $this->Ln(4);
 
         $this->cell(20,1,'Address',0,0,'L');
-        $this->cell(100,1,': '.$this->customer['0']->address,0,0,'L');
-        $this->cell(25,1,'Expedition',0,0,'L');
-        $this->cell(15,1,': ',0,0,'L');
+        $this->cell(100,1,': '.$this->header[0]->address,0,0,'L');
+        $this->cell(25,1,'Supplier.',0,0,'L');
+        $this->cell(15,1,': '.$this->header[0]->supplier,0,0,'L');
+        $this->Ln(4);
+
+        $this->cell(20,1,'Contact',0,0,'L');
+        $this->cell(100,1,': '.$this->header[0]->phone,0,0,'L');
+        $this->cell(25,1,'Company',0,0,'L');
+        $this->cell(100,1,': '.$this->header[0]->company_name,0,0,'L');
         $this->Ln(4);
 
         $this->cell(20,1,'',0,0,'L');
-        $this->cell(100,1,'  '.$this->customer['0']->city.', '
-            .$this->customer['0']->state.'-'.$this->customer['0']->postal_code.' '
-            .$this->customer['0']->country
-            ,0,0,'L');
+        $this->cell(100,1,' ',0,0,'L');
+        $this->cell(25,1,'Doc Date',0,0,'L');
+        $this->cell(15,1,': '.date('d-m-Y',strtotime($this->header[0]->created_at)),0,0,'L');
+        $this->Ln(4);
+
 
         $this->HeaderList();
     }
@@ -181,23 +100,25 @@ class Pointernal extends Fpdf
     function Body(){
         $baris = 1;
         $row=1;
-        foreach ($this->detail as $value) {
-            if($baris==44){
-                $this->FooterSubTotal();
-                $this->AddPage();
-                $baris = 1;
+        // for($x=0; $x < 60; $x++)
+            foreach ($this->detail as $value) {
+                if($baris==44){
+                    $this->FooterSubTotal();
+                    $this->AddPage();
+                    $baris = 1;
+                }
+                $this->cell(10,1,$row++,0,0,'C');
+                $this->cell(45,1,$value->code,0,0,'L');
+                $this->cell(60,1,$value->name,0,0,'L');
+                $this->cell(25,1,number_format($value->qty,0,"",'.'),0,0,'C');
+                $this->cell(20,1,$value->unit_code,0,0,'C');
+                $this->cell(20,1,number_format($value->net_unit_cost,0,"",'.'),0,0,'C');
+                $this->grand_kirim += $value->qty;
+                $this->grand_harga += $value->net_unit_cost;
+                $this->Ln(4);
+                $baris++;
             }
-            $this->cell(10,1,$row++,0,0,'C');
-            $this->cell(45,1,$value->code,0,0,'L');
-            $this->cell(60,1,$value->name,0,0,'L');
-            $this->cell(25,1,number_format($value->qty_kirim,0,"",'.'),0,0,'C');
-            $this->cell(20,1,$value->unit_code,0,0,'C');
-            $this->cell(20,1,number_format($value->price,0,"",'.'),0,0,'C');
-            $this->grand_kirim += $value->qty_kirim;
-            $this->grand_harga += $value->price;
-            $this->Ln(4);
-            $baris++;
-        }
+
         $this->FooterTotal();
         $this->grand_harga = 0;
         $this->grand_kirim = 0;
@@ -209,27 +130,12 @@ class Pointernal extends Fpdf
         $this->Ln(2);
         $this->Line(11,$this->GetY(),199,$this->GetY());
         $this->Ln(2);
-        $this->cell(18,1,'*Note : '.$this->header['note'],0,0,'L');
+        $this->cell(18,1,'*Note : '.$this->header[0]->note,0,0,'L');
         $this->cell(95,1,'Total',0,0,'R');
         $this->cell(20,1,number_format($this->grand_kirim,0,"",'.'),0,0,'R');
         $this->cell(20,1,'',0,0,'R');
         $this->cell(20,1,number_format($this->grand_harga,0,"",'.'),0,0,'R');
-        $this->Ln(4);
-        $this->Line(11,$this->GetY(),199,$this->GetY());
-        $this->Ln(4);
-        $this->cell(65,1,'Disetujui,',0,0,'C');
-        $this->cell(65,1,'Diperiksa,',0,0,'C');
-        $this->cell(65,1,'Diterima,',0,0,'C');
-        $this->Ln(16);
-        $this->cell(155,1,'',0,0,'C');
-        $this->Ln(2);
-        $this->cell(65,1,'(                                      )',0,0,'C');
-        $this->cell(65,1,'(                                      )',0,0,'C');
-        $this->cell(65,1,'(                                      )',0,0,'C');
-        $this->Ln(2);
-        $this->Line(11,$this->GetY(),199,$this->GetY());
-        $this->Ln(4);
-        $this->cell(18,1,'Distribusi : Acc (Asli) / WH (Copy) / Audit (Copy)',0,0,'L');
+
     }
 
     function FooterSubTotal(){
@@ -241,7 +147,7 @@ class Pointernal extends Fpdf
         $this->cell(100,1,'',0,0,'L');
         $this->cell(20,1,'SUB TOTAL',0,0,'L');
         $this->cell(10,1,number_format($this->grand_kirim,0,"",'.'),0,0,'R');
-        $this->cell(40,1,'',0,0,'L');
+        $this->cell(25,1,'',0,0,'L');
         $this->cell(25,1,number_format($this->grand_harga,0,"",'.'),0,0,'R');
         $this->Ln(4);
         $this->Line(11,$this->GetY(),206,$this->GetY());

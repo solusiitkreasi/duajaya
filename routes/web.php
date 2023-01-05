@@ -156,6 +156,7 @@ Route::group(['middleware' => ['auth', 'active']], function() {
 	Route::post('importpurchase', 'PurchaseController@importPurchase')->name('purchase.import');
 	Route::post('purchases/deletebyselection', 'PurchaseController@deleteBySelection');
 	Route::resource('purchases', 'PurchaseController');
+    Route::get('purchases/gen_invoice/{id}', 'PurchaseController@genInvoice')->name('purchases.invoice');
 
 	Route::get('transfers/product_transfer/{id}','TransferController@productTransferData');
 	Route::get('transfers/transfer_by_csv', 'TransferController@transferByCsv');
