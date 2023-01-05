@@ -49,7 +49,7 @@ use Srmklive\PayPal\Services\ExpressCheckout;
 use Srmklive\PayPal\Services\AdaptivePayments;
 use GeniusTS\HijriDate\Date;
 use Illuminate\Support\Facades\Validator;
-use App\Pdf\Poprint;
+use App\Pdf\Poeksternal;
 
 class SaleController extends Controller
 {
