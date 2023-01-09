@@ -210,7 +210,7 @@ class ProductController extends Controller
         if ($role->hasPermissionTo('products-add')){
             $lims_product_list_without_variant = $this->productWithoutVariant();
             $lims_product_list_with_variant = $this->productWithVariant();
-            $lims_brand_list = Brand::where('is_active', true)->get();
+            $lims_brand_list = Brand::where('is_active', true)->orderBy('title','ASC')->get();
             $lims_category_list = Category::where('is_active', true)->get();
             $lims_unit_list = Unit::where('is_active', true)->get();
             $lims_tax_list = Tax::where('is_active', true)->get();
