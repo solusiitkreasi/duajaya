@@ -211,7 +211,7 @@ class ProductController extends Controller
             $lims_product_list_without_variant = $this->productWithoutVariant();
             $lims_product_list_with_variant = $this->productWithVariant();
             $lims_brand_list = Brand::where('is_active', true)->orderBy('title','ASC')->get();
-            $lims_category_list = Category::where('is_active', true)->get();
+            $lims_category_list = Category::where('is_active', true)->orderBy('name','ASC')->get();
             $lims_unit_list = Unit::where('is_active', true)->get();
             $lims_tax_list = Tax::where('is_active', true)->get();
             $lims_warehouse_list = Warehouse::where('is_active', true)->get();
