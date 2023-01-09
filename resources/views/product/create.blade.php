@@ -97,7 +97,7 @@
                                         <div class="input-group">
                                           <select name="brand_id" class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Brand...">
                                             @foreach($lims_brand_list as $brand)
-                                                <option value="{{$brand->id}}">[ {{$brand->code}} ] - {{$brand->title}}</option>
+                                                <option value="{{$brand->id}}">{{ucfirst($brand->title)}}</option>
                                             @endforeach
                                           </select>
                                         </div>
@@ -109,7 +109,7 @@
                                         <div class="input-group">
                                           <select name="category_id" required class="selectpicker form-control" data-live-search="true" data-live-search-style="begins" title="Select Category...">
                                             @foreach($lims_category_list as $category)
-                                                <option value="{{$category->id}}">[ {{$category->code}} ] - {{$category->name}}</option>
+                                                <option value="{{$category->id}}">{{ucfirst($category->name)}}</option>
                                             @endforeach
                                           </select>
                                         </div>
