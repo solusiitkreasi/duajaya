@@ -8,6 +8,7 @@ class Doprint extends Fpdf
     private $grand_beli;
     private $grand_kirim;
     private $grand_harga;
+    private $subtotal;
     private $total;
     private $halaman;
     private $total_halaman;
@@ -168,11 +169,12 @@ class Doprint extends Fpdf
         $this->Line(11,$this->GetY(),206,$this->GetY());
         $this->Ln(5);
         $this->cell(10,1,'NO.',0,0,'C');
-        $this->cell(45,1,'SKU',0,0,'L');
-        $this->cell(60,1,'Nama Barang',0,0,'L');
-        $this->cell(25,1,'Qty',0,0,'C');
+        $this->cell(35,1,'SKU',0,0,'L');
+        $this->cell(50,1,'Nama Barang',0,0,'L');
+        $this->cell(15,1,'Qty',0,0,'C');
         $this->cell(20,1,'Unit',0,0,'C');
         $this->cell(20,1,'Unit Price',0,0,'C');
+        $this->cell(20,1,'Subtotal',0,0,'C');
         $this->Ln(5);
         $this->Line(11,$this->GetY(),206,$this->GetY());
         $this->Ln(4);
@@ -188,19 +190,22 @@ class Doprint extends Fpdf
                 $baris = 1;
             }
             $this->cell(10,1,$row++,0,0,'C');
-            $this->cell(45,1,$value->code,0,0,'L');
-            $this->cell(60,1,$value->name,0,0,'L');
-            $this->cell(25,1,number_format($value->qty_kirim,0,"",'.'),0,0,'C');
+            $this->cell(35,1,$value->code,0,0,'L');
+            $this->cell(50,1,$value->name,0,0,'L');
+            $this->cell(15,1,number_format($value->qty_kirim,0,"",'.'),0,0,'C');
             $this->cell(20,1,$value->unit_code,0,0,'C');
             $this->cell(20,1,number_format($value->price,0,"",'.'),0,0,'C');
+            $this->cell(20,1,number_format($value->qty_kirim * $value->price,0,"",'.'),0,0,'C');
             $this->grand_kirim += $value->qty_kirim;
             $this->grand_harga += $value->price;
+            $this->subtotal += $value->qty_kirim * $value->price;
             $this->Ln(4);
             $baris++;
         }
         $this->FooterTotal();
         $this->grand_harga = 0;
         $this->grand_kirim = 0;
+        $this->subtotal = 0;
     }
 
     function FooterTotal(){
@@ -213,7 +218,7 @@ class Doprint extends Fpdf
         $this->cell(95,1,'Total',0,0,'R');
         $this->cell(20,1,number_format($this->grand_kirim,0,"",'.'),0,0,'R');
         $this->cell(20,1,'',0,0,'R');
-        $this->cell(20,1,number_format($this->grand_harga,0,"",'.'),0,0,'R');
+        $this->cell(20,1,number_format($this->subtotal,0,"",'.'),0,0,'R');
         $this->Ln(4);
         $this->Line(11,$this->GetY(),199,$this->GetY());
         $this->Ln(4);
@@ -242,7 +247,7 @@ class Doprint extends Fpdf
         $this->cell(20,1,'SUB TOTAL',0,0,'L');
         $this->cell(10,1,number_format($this->grand_kirim,0,"",'.'),0,0,'R');
         $this->cell(40,1,'',0,0,'L');
-        $this->cell(25,1,number_format($this->grand_harga,0,"",'.'),0,0,'R');
+        $this->cell(25,1,number_format($this->subtotal,0,"",'.'),0,0,'R');
         $this->Ln(4);
         $this->Line(11,$this->GetY(),206,$this->GetY());
     }
