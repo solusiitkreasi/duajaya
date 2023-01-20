@@ -11,6 +11,7 @@ use App\Tax;
 use App\Account;
 use App\Purchase;
 use App\ProductPurchase;
+use App\Product_Supplier;
 use App\Product_Warehouse;
 use App\Payment;
 use App\PaymentWithCheque;
@@ -487,7 +488,7 @@ class PurchaseController extends Controller
             $product_supplier->supplier_id = $supplier_id;
             $product_supplier->product_id = $id;
             $product_supplier->price = $net_unit_cost[$i];
-            // $product_supplier->save();
+            $product_supplier->save();
 
             $product_purchase['purchase_id'] = $lims_purchase_data->id ;
             $product_purchase['product_id'] = $id;
