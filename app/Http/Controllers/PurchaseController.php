@@ -391,6 +391,7 @@ class PurchaseController extends Controller
         $tax = $data['tax'];
         $total = $data['subtotal'];
         $imei_numbers = $data['imei_number'];
+        $supplier_id = $data['supplier_id'];
         $product_purchase = [];
 
         foreach ($product_id as $i => $id) {
@@ -483,7 +484,9 @@ class PurchaseController extends Controller
 
             //added price to product_supplier table
             $product_supplier = new Product_Supplier();
+            $product_supplier->supplier_id = $supplier_id;
             $product_supplier->product_id = $id;
+            $product_supplier->price = $net_unit_cost[$i];
             // $product_supplier->save();
 
             $product_purchase['purchase_id'] = $lims_purchase_data->id ;
