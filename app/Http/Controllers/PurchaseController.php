@@ -480,6 +480,12 @@ class PurchaseController extends Controller
             }
             $lims_product_warehouse_data->save();
 
+
+            //added price to product_supplier table
+            $product_supplier = new Product_Supplier();
+            $product_supplier->product_id = $id;
+            $product_supplier->save();
+
             $product_purchase['purchase_id'] = $lims_purchase_data->id ;
             $product_purchase['product_id'] = $id;
             $product_purchase['imei_number'] = $imei_numbers[$i];
